@@ -1,12 +1,18 @@
+import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Dash} from './components/dash'
-//this is where we will import components
+import {Provider} from 'react-redux';
 import './index.css';
+import store from './store';
+import {Dash} from './components/dash'
+import FactorForm from './factorForm';
+import showResults from "./showResults";
 
 ReactDOM.render(
-	<Dash user/>,
-	 document.getElementById('root')
-	 );
+    <Provider store={store}>
+        <FactorForm onSubmit={showResults}/>
+    </Provider>,
+    document.getElementById('root')
+);
 
 	
