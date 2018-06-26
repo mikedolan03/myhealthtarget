@@ -5,12 +5,12 @@ import {Provider} from 'react-redux';
 import './index.css';
 import store from './store';
 import {Dash} from './components/dash'
-import FactorForm from './factorForm';
-import showResults from "./showResults";
+import FactorForm from './components/factorForm';
+import showResults from './components/showResults';
 
 ReactDOM.render(
     <Provider store={store}>
-        <FactorForm onSubmit={showResults}/>
+        <Dash />
     </Provider>,
     document.getElementById('root')
 );

@@ -1,18 +1,30 @@
 import React from 'react';
 //import other compenents and actions
-
+import {connect} from 'react-redux';
 import './dash.css';
+//components
 import {Hero} from './hero';
 import {HealthSummary} from './healthsummary';
+import showResults from "./showResults";
+import FactorForm from './factorForm';
+import {updateScore} from '../actions';
 
+
+
+   
 export class Dash extends React.Component {
-constructor(props) {
-        super(props);
+
+ doScore() {
+
+    	props.dispatch(updateScore(10));
 
     }
+
 	render() {
 
-		console.log('props', this.props);
+		this.doScore(); 
+
+		console.log('props', updateScore,  this.props);
 
 
 
@@ -24,9 +36,13 @@ constructor(props) {
 				</nav>
 			</header>
 			<main>
+
+			<button onClick={() => this.doScore()}>Change Score</button>
 				<Hero />
 
 				<HealthSummary />
+
+				<FactorForm onSubmit={showResults}/>
 
 				<section>
 				<form>
@@ -86,8 +102,17 @@ const userInfo = {
 
 Dash.defaultProps = {
     userInfo: userInfo,
-    userData, userData
+    userData: userData,
+    appMode: 'Home',
+    score: 50
 };
-	
 
+export const mapStateToProps = state => ({
+	userInfo: state.userInfo,
+	userData: state.userData,
+	appMode: state.appMode,
+	score: state.score
+})
+
+export default connect(mapStateToProps)(Dash);
 

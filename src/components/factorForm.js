@@ -1,6 +1,5 @@
 import React from 'react';
 import { Field, FieldArray, reduxForm } from 'redux-form'
-import {AddFood} from './components/addfood'
 
 const renderFoods = ({fields}) => (
 
@@ -10,20 +9,22 @@ const renderFoods = ({fields}) => (
     </li>
     {fields.map((food, index) =>
       <li key={index}>
-        <button
-          type="button"
-          title="Remove Food"
-          onClick={() => fields.remove(index)}/>
+        <label>Food:</label>
         <Field
           name={`${food}.name`}
           type="text"
           component="input"
           label={`Food #${index + 1}`}/>
+          <label>Tags:</label>
           <Field
           name={`${food}.tags`}
           type="text"
           component="input"
           label={`Tags for #${index + 1}`}/>
+          <button
+          type="button"
+          title="Remove Food"
+          onClick={() => fields.remove(index)}>-</button>
       </li>
     )}
   </ul>
@@ -66,5 +67,5 @@ const FactorForm = props => {
 };
 
 export default reduxForm({
-  form: 'fForm', // a unique identifier for this form
+  form: 'FactorForm', // a unique identifier for this form
 })(FactorForm);
