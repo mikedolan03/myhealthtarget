@@ -3,6 +3,7 @@ import {TRACK_FOOD, TRACK_SYMPTOM, UPDATE_SCORE} from '../actions';
 
 
 const initialState = {
+      appMode: 'Home',
       score: 50
     };
 

@@ -1,6 +1,8 @@
 import React from 'react';
 //import other compenents and actions
 import {connect} from 'react-redux';
+import store from '../store';
+
 import './dash.css';
 //components
 import {Hero} from './hero';
@@ -8,23 +10,25 @@ import {HealthSummary} from './healthsummary';
 import showResults from "./showResults";
 import FactorForm from './factorForm';
 import {updateScore} from '../actions';
-
-
-
    
 export class Dash extends React.Component {
 
  doScore() {
 
-    	props.dispatch(updateScore(10));
+ 	let randomnumber = Math.floor(Math.random() * 100) + 1;
+
+    	this.props.dispatch( updateScore(randomnumber) );
+		console.log(store.getState());
 
     }
 
 	render() {
+		
+		//console.log(store.getState());
 
 		this.doScore(); 
 
-		console.log('props', updateScore,  this.props);
+		console.log('props', updateScore,  this.props.score);
 
 
 
@@ -40,7 +44,7 @@ export class Dash extends React.Component {
 			<button onClick={() => this.doScore()}>Change Score</button>
 				<Hero />
 
-				<HealthSummary />
+				<HealthSummary score={this.props.score}/>
 
 				<FactorForm onSubmit={showResults}/>
 
@@ -107,12 +111,14 @@ Dash.defaultProps = {
     score: 50
 };
 
-export const mapStateToProps = state => ({
+const mapStateToProps = state => ({
 	userInfo: state.userInfo,
 	userData: state.userData,
 	appMode: state.appMode,
 	score: state.score
 })
 
-export default connect(mapStateToProps)(Dash);
+//const Test = ; 
+export const MyTest = connect(mapStateToProps)(Dash);
 
+//export default connect(mapStateToProps)(Dash);
