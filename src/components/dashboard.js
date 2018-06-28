@@ -1,9 +1,13 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import store from '../store';
 
 export default class DashBoard extends React.Component {
 
-	render( ) {  
+	render( ) {
+
+			console.log('store in dash: ', store.getState());
+  
 
 		return (
 

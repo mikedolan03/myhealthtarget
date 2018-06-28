@@ -1,25 +1,30 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import SymptomForm from './symptomForm';
+import showResults from "./showResults";
 
 export default class SymptomTracker extends React.Component {
 
+
 	render() {
+
+ console.log("history: ", this.props.history); 
 
 		return (
 
 			<section className="symptomtracker-container">
-			<h2>Symptom Tracking Form</h2>
-			<label>Symptom</label>
-			<input type="text" name="symptom" />
-			<label>Severity Level 1-10</label>
-			<input type="number" name="severity" />
+			<h2>This is the symptom tracking form page</h2>
 
-			<h3><Link to="/loggedin/dashboard/">Save symptom</Link></h3>
+
+			<SymptomForm history={this.props.history}/>
+
+
+			<h3><Link to="/loggedin/dashboard/">Go back to Dashboard (without saving)</Link></h3>
+
 
 			</section>
 
-			); 
+			);
 	}
-
-
 }
+
