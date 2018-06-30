@@ -1,5 +1,5 @@
 //import * as actions '../actions';
-import {TRACK_FOOD, TRACK_SYMPTOM, UPDATE_SCORE} from '../actions';
+import {TRACK_FOOD, TRACK_SYMPTOM, UPDATE_SCORE, FETCH_FOODLIST_SUCCESS} from '../actions';
 
 
 const initialState = {
@@ -11,6 +11,8 @@ const initialState = {
     console.log('in action: ', action); 
 
  	if(action.type === TRACK_FOOD) {
+
+        console.log('TRACK_FOOD'); 
 
         let newFoods = action.foodobj.foods; 
 
@@ -31,7 +33,7 @@ const initialState = {
  	} else { 
 
         		if(action.type === TRACK_SYMPTOM) {
-	 		
+	 		console.log('TRACK_Symtpom'); 
 	 				return Object.assign({}, state, {
 	 				appMode: action.appMode
 	 				});
@@ -45,9 +47,20 @@ const initialState = {
                     	});
 
                     } else {
+
+                        if(action.type === FETCH_FOODLIST_SUCCESS) {
+
+                            console.log('FETCH_FOODLIST_SUCCESS'); 
+
+                        return Object.assign({}, state, {
+                        foodList: action.foodList
+                        });
+
+                        } else {
                     
                                 return state;
                                 }
+                    }
                 }
             }
 

@@ -3,7 +3,7 @@ import { Field, FieldArray, reduxForm } from 'redux-form'
 import {BrowserRouter as Router, Route, Redirect, Link} from 'react-router-dom';
 import { withRouter} from 'react-router-dom';
 import {trackFood} from '../actions';
-
+import {fetchFoodList} from '../actions';
 const renderFoods = ({fields}) => {
   
   if(fields.length < 1) fields.push(); 
@@ -88,6 +88,7 @@ export class FactorForm extends React.Component {
         </div>
         <div>
           <button type="submit">Submit</button>
+          <button type="button" onClick={()=> this.props.dispatch(fetchFoodList()) }>load from server</button>
         </div>
       </form>
       );
