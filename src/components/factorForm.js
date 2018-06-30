@@ -1,6 +1,8 @@
 import React from 'react';
 import { Field, FieldArray, reduxForm } from 'redux-form'
 import {BrowserRouter as Router, Route, Redirect, Link} from 'react-router-dom';
+import { withRouter} from 'react-router-dom';
+import {trackFood} from '../actions';
 
 const renderFoods = ({fields}) => {
   
@@ -50,16 +52,20 @@ export class FactorForm extends React.Component {
   
   onSubmit(values) {
         //event.preventDefault();
-       console.log(values);
+       console.log('sending to store: ', values.foods);
+      this.props.dispatch(trackFood(values));
+
        this.props.history.push('/loggedin/dashboard');
     }
+
+    //form  onSubmit={this.props.handleSubmit(values =>
+    //                  this.onSubmit(values))}
 
   render() {
      console.log("history in form: ", this.props.history); 
 
     return (
-      <form  onSubmit={this.props.handleSubmit(values =>
-                      this.onSubmit(values))} >
+      <form onSubmit={this.props.handleSubmit(values =>this.onSubmit(values))}>
          <div> 
          <FieldArray name="foods" component={renderFoods} />
          </div>
@@ -87,7 +93,8 @@ export class FactorForm extends React.Component {
       );
   };
  }
+const myForm = withRouter(FactorForm);
 
 export default reduxForm({
   form: 'FactorForm', // a unique identifier for this form
-})(FactorForm);
+})(myForm);

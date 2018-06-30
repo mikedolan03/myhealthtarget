@@ -3,16 +3,31 @@ import {TRACK_FOOD, TRACK_SYMPTOM, UPDATE_SCORE} from '../actions';
 
 
 const initialState = {
-      appMode: 'Home',
-      score: 50
+      foodList: [],
     };
 
  export const htReducer = (state=initialState, action) => {
 
+    console.log('in action: ', action); 
+
  	if(action.type === TRACK_FOOD) {
- 		return Object.assign({}, state, {
- 			appMode: action.appMode
- 		});
+
+        let newFoods = action.foodobj.foods; 
+
+        newFoods.map((obj) => {
+            obj.time = action.foodobj.time;
+            obj.date = action.foodobj.date;
+        });
+
+ 		//return Object.assign({}, state, {
+ 			//foodList: [...state.foodList,
+             //  newFoods]
+ 		//});
+
+        return { 
+            ...state, 
+            foodList: state.foodList.concat(newFoods)
+        }
  	} else { 
 
         		if(action.type === TRACK_SYMPTOM) {

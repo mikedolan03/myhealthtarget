@@ -1,0 +1,12 @@
+.dashboard {
+
+margin: 5px;
+text-align: left;	
+}
+
+.dashboard .info-block {
+	border-style: 	solid;
+	border-width: 	1px;
+	background-color: 	lightgrey;
+
+}

@@ -19,8 +19,9 @@ render() {
 			<input type="text" name="user" />
 			<label>Password</label>
 			<input type="password" name="password" />
-			
-			<h3><Link to="/loggedin/dashboard/">Create Account</Link></h3>
+			<button onClick={()=> this.props.history.push('/loggedin/dashboard')}>
+				Create Account
+			</button>
 			</form>
 			<h3><Link to="/login/">Already have an account? Log in</Link></h3>
 		</section>

@@ -3,7 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import store from '../store';
 
-import './dash.css';
+//import './dash.css';
 //components
 import {Hero} from './hero';
 import {HealthSummary} from './healthsummary';

@@ -6,9 +6,9 @@
 
 
 export const TRACK_FOOD = 'TRACK_FOOD';
-export const trackFood = () => ({
+export const trackFood = foodobj => ({
     type: TRACK_FOOD,
-    appMode: 'Food Input'
+    foodobj
 });
 
 export const TRACK_SYMPTOM = 'TRACK_SYMPTOM';

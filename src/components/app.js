@@ -1,9 +1,11 @@
 import React from 'react';
+import {connect} from 'react-redux';
+
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 import LandingPage from './landingpage';
 import DashBoard from './dashboard';
-import FactorTracker from './factortracker';
+import myFactorTracker from './factortracker';
 import SymptomTracker from './symptomtracker';
 import ReviewScreen from './reviewscreen';
 import Login from './login';
@@ -11,13 +13,21 @@ import SignUp from './signup';
 import NavBar from './navbar';
 
 import './app.css';
+import './grid.css';
 
 
-export default function App(props) {
+export class App extends React.Component {
+
+ componentDidMount() {
+		//this.props.dispace(fetchUserData());
+ }
+
+ render() {
+
 	return (
 		<Router> 
 			<div className="app">
-				<header> 
+				<header className="headerwidth"> 
 					<h1 className="logo"><Link to="/">My Health Target</Link></h1>
 				</header>
 				<main>
@@ -26,7 +36,7 @@ export default function App(props) {
 					<Route exact path="/loggedin/dashboard/" component={DashBoard} />
 					<Route exact path="/login/" component={Login} />
 					<Route exact path="/signup/" component={SignUp} />
-					<Route exact path="/loggedin/factortracker/" component={FactorTracker} /> 
+					<Route exact path="/loggedin/factortracker/" component={myFactorTracker} /> 
 					<Route exact path="/loggedin/symptomtracker/" component={SymptomTracker} /> 
 					<Route exact path="/loggedin/reviewscreen/" component={ReviewScreen}  />
 
@@ -36,4 +46,11 @@ export default function App(props) {
 
 		);
 	}
+}
+
+const mapStateToProps = state => ({
+	userData: state.userData
+});
+
+export default connect(mapStateToProps)(App);
 
