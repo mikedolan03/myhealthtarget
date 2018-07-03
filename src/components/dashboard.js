@@ -2,8 +2,11 @@ import React from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import store from '../store';
 import './dashboard.css';
+import SymptomList from './symptomlist';
+
 
 export default class DashBoard extends React.Component {
+
 
 	clickedTrackFood() {
 
@@ -14,8 +17,25 @@ export default class DashBoard extends React.Component {
 
 	render( ) {
 
+			let mySymptoms; 
+		let lists;
+
 			console.log('store in dash: ', store.getState());
-  
+
+  			let currentStore = store.getState(); 
+
+  			if(currentStore.reducer.symptomList.length > 0) {
+  				console.log('we have symptoms');
+
+  				  lists = currentStore.reducer.symptomList.map((list, index) => (
+            		<li className="list-wrapper" key={index}>
+                		<SymptomList {...list} />
+            		</li>
+            		));
+
+  				
+  			}
+
 
 		return (
 
@@ -40,8 +60,10 @@ export default class DashBoard extends React.Component {
 			<button onClick={()=> this.props.history.push('/loggedin/reviewscreen/')}	>
 				Review your Data
 			</button>
+		<ul>{lists}</ul>
 
 		</section>
+
 
 			);
 

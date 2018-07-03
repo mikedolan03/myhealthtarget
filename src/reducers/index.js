@@ -4,6 +4,7 @@ import {TRACK_FOOD, TRACK_SYMPTOM, UPDATE_SCORE, FETCH_FOODLIST_SUCCESS} from '.
 
 const initialState = {
       foodList: [],
+      symptomList: [],
     };
 
  export const htReducer = (state=initialState, action) => {
@@ -33,10 +34,19 @@ const initialState = {
  	} else { 
 
         		if(action.type === TRACK_SYMPTOM) {
-	 		console.log('TRACK_Symtpom'); 
-	 				return Object.assign({}, state, {
-	 				appMode: action.appMode
-	 				});
+	 		    console.log('TRACK_Symptom'); 
+
+                let newSymptoms = action.symptomObj.symptoms;
+
+                newSymptoms.map( (obj) => {
+                    obj.time = action.symptomObj.time;
+                    obj.date = action.symptomObj.date;
+                });
+
+	 				return {
+                        ...state,
+                        symptomList: state.symptomList.concat(newSymptoms)
+                    }
 
         		} else {
 
@@ -57,6 +67,8 @@ const initialState = {
                         });
 
                         } else {
+
+                           
                     
                                 return state;
                                 }

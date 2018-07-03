@@ -1,6 +1,7 @@
 import React from 'react';
 import { Field, FieldArray, reduxForm } from 'redux-form'
 import {BrowserRouter as Router, Route, Redirect, Link} from 'react-router-dom';
+import {postSymptoms} from '../actions';
 
 const renderSymptoms = ({fields}) => {
   
@@ -59,6 +60,7 @@ export class SymptomForm extends React.Component {
   
   onSubmit(values) {
         //event.preventDefault();
+     this.props.dispatch(postSymptoms(values));
        console.log(values);
        this.props.history.push('/loggedin/dashboard');
     }

@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Route, Redirect, Link} from 'react-router-dom';
 import { withRouter} from 'react-router-dom';
 import {trackFood} from '../actions';
 import {fetchFoodList} from '../actions';
+import {postFoodItems} from '../actions';
 const renderFoods = ({fields}) => {
   
   if(fields.length < 1) fields.push(); 
@@ -53,8 +54,8 @@ export class FactorForm extends React.Component {
   onSubmit(values) {
         //event.preventDefault();
        console.log('sending to store: ', values.foods);
-      this.props.dispatch(trackFood(values));
-
+     // this.props.dispatch(trackFood(values));
+     this.props.dispatch(postFoodItems(values));
        this.props.history.push('/loggedin/dashboard');
     }
 
