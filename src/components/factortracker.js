@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 
 import FactorForm from './factorForm';
 import showResults from "./showResults";
+import FoodList from './foodlist';
 
 export class FactorTracker extends React.Component {
 
@@ -31,6 +32,8 @@ export class FactorTracker extends React.Component {
 		<button onClick={()=> this.props.history.push('/loggedin/dashboard/')}>
 				Go back to dash
 			</button>
+
+			<FoodList />
 
 			</section>
 

@@ -2,6 +2,7 @@ import React from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import SymptomForm from './symptomForm';
 import showResults from "./showResults";
+import SymptomList from './symptomlist';
 
 export default class SymptomTracker extends React.Component {
 
@@ -20,6 +21,9 @@ export default class SymptomTracker extends React.Component {
 
 
 			<h3><Link to="/loggedin/dashboard/">Go back to Dashboard (without saving)</Link></h3>
+
+			<SymptomList />
+
 
 
 			</section>

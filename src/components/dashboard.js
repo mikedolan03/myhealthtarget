@@ -1,11 +1,14 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import store from '../store';
+import {connect} from 'react-redux';
+
 import './dashboard.css';
 import SymptomList from './symptomlist';
+import FoodList from './foodlist';
 
 
-export default class DashBoard extends React.Component {
+export class DashBoard extends React.Component {
 
 
 	clickedTrackFood() {
@@ -18,23 +21,25 @@ export default class DashBoard extends React.Component {
 	render( ) {
 
 			let mySymptoms; 
-		let lists;
+			let lists;
 
 			console.log('store in dash: ', store.getState());
 
+			console.log('my prop based data', this.props.foodList); 
+
   			let currentStore = store.getState(); 
 
-  			if(currentStore.reducer.symptomList.length > 0) {
+  			/*if(currentStore.reducer.symptomList.length > 0) {
   				console.log('we have symptoms');
 
-  				  lists = currentStore.reducer.symptomList.map((list, index) => (
+  				  lists = this.props.symptomList.map((list, index) => (
             		<li className="list-wrapper" key={index}>
-                		<SymptomList {...list} />
+                		<SymptomListItem {...list} />
             		</li>
             		));
 
   				
-  			}
+  			} */
 
 
 		return (
@@ -60,7 +65,10 @@ export default class DashBoard extends React.Component {
 			<button onClick={()=> this.props.history.push('/loggedin/reviewscreen/')}	>
 				Review your Data
 			</button>
-		<ul>{lists}</ul>
+
+		<SymptomList />
+
+		<FoodList />
 
 		</section>
 
@@ -70,3 +78,10 @@ export default class DashBoard extends React.Component {
 	}; 
 
 }
+
+const mapStateToProps = state => ({
+    foodList: state.reducer.foodList,
+    symptomList: state.reducer.symptomList
+});
+
+export default connect(mapStateToProps)(DashBoard);
