@@ -3,7 +3,7 @@
 //users can navigate between food tracking / symptom tracking
 //so we need an action to enable the respective forms
 
-
+const API_BASE_URL = '/'; 
 
 export const TRACK_FOOD = 'TRACK_FOOD';
 export const trackFood = foodobj => ({
@@ -35,14 +35,68 @@ export const sendFoodItemSuccess = (foodItem) => ({
 	foodItem
 });
 
-function getData() {
-    return new Promise((resolve, reject)=>{
-     
-    	const myData =[ 
+//myFetch(url, options, redirect, refer, body) {
+   function myFetch(url, options) {
+	
+	let myData;
+
+	//probably should be `${API_BASE_URL}/foodlist`
+   	if(url == `${API_BASE_URL}/foodlist` &&
+   		options.method == 'GET') {
+
+   		 myData =[ 
        		{name: 'carrot', tags: 'orange, veg', time: "01:00", date: "2018-06-28"},
        		{name: 'spagetti', tags: 'pasta, gluten', time: "01:30", date: "2018-06-25"}
 			];
 			let error = false; 
+
+   	}
+
+   	if(url == `${API_BASE_URL}/foodlist` &&
+   		options.method == 'POST') {
+
+   		 myData = options.body; 
+   		
+   	}
+
+   if(url == `${API_BASE_URL}/foodlist` &&
+   		options.method == 'PUT') {
+   	//edit entry
+   		   		
+   		   myData = options.body; 
+
+   	}
+
+   if(url == `${API_BASE_URL}/symptomlist` &&
+   		options.method == 'GET') {
+   		
+   		 myData =[ 
+       		{name: 'sick stomach', severity: '5', time: "01:00", date: "2018-06-28"},
+       		{name: 'heartburn', severity: '10', time: "01:30", date: "2018-06-25"}
+			];
+   	}
+
+   if(url == `${API_BASE_URL}/symptomlist` &&
+   		options.method == 'POST') {
+   		   		   		
+   		   	 myData = options.body; 
+
+   	}
+
+    if(url == `${API_BASE_URL}/symptomlist` &&
+   		options.method == 'PUT') {
+   		   	
+   		   	 myData = options.body; 
+
+   	}
+   	//if url and no options or option.method=get return requested data
+   	//implement search filters on server side - here just return simple sorted data
+   	//
+
+    return new Promise((resolve, reject)=>{
+     
+    				let error = false; 
+
 			
 			//or test error 
 			//error = "ahhhhh something went wrong!"; 
@@ -50,6 +104,22 @@ function getData() {
             if (error)  { reject(error); 
             }
             else resolve(myData);
+        
+    });
+}
+
+function getDataSymptoms() {
+    return new Promise((resolve, reject)=>{
+     
+    	
+			let error = false; 
+			
+			//or test error 
+			//error = "ahhhhh something went wrong!"; 
+
+            if (error)  { reject(error); 
+            }
+            else resolve();
         
     });
 }
@@ -84,9 +154,29 @@ export const fetchFoodList = () => dispatch => {
       //  }
        // return res.json();
      console.log('in the fetchfoodlistpromise');
-     getData()
+
+
+     myFetch(`${API_BASE_URL}/foodlist`, {method: 'GET'} )
     .then(foodList => {
         dispatch(fetchFoodListSuccess(foodList));
+    })
+    .catch(error => { 
+  		console.log('error: ', error);
+  		//dispatch error message action - to show user a error component
+
+    });
+};
+
+export const fetchSymptomList = () => dispatch => {
+    //fetch(`${API_BASE_URL}/foodlist`).then(res => {
+     //   if (!res.ok) {
+      //      return Promise.reject(res.statusText);
+      //  }
+       // return res.json();
+     console.log('in the fetchfoodlistpromise');
+     getDataSymptoms()
+    .then(symptomList => {
+        //dispatch(fetchSymptomListSuccess(foodList));
     })
     .catch(error => { 
   		console.log('error: ', error);
@@ -95,7 +185,8 @@ export const fetchFoodList = () => dispatch => {
 };
 
 export const postFoodItems = (foodItem) => dispatch => {
-	sendData(foodItem)
+	
+	myFetch(`${API_BASE_URL}/foodlist`, {method: 'POST', body: foodItem} )
 	.then(responseData => { 
 		console.log('data sent');
 		dispatch( trackFood(responseData));

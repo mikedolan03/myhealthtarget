@@ -16,7 +16,7 @@ export class FactorTracker extends React.Component {
 
 	render() {
 
- console.log("history: ", this.props.history); 
+ 		console.log("history: ", this.props.history); 
 
 		return (
 
