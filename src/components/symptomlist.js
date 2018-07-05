@@ -8,6 +8,20 @@ import SymptomListItem from './symptomlistitem';
 
 export class SymptomList extends React.Component {
 
+	sortList() {
+
+		let array = this.props.symptomList.slice(0, parseInt(this.props.show));
+
+		array.sort(function(a, b) {
+    			a = new Date(a.date);
+    			b = new Date(b.date);
+    			return a>b ? -1 : a<b ? 1 : 0;
+		}
+		);
+
+		return array; 
+	}
+
 render() {
 
 			let mySymptoms; 
@@ -20,8 +34,11 @@ render() {
 
   			if(this.props.symptomList.length > 0) {
   				console.log('we have symptoms');
+				
 
-  				  lists = this.props.symptomList.map((list, index) => (
+//  	lists = this.props.symptomList.slice(0, parseInt(this.props.show)).map((list, index) => (
+
+  	lists = this.sortList().map((list, index) => (
             		<li className="list-wrapper" key={index}>
                 		<SymptomListItem {...list} />
             		</li>

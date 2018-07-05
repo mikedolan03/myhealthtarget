@@ -1,9 +1,22 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {fetchFoodList} from '../actions';
+import {fetchSymptomList} from '../actions';
+
+import {connect} from 'react-redux';
 
 //import './signup.css'
 
-export default class SignUp extends React.Component { 
+export class SignUp extends React.Component { 
+
+login() {
+
+	 this.props.dispatch(fetchFoodList());
+	 	 this.props.dispatch(fetchSymptomList());
+
+	 this.props.history.push('/loggedin/dashboard');
+
+}
 
 render() {
 
@@ -19,7 +32,7 @@ render() {
 			<input type="text" name="user" />
 			<label>Password</label>
 			<input type="password" name="password" />
-			<button onClick={()=> this.props.history.push('/loggedin/dashboard')}>
+			<button onClick={()=> this.login()}>
 				Create Account
 			</button>
 			</form>
@@ -30,3 +43,10 @@ render() {
 	}
 
 }
+
+const mapStateToProps = state => ({
+    foodList: state.reducer.foodList,
+    symptomList: state.reducer.symptomList
+});
+
+export default connect(mapStateToProps)(SignUp);

@@ -29,6 +29,12 @@ export const fetchFoodListSuccess = (foodList) => ({
     foodList
 });
 
+export const FETCH_SYMPTOMLIST_SUCCESS = 'FETCH_SYMPTOMLIST_SUCCESS';
+export const fetchSymptomListSuccess = (symptomList) => ({
+    type: FETCH_SYMPTOMLIST_SUCCESS,
+    symptomList
+});
+
 export const SEND_FOODITEM_SUCCESS = 'SEND_FOODITEM_SUCCESS';
 export const sendFoodItemSuccess = (foodItem) => ({ 
 	type: SEND_FOODITEM_SUCCESS,
@@ -45,8 +51,14 @@ export const sendFoodItemSuccess = (foodItem) => ({
    		options.method == 'GET') {
 
    		 myData =[ 
-       		{name: 'carrot', tags: 'orange, veg', time: "01:00", date: "2018-06-28"},
-       		{name: 'spagetti', tags: 'pasta, gluten', time: "01:30", date: "2018-06-25"}
+       		{name: 'carrot', tags: 'orange, veg', time: "01:00", date: "2018-06-27"},
+       		{name: 'spaghetti', tags: 'pasta, gluten', time: "11:30", date: "2018-06-25"},
+       		{name: 'pizza', tags: 'cheese, wheat, tomato, veg', time: "01:00", date: "2018-06-28"},
+       		{name: 'blueberries', tags: 'fruit, blue', time: "5:30", date: "2018-06-25"},
+       		{name: 'cheerios', tags: 'cereal, oats, milk', time: "06:00", date: "2018-06-28"},
+       		{name: 'spaghetti', tags: 'pasta, gluten', time: "07:30", date: "2018-06-26"},
+       		{name: 'ice cream', tags: 'dairy, sugar', time: "08:00", date: "2018-06-28"},
+       		{name: 'ravioli', tags: 'pasta, gluten', time: "14:30", date: "2018-06-26"}
 			];
 			let error = false; 
 
@@ -72,7 +84,15 @@ export const sendFoodItemSuccess = (foodItem) => ({
    		
    		 myData =[ 
        		{name: 'sick stomach', severity: '5', time: "01:00", date: "2018-06-28"},
-       		{name: 'heartburn', severity: '10', time: "01:30", date: "2018-06-25"}
+       		{name: 'heartburn', severity: '10', time: "01:30", date: "2018-06-29"},
+       		{name: 'sick stomach', severity: '5', time: "01:00", date: "2018-06-29"},
+       		{name: 'headache', severity: '10', time: "01:30", date: "2018-06-30"},
+       		{name: 'sick stomach', severity: '5', time: "01:00", date: "2018-06-29"},
+       		{name: 'heartburn', severity: '10', time: "01:30", date: "2018-06-28"},
+       		{name: 'gas', severity: '5', time: "01:00", date: "2018-06-28"},
+       		{name: 'heartburn', severity: '10', time: "01:30", date: "2018-06-27"},
+       		{name: 'gas', severity: '5', time: "01:00", date: "2018-06-28"},
+       		{name: 'heartburn', severity: '10', time: "01:30", date: "2018-06-30"}
 			];
    	}
 
@@ -173,10 +193,11 @@ export const fetchSymptomList = () => dispatch => {
       //      return Promise.reject(res.statusText);
       //  }
        // return res.json();
-     console.log('in the fetchfoodlistpromise');
-     getDataSymptoms()
+     console.log('in the fetchsymptomlistpromise');
+     
+     myFetch(`${API_BASE_URL}/symptomlist`, {method: 'GET'} )
     .then(symptomList => {
-        //dispatch(fetchSymptomListSuccess(foodList));
+        dispatch(fetchSymptomListSuccess(symptomList));
     })
     .catch(error => { 
   		console.log('error: ', error);
@@ -197,7 +218,7 @@ export const postFoodItems = (foodItem) => dispatch => {
 }
 
 export const postSymptoms = (symptom) => dispatch => {
-	sendData(symptom)
+	myFetch(`${API_BASE_URL}/foodlist`, {method: 'POST', body: symptom} )
 	.then(responseData => { 
 		console.log('data sent');
 		dispatch( trackSymptom(responseData));

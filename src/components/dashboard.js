@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import './dashboard.css';
 import SymptomList from './symptomlist';
 import FoodList from './foodlist';
+import MyChart from './chart';
 
 
 export class DashBoard extends React.Component {
@@ -48,28 +49,26 @@ export class DashBoard extends React.Component {
 
 			<h2>This is the Dashboard</h2> 
 
+			<MyChart />
+
 			<div className="info-block">
 			<h3>Block of recent data, Health Target Score</h3>
 			</div>
 
-			<h2>Track something</h2> 
 
-			<button onClick={()=> this.props.history.push('/loggedin/factortracker/')}>
-				Add food to track
+		<SymptomList show='5'/>
+		<button onClick={()=> this.props.history.push('/loggedin/symptomtracker/')}	>
+				Add symptom	to track
 			</button>
 
-			<button onClick={()=> this.props.history.push('/loggedin/symptomtracker/')}	>
-				Add symptom	to track
+		<FoodList show='5'/>
+		<button onClick={()=> this.props.history.push('/loggedin/factortracker/')}>
+				Add food to track
 			</button>
 
 			<button onClick={()=> this.props.history.push('/loggedin/reviewscreen/')}	>
 				Review your Data
 			</button>
-
-		<SymptomList />
-
-		<FoodList />
-
 		</section>
 
 

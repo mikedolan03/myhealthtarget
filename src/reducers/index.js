@@ -1,5 +1,5 @@
 //import * as actions '../actions';
-import {TRACK_FOOD, TRACK_SYMPTOM, UPDATE_SCORE, FETCH_FOODLIST_SUCCESS} from '../actions';
+import {TRACK_FOOD, TRACK_SYMPTOM, UPDATE_SCORE, FETCH_FOODLIST_SUCCESS, FETCH_SYMPTOMLIST_SUCCESS} from '../actions';
 
 
 const initialState = {
@@ -68,11 +68,22 @@ const initialState = {
 
                         } else {
 
+                            if(action.type === FETCH_SYMPTOMLIST_SUCCESS) {
+
+                            console.log('FETCH_SYMPTOMLIST_SUCCESS'); 
+
+                        return Object.assign({}, state, {
+                        symptomList: action.symptomList
+                        });
+
+                        } else {
+
                            
                     
                                 return state;
                                 }
                     }
+                }
                 }
             }
 

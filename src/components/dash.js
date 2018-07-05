@@ -9,6 +9,8 @@ import {Hero} from './hero';
 import {HealthSummary} from './healthsummary';
 import showResults from "./showResults";
 import FactorForm from './factorForm';
+import MyChart from './chart';
+
 import {updateScore} from '../actions';
    
 export class Dash extends React.Component {
@@ -43,6 +45,8 @@ export class Dash extends React.Component {
 
 			<button onClick={() => this.doScore()}>Change Score</button>
 				<Hero />
+
+				<MyChart />
 
 				<HealthSummary score={this.props.score}/>
 
