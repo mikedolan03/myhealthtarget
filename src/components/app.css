@@ -1,9 +1,16 @@
-.logo {
+.logo a{
 
-	margin-top: 50px;
+	margin-top: 5px;
+	color: 	#e87300;
+	text-decoration: none;	
 
 }
 
 .headerwidth {
 	width: 100%;
+}
+
+body {
+	background-color: 	#4A6D9D; 
+	color: white;
 }

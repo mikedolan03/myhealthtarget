@@ -1,6 +1,6 @@
 import React from 'react';
 
-//import './symptomlistitem.css';
+import './symptomlistitem.css';
 
 export default function SymptomListItem(props) {
     return (

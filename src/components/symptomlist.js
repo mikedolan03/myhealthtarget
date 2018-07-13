@@ -5,8 +5,23 @@ import {connect} from 'react-redux';
 
 //import './syomptomlist.css';
 import SymptomListItem from './symptomlistitem';
+import './symptomlist.css';
 
 export class SymptomList extends React.Component {
+
+	constructor(props) {
+    super(props);
+    this.state = {showInfo: false}
+    this.showMoreInfo = this.showMoreInfo.bind(this);
+  }
+
+	showMoreInfo(index) {
+			this.setState(prevState => ({
+      showInfo: !prevState.showInfo
+    }));
+
+			console.log('hello ',this.state); 
+	}
 
 	sortList() {
 
@@ -41,6 +56,9 @@ render() {
   	lists = this.sortList().map((list, index) => (
             		<li className="list-wrapper" key={index}>
                 		<SymptomListItem {...list} />
+                		<button className="info-button" onClick={(index)=> { this.showMoreInfo() } }>i</button>
+            		
+
             		</li>
             		));
 

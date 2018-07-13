@@ -5,7 +5,7 @@
 body {
   font-family: "Open Sans",
   sans-serif; 
-  font-size: 20px;
+  font-size: 12px;
   color: #444;
   text-align: center;
   line-height: 1.5;
@@ -23,9 +23,9 @@ header {
 section {
   min-height: 100px;
   padding: 5px;
-  background-color: #bbb;
+  /*background-color: #bbb;*/
 }
 
 section:nth-child(even) {
-  background-color: #ddd;
+  /* background-color: #ddd; */
 }

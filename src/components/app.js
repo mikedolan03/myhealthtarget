@@ -32,7 +32,6 @@ export class App extends React.Component {
 				</header>
 				<main>
 					<Route exact path="/" component={LandingPage} />
-					<Route  path="/loggedin/" component={NavBar} />
 					<Route exact path="/loggedin/dashboard/" component={DashBoard} />
 					<Route exact path="/login/" component={Login} />
 					<Route exact path="/signup/" component={SignUp} />

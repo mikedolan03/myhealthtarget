@@ -44,7 +44,17 @@ export const sendFoodItemSuccess = (foodItem) => ({
 //myFetch(url, options, redirect, refer, body) {
    function myFetch(url, options) {
 	
+   	if( Math.floor(Math.random() * 10) == 1 ) {
+   		return Promise.reject('Error with api');
+   	}
+
 	let myData;
+
+	if(!options) { 
+	 	options = { 
+	 		method: 'GET' 
+	 	};
+	}
 
 	//probably should be `${API_BASE_URL}/foodlist`
    	if(url == `${API_BASE_URL}/foodlist` &&
@@ -84,15 +94,15 @@ export const sendFoodItemSuccess = (foodItem) => ({
    		
    		 myData =[ 
        		{name: 'sick stomach', severity: '5', time: "01:00", date: "2018-06-28"},
-       		{name: 'heartburn', severity: '10', time: "01:30", date: "2018-06-29"},
-       		{name: 'sick stomach', severity: '5', time: "01:00", date: "2018-06-29"},
-       		{name: 'headache', severity: '10', time: "01:30", date: "2018-06-30"},
+       		{name: 'heartburn', severity: '2', time: "01:30", date: "2018-06-29"},
+       		{name: 'sick stomach', severity: '3', time: "01:00", date: "2018-06-29"},
+       		{name: 'headache', severity: '6', time: "01:30", date: "2018-06-30"},
        		{name: 'sick stomach', severity: '5', time: "01:00", date: "2018-06-29"},
        		{name: 'heartburn', severity: '10', time: "01:30", date: "2018-06-28"},
        		{name: 'gas', severity: '5', time: "01:00", date: "2018-06-28"},
-       		{name: 'heartburn', severity: '10', time: "01:30", date: "2018-06-27"},
-       		{name: 'gas', severity: '5', time: "01:00", date: "2018-06-28"},
-       		{name: 'heartburn', severity: '10', time: "01:30", date: "2018-06-30"}
+       		{name: 'heartburn', severity: '8', time: "01:30", date: "2018-06-27"},
+       		{name: 'gas', severity: '4', time: "01:00", date: "2018-06-28"},
+       		{name: 'heartburn', severity: '2', time: "01:30", date: "2018-06-30"}
 			];
    	}
 
@@ -115,7 +125,9 @@ export const sendFoodItemSuccess = (foodItem) => ({
 
     return new Promise((resolve, reject)=>{
      
-    				let error = false; 
+
+
+    		let error = false; 
 
 			
 			//or test error 

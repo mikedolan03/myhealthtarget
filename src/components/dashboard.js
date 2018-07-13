@@ -42,6 +42,41 @@ export class DashBoard extends React.Component {
   				
   			} */
 
+  			if(this.props.symptomList) {
+  				console.log('props loaded');
+
+  				return (
+
+		<section className="dashboard"> 
+
+			<h2>Recent Correlations</h2> 
+
+			<MyChart />
+
+			<div className="info-block">
+			<h3>Block of recent data, Health Target Score</h3>
+			</div>
+
+
+		<SymptomList show='5'/>
+		<button className="big-button" onClick={()=> this.props.history.push('/loggedin/symptomtracker/')}	>
+				Add symptom	to track
+			</button>
+
+		<FoodList show='5'/>
+		<button className="big-button" onClick={()=> this.props.history.push('/loggedin/factortracker/')}>
+				Add food to track
+			</button>
+
+			<button className="big-button" onClick={()=> this.props.history.push('/loggedin/reviewscreen/')}	>
+				Review your Data
+			</button>
+		</section>
+
+
+			);
+  			} else {
+
 
 		return (
 
@@ -49,7 +84,7 @@ export class DashBoard extends React.Component {
 
 			<h2>This is the Dashboard</h2> 
 
-			<MyChart />
+			
 
 			<div className="info-block">
 			<h3>Block of recent data, Health Target Score</h3>
@@ -73,6 +108,7 @@ export class DashBoard extends React.Component {
 
 
 			);
+		}
 
 	}; 
 

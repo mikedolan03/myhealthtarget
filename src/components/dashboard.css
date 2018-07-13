@@ -10,3 +10,11 @@ text-align: left;
 	background-color: 	lightgrey;
 
 }
+
+.dashboard .big-button {
+ width: 100%;
+ background-color: 	#e87300;
+ border-style: 	none;	
+ border-radius: 2px;
+ margin-top: 3px;
+}

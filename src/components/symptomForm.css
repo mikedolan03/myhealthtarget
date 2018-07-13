@@ -1,0 +1,56 @@
+.form-container {
+display: 	block;
+border-width: 	1px;
+border-style: 	solid;
+margin: 2px;
+padding: 5px; 
+clear: both;
+overflow: hidden;
+text-align: left;
+}
+
+.symptom-box {
+display: 	block;
+border-width: 	1px;
+border-style: 	solid;
+background-color: #d4d4d43d;
+padding: 5px;
+margin-top: 5px;
+margin-bottom: 	5px;
+clear: both;
+    overflow: hidden;
+
+}
+
+.question {
+	display: 	block;	
+    margin-top: 5px;
+    vertical-align: middle;
+    clear: both;
+
+}
+
+.answer {
+	margin-left: 10px;
+	    vertical-align: middle;
+
+}
+
+.remove {
+	display: 	block;	
+	float: 	right;
+	background-color: #e87300;
+	border-style: 	none;	
+	border-radius: 	5px;
+ 
+}
+
+.add {
+	display: block;	
+	float: 	right;
+	background-color: 	white;
+	color: #e87300;
+	border-style: 	none;	
+	border-radius: 	5px; 
+}
+

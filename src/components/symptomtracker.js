@@ -22,7 +22,7 @@ export default class SymptomTracker extends React.Component {
 
 			<h3><Link to="/loggedin/dashboard/">Go back to Dashboard (without saving)</Link></h3>
 
-			<SymptomList />
+			<SymptomList show="10"/>
 
 
 
