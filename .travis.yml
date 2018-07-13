@@ -5,3 +5,7 @@ cache:
     - node_modules
 env:
   - CI=true
+deploy:
+  provider: heroku
+  api_key: "ede85426-87b6-484f-a478-5359ee823595"
+  app: blooming-lake-36867
