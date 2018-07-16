@@ -2,8 +2,33 @@
 
 //users can navigate between food tracking / symptom tracking
 //so we need an action to enable the respective forms
+import {SubmissionError} from 'redux-form';
+import {API_BASE_URL} from '../config';
+import {normalizeResponseErrors} from './utils';
+//const API_BASE_URL = '/'; 
 
-const API_BASE_URL = '/'; 
+export const signUpUser = user => dispatch => {
+    return fetch(`${API_BASE_URL}/users`, {
+   method: 'POST',
+   headers: {
+    'content-type': 'application/json'
+   },
+   body: JSON.stringify(user)
+   })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .catch(err => {
+      const {reason, message, location} =  err;
+      if (reason === 'Validation Error') {
+        return Promise.reject(
+          new SubmissionError({
+            [location]: message
+          })
+        );
+      }
+    });
+};
+
 
 export const TRACK_FOOD = 'TRACK_FOOD';
 export const trackFood = foodobj => ({
@@ -59,6 +84,10 @@ export const sendFoodItemSuccess = (foodItem) => ({
 	//probably should be `${API_BASE_URL}/foodlist`
    	if(url == `${API_BASE_URL}/foodlist` &&
    		options.method == 'GET') {
+
+
+        
+
 
    		 myData =[ 
        		{name: 'carrot', tags: 'orange, veg', time: "01:00", date: "2018-06-27"},

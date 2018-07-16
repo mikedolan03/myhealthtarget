@@ -7,6 +7,8 @@ import './dashboard.css';
 import SymptomList from './symptomlist';
 import FoodList from './foodlist';
 import MyChart from './chart';
+import PercentBox from './percentbox';
+import DataBar from './databar';
 
 
 export class DashBoard extends React.Component {
@@ -56,6 +58,10 @@ export class DashBoard extends React.Component {
 			<div className="info-block">
 			<h3>Block of recent data, Health Target Score</h3>
 			</div>
+
+			<PercentBox number="50" description="percent of time you ate hotdogs within 48hrs of getting Heartburn" />
+
+			<DataBar percent="50" description="Times you ate hotdogs" number="5" />
 
 
 		<SymptomList show='5'/>
