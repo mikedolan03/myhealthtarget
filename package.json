@@ -5,6 +5,7 @@
   "dependencies": {
     "chart.js": "^2.7.2",
     "jwt-decode": "^2.2.0",
+    "query-string": "^6.1.0",
     "react": "^16.4.1",
     "react-autosuggest": "^9.3.4",
     "react-dom": "^16.4.1",

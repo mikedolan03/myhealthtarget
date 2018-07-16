@@ -5,6 +5,9 @@
 import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
+const queryString = require('query-string');
+
+
 //const API_BASE_URL = '/'; 
 
 export const signUpUser = user => dispatch => {
@@ -46,6 +49,11 @@ export const UPDATE_SCORE = 'UPDATE_SCORE';
 export const updateScore = (score) => ({
     type: UPDATE_SCORE,
     score
+});
+
+export const FETCH_FOODLIST_REQUEST = 'FETCH_FOODLIST_REQUEST';
+export const fetchFoodListRequest = () => ({
+    type: FETCH_FOODLIST_REQUEST
 });
 
 export const FETCH_FOODLIST_SUCCESS = 'FETCH_FOODLIST_SUCCESS';
@@ -219,11 +227,16 @@ function sendData(data) {
    })*/
 
 export const fetchFoodList = () => (dispatch, getState) => {
- 
+
+    let myUrl = `${API_BASE_URL}/daylists/`; 
+    let myQueryObj = {sdate: '7-4-2018', edate: '7-11-2018'};
+    let myQuery = '?' + queryString.stringify(myQueryObj); 
+    myUrl = myUrl + myQuery;
+    
      console.log('in the fetchfoodlistpromise');
      //myFetch(`${API_BASE_URL}/foodlist`, {method: 'GET'} )
     const authToken = getState().auth.authToken;
-    return fetch(`${API_BASE_URL}/daylists/`, { 
+    return fetch(`${myUrl}`, { 
       method: 'GET',
       headers: {
         Authorization: `Bearer ${authToken}`

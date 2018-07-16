@@ -1,10 +1,12 @@
 //import * as actions '../actions';
-import {TRACK_FOOD, TRACK_SYMPTOM, UPDATE_SCORE, FETCH_FOODLIST_SUCCESS, FETCH_SYMPTOMLIST_SUCCESS} from '../actions';
+import {TRACK_FOOD, TRACK_SYMPTOM, UPDATE_SCORE, FETCH_FOODLIST_REQUEST, FETCH_FOODLIST_SUCCESS, FETCH_SYMPTOMLIST_SUCCESS} from '../actions';
 
 
 const initialState = {
       foodList: [],
       symptomList: [],
+      loading: false,
+      loaded: false
     };
 
  export const htReducer = (state=initialState, action) => {
@@ -58,13 +60,27 @@ const initialState = {
 
                     } else {
 
+                        if(action.type === FETCH_FOODLIST_REQUEST) {
+                         console.log('FF Request');
+
+                         return Object.assign({}, state, { 
+                            loading: true,
+                            loaded: false
+                         });
+
+                        } else {
+
+
+
                         if(action.type === FETCH_FOODLIST_SUCCESS) {
 
                             console.log('FETCH_FOODLIST_SUCCESS');
                             console.log('foodlist', action.foodlist); 
 
                         return Object.assign({}, state, {
-                        foodList: action.foodList
+                        foodList: action.foodList,
+                        loading: false,
+                        loaded: true
                         });
 
                         } else {
@@ -84,7 +100,8 @@ const initialState = {
                                 return state;
                                 }
                     }
-                }
+                  }
+                 }
                 }
             }
 

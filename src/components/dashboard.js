@@ -33,103 +33,75 @@ export class DashBoard extends React.Component {
 			let mySymptoms; 
 			let lists;
 
+			console.log('any props? ', this.props ); 
+
 			console.log('store in dash: ', store.getState());
 
-			console.log('my prop based data', this.props.foodList); 
+			if (this.props.loading) {
 
-  			let currentStore = store.getState(); 
+				console.log('loading');
 
-  			/*if(currentStore.reducer.symptomList.length > 0) {
-  				console.log('we have symptoms');
+				return(	
+					<section className="dashboard">
+					<h2>Loading... </h2>
+					</section>	
+					 );
 
-  				  lists = this.props.symptomList.map((list, index) => (
-            		<li className="list-wrapper" key={index}>
-                		<SymptomListItem {...list} />
-            		</li>
-            		));
+			} else if (this.props.loaded) {
 
-  				
-  			} */
-
-  			if(this.props.symptomList) {
-  				console.log('props loaded');
-
-  				return (
-
-		<section className="dashboard"> 
-
-			<h2>Recent Correlations</h2> 
-
-			<MyChart />
-
-			<div className="info-block">
-			<h3>Block of recent data, Health Target Score</h3>
-			</div>
-
-			<PercentBox number="50" description="percent of time you ate hotdogs within 48hrs of getting Heartburn" />
-
-			<DataBar percent="50" description="Times you ate hotdogs" number="5" />
+								console.log('loaded');
 
 
-		<SymptomList show='5'/>
-		<button className="big-button" onClick={()=> this.props.history.push('/loggedin/symptomtracker/')}	>
+				return (
+
+				<section className="dashboard"> 
+
+				<h2>Recent Correlations</h2> 
+
+				{this.props.foodList[0].foodList[0].name}
+
+				<PercentBox number="50" description="hello" />
+
+				<DataBar percent="50" description= "hi" number="5" />
+
+
+				<SymptomList show='5'/>
+				<button className="big-button" onClick={()=> this.props.history.push('/loggedin/symptomtracker/')}	>
 				Add symptom	to track
-			</button>
+				</button>
 
-		<FoodList show='5'/>
-		<button className="big-button" onClick={()=> this.props.history.push('/loggedin/factortracker/')}>
+				<FoodList show='5'/>
+				<button className="big-button" onClick={()=> this.props.history.push('/loggedin/factortracker/')}>
 				Add food to track
-			</button>
+					</button>
 
-			<button className="big-button" onClick={()=> this.props.history.push('/loggedin/reviewscreen/')}	>
-				Review your Data
-			</button>
-		</section>
-
-
-			);
-  			} else {
+					<button className="big-button" onClick={()=> this.props.history.push('/loggedin/reviewscreen/')}	>
+						Review your Data
+					</button>
+				</section>
 
 
-		return (
+					);
+				} else {
 
-		<section className="dashboard"> 
-
-			<h2>This is the Dashboard</h2> 
-
-			
-
-			<div className="info-block">
-			<h3>Block of recent data, Health Target Score</h3>
-			</div>
+				console.log('Getting data');
 
 
-		<SymptomList show='5'/>
-		<button onClick={()=> this.props.history.push('/loggedin/symptomtracker/')}	>
-				Add symptom	to track
-			</button>
-
-		<FoodList show='5'/>
-		<button onClick={()=> this.props.history.push('/loggedin/factortracker/')}>
-				Add food to track
-			</button>
-
-			<button onClick={()=> this.props.history.push('/loggedin/reviewscreen/')}	>
-				Review your Data
-			</button>
-		</section>
-
-
-			);
+					return(	
+					<section className="dashboard">
+					<h2>Getting data... </h2>
+					</section>	
+					 );
+				}
+			}
 		}
 
-	}; 
-
-}
 
 const mapStateToProps = state => ({
     foodList: state.reducer.foodList,
-    symptomList: state.reducer.symptomList
+    symptomList: state.reducer.symptomList,
+    loading: state.reducer.loading,
+    loaded: state.reducer.loaded
 });
 
 export default connect(mapStateToProps)(DashBoard);
