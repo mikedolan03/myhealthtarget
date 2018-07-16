@@ -9,9 +9,16 @@ import FoodList from './foodlist';
 import MyChart from './chart';
 import PercentBox from './percentbox';
 import DataBar from './databar';
+import {fetchFoodList} from '../actions';
 
 
 export class DashBoard extends React.Component {
+
+	componentDidMount() {
+        //this.props.dispatch(fetchProtectedData());
+        	 this.props.dispatch(fetchFoodList());
+
+    }
 
 
 	clickedTrackFood() {

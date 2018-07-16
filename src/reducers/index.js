@@ -60,7 +60,8 @@ const initialState = {
 
                         if(action.type === FETCH_FOODLIST_SUCCESS) {
 
-                            console.log('FETCH_FOODLIST_SUCCESS'); 
+                            console.log('FETCH_FOODLIST_SUCCESS');
+                            console.log('foodlist', action.foodlist); 
 
                         return Object.assign({}, state, {
                         foodList: action.foodList

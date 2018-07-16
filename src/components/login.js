@@ -1,7 +1,8 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
 import {fetchFoodList} from '../actions';
 import {fetchSymptomList} from '../actions';
+import LoginForm from './loginform';
 
 import {connect} from 'react-redux';
 //import './login.css'
@@ -10,15 +11,31 @@ export  class LogIn extends React.Component {
 
 login() {
 
-	 this.props.dispatch(fetchFoodList());
-		this.props.dispatch(fetchSymptomList());
+	// this.props.dispatch(fetchFoodList());
+	//	this.props.dispatch(fetchSymptomList());
 
-	 this.props.history.push('/loggedin/dashboard');
+	// this.props.history.push('/loggedin/dashboard');
 
 }
 
 render() {
 
+	if (this.props.loggedIn) {
+        return <Redirect to="/loggedin/dashboard" />;
+    }   
+    else {
+
+					return ( 
+
+					<LoginForm />
+
+					)
+		}
+};
+
+}
+
+/*
 	return ( 		
 
 		<section className="login-page-container">
@@ -40,9 +57,13 @@ render() {
 	}
 
 }
+*/
+
 const mapStateToProps = state => ({
     foodList: state.reducer.foodList,
-    symptomList: state.reducer.symptomList
+    symptomList: state.reducer.symptomList,
+    loggedIn: state.auth.currentUser !== null
+
 });
 
 export default connect(mapStateToProps)(LogIn);

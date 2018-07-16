@@ -86,7 +86,7 @@ export const sendFoodItemSuccess = (foodItem) => ({
    		options.method == 'GET') {
 
 
-        
+
 
 
    		 myData =[ 
@@ -208,17 +208,33 @@ function sendData(data) {
 //track food should probably be renamed Add_Food or somethting since we are adding it to the
 //db
 
-export const fetchFoodList = () => dispatch => {
-    //fetch(`${API_BASE_URL}/foodlist`).then(res => {
-     //   if (!res.ok) {
-      //      return Promise.reject(res.statusText);
-      //  }
-       // return res.json();
+
+/*export const signUpUser = user => dispatch => {
+    return fetch(`${API_BASE_URL}/users`, {
+   method: 'POST',
+   headers: {
+    'content-type': 'application/json'
+   },
+   body: JSON.stringify(user)
+   })*/
+
+export const fetchFoodList = () => (dispatch, getState) => {
+ 
      console.log('in the fetchfoodlistpromise');
-
-
-     myFetch(`${API_BASE_URL}/foodlist`, {method: 'GET'} )
+     //myFetch(`${API_BASE_URL}/foodlist`, {method: 'GET'} )
+    const authToken = getState().auth.authToken;
+    return fetch(`${API_BASE_URL}/daylists/`, { 
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${authToken}`
+      }
+    }) 
+    .then(res => {
+        console.log('in res', res.body);
+      return res.json(); 
+    })
     .then(foodList => {
+      console.log('foodlist after res', foodList  );
         dispatch(fetchFoodListSuccess(foodList));
     })
     .catch(error => { 
