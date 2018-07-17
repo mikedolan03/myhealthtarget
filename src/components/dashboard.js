@@ -16,7 +16,10 @@ export class DashBoard extends React.Component {
 
 	componentDidMount() {
         //this.props.dispatch(fetchProtectedData());
-        	 this.props.dispatch(fetchFoodList());
+        let myQueryObj = {sdate: '7-4-2018', edate: '7-11-2018', symptom:'Gas'};
+
+        //this.props.dispatch(fetchFoodList('daylists/getcauses', myQueryObj) );
+        this.props.dispatch(fetchFoodList('daylists', {}) );
 
     }
 
@@ -63,36 +66,57 @@ export class DashBoard extends React.Component {
 
 								} else { 
 
-									return (
+								let myPercent =	(this.props.foodList.foodCounts[0].count / this.props.foodList.daylists.length) * 100; 
+								myPercent = Math.round(myPercent);
+								return (
+								<section className="dashboard"> 
+									<div className="dashboard-container">
+											<div className="row">
+												<div className="col-12">
+												<h2>Recent Correlations</h2>
+												</div>
+											</div>
+											<div className="row">
+												<div className="col-6">
+													<MyChart />
+												</div>
+												<div className="col-6">
+													<PercentBox number={this.props.foodList.foodCounts[0].count} unit=' times'
+														heading={this.props.foodList.foodCounts[0].name} description="# times eaten before symptom"/>
+												</div>
+											</div>
+											<div className="row">
+												<div className="col-4">
+													<DataBar percent={myPercent} description= {this.props.foodList.foodCounts[0].name} number={`${myPercent}%`} />
+												</div>
+												<div className="col-4">
+													<DataBar percent={myPercent} description= {this.props.foodList.foodCounts[0].name} number={`${myPercent}%`} />
+												</div>
+												<div className="col-4">
+													<DataBar percent={myPercent} description= {this.props.foodList.foodCounts[0].name} number={`${myPercent}%`} />
+												</div>
+											</div>
+											<div className="row">
+												<div className="col-12">
+													{this.props.foodList.daylists[0].foodList[0].name}
 
-				<section className="dashboard"> 
+													<SymptomList show='5'/>
+													<button className="big-button" onClick={()=> this.props.history.push('/loggedin/symptomtracker/')}	>
+													Add symptom	to track
+													</button>
 
-				<h2>Recent Correlations</h2> 
+													<FoodList show='5'/>
+													<button className="big-button" onClick={()=> this.props.history.push('/loggedin/factortracker/')}>
+													Add food to track
+													</button>
 
-				{this.props.foodList[0].foodList[0].name}
-
-				<MyChart />
-
-				<PercentBox number="50" description="hello" />
-
-				<DataBar percent="50" description= "hi" number="5" />
-
-
-				<SymptomList show='5'/>
-				<button className="big-button" onClick={()=> this.props.history.push('/loggedin/symptomtracker/')}	>
-				Add symptom	to track
-				</button>
-
-				<FoodList show='5'/>
-				<button className="big-button" onClick={()=> this.props.history.push('/loggedin/factortracker/')}>
-				Add food to track
-					</button>
-
-					<button className="big-button" onClick={()=> this.props.history.push('/loggedin/reviewscreen/')}	>
-						Review your Data
-					</button>
-				</section>
-
+													<button className="big-button" onClick={()=> this.props.history.push('/loggedin/reviewscreen/')}	>
+													Review your Data
+													</button>
+												</div>
+											</div>
+									</div>
+								</section>
 
 					);
 

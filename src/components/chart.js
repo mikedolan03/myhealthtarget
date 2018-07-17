@@ -36,39 +36,6 @@ export class MyChart extends React.Component {
         let ctx = document.getElementById("myChart").getContext('2d');
 
 
-    let today = new Date();
-    let dd = today.getDate();
-    let mm = today.getMonth()+1;
-    let yyyy = today.getFullYear();
-
-    let x = new Date(); 
-    x.setDate(x.getDate-7);
-    
-
-    if(dd<10) {
-    dd = '0'+dd
-    } 
-
-    if(mm<10) {
-    mm = '0'+mm
-    } 
-
-    today = mm + '/' + dd; //+ '/' + yyyy;
-    let dates = [];
-    let count = 7; 
-    
-    console.log('before for'); 
-
-    for (let i = 0; i < 7; i++)
-    {
-
-       //console.log('date', dd); 
-
-        dates[count] = mm + '/' + (parseInt(dd)-i).toString();
-        count--; 
-             //  console.log('date', dates[count]); 
-
-    }
 //this.props.symptomList[0].severity
         
     Chart.defaults.global.defaultFontColor = 'white';
@@ -99,7 +66,6 @@ export class MyChart extends React.Component {
 
     console.log('data: ', symptomSeverityData);
 
-    let myDays = this.props.foodList.splice();
     let mydates = [];
     let severity = [];
     let foods = []; 
@@ -107,20 +73,20 @@ export class MyChart extends React.Component {
     let myDataSets = [];
 
 
-    for(let i = 0; i < this.props.foodList.length; i++)
+    for(let i = 0; i < this.props.foodList.daylists.length; i++)
     {
 
         
-       mydates.push( moment(this.props.foodList[i].date).format("MM-DD-YYYY") );
+       mydates.push( moment(this.props.foodList.daylists[i].date).format("MM-DD-YYYY") );
 
-       for(let ii = 0; ii < this.props.foodList[i].foodList.length; ii++)
+       for(let ii = 0; ii < this.props.foodList.daylists[i].foodList.length; ii++)
        {
         let newdata = [{},{},{},{},{},{},{}]; 
          newdata.splice(i, 0, { x:5, y:ii});
 
         myDataSets.push( 
                         {
-                        "label": this.props.foodList[i].foodList[ii].name,
+                        "label": this.props.foodList.daylists[i].foodList[ii].name,
                         "data":newdata,
                         "fill": "false",
                         "borderColor":"#ff7800",
@@ -162,7 +128,7 @@ export class MyChart extends React.Component {
 
         myDataSets.push( 
                         {
-                        "label": this.props.foodList[0].foodList[0].name,
+                        "label": this.props.foodList.daylists[0].foodList[0].name,
                         "data":[5,3,6, 3, 9, 10, 2, 4],
                         "fill": "false",
                         "borderColor":"#ff7800",
@@ -170,7 +136,7 @@ export class MyChart extends React.Component {
                         }
             );
 
-         myDataSets.push( 
+        /* myDataSets.push( 
                         {
                         "label": this.props.foodList[0].foodList[1].name,
                         "data":[
@@ -193,7 +159,7 @@ export class MyChart extends React.Component {
                         "type":"scatter"
                         }
             );
-
+*/
     myData.labels = mydates; 
 
 
@@ -211,7 +177,8 @@ export class MyChart extends React.Component {
         "options":{
             legend: {
                 display: false
-            }
+            },
+            pointStyle: "rect"
         }
     });
 
@@ -284,7 +251,7 @@ export class MyChart extends React.Component {
 
             return (
                 <div>
-                <h2>{this.props.foodList[0].date}</h2>
+                <h2>{this.props.foodList.daylists[0].symptomList[0].name}</h2>
             <div className="chartcontainer datareturned">
             <canvas id="myChart" width="300" height="300"></canvas>
             

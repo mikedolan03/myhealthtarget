@@ -29,6 +29,12 @@ const renderFoods = ({fields}) => {
           type="text"
           component="input"
           label={`Tags for #${index + 1}`}/>
+          <label>Time:</label>
+          <Field
+          name={`${food}.time`}
+          type="text"
+          component="input"
+          label={`Tags for #${index + 1}`}/>
           <button
           type="button"
           title="Remove Food"
@@ -68,7 +74,7 @@ export class FactorForm extends React.Component {
     return (
       <form onSubmit={this.props.handleSubmit(values =>this.onSubmit(values))}>
          <div> 
-         <FieldArray name="foods" component={renderFoods} />
+         <FieldArray name="fooditems" component={renderFoods} />
          </div>
        <div>
           <label>Date</label>
@@ -79,12 +85,6 @@ export class FactorForm extends React.Component {
               type="date"
               placeholder=""
             />
-          </div>
-        </div>
-        <div>
-          <label>Time</label>
-          <div>
-            <Field name="time" component="input" type="time" value="" />
           </div>
         </div>
         <div>

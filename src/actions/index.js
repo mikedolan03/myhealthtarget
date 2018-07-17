@@ -226,12 +226,17 @@ function sendData(data) {
    body: JSON.stringify(user)
    })*/
 
-export const fetchFoodList = () => (dispatch, getState) => {
-
-    let myUrl = `${API_BASE_URL}/daylists/`; 
-    let myQueryObj = {sdate: '7-4-2018', edate: '7-11-2018'};
-    let myQuery = '?' + queryString.stringify(myQueryObj); 
+export const fetchFoodList = (endpoint, myQueryObj ={}) => (dispatch, getState) => {
+    if(endpoint == '') { endpoint = 'daylists';}
+    let myQuery;
+    let myUrl = `${API_BASE_URL}/${endpoint}/`; 
+    //let myQueryObj = {sdate: '7-4-2018', edate: '7-11-2018'};
+    
+    //if query sent - add it
+    if(myQueryObj !== {}) {
+    myQuery = '?' + queryString.stringify(myQueryObj); 
     myUrl = myUrl + myQuery;
+    } 
     
      console.log('in the fetchfoodlistpromise');
      //myFetch(`${API_BASE_URL}/foodlist`, {method: 'GET'} )
@@ -275,17 +280,30 @@ export const fetchSymptomList = () => dispatch => {
     });
 };
 
-export const postFoodItems = (foodItem) => dispatch => {
-	
-	myFetch(`${API_BASE_URL}/foodlist`, {method: 'POST', body: foodItem} )
-	.then(responseData => { 
-		console.log('data sent');
-		dispatch( trackFood(responseData));
-	})
+export const postFoodItems = (foodItem) => (dispatch, getState) => {
+
+console.log('adding', foodItem);
+ 
+
+  const authToken = getState().auth.authToken;
+    return fetch(`${API_BASE_URL}/daylists/`, { 
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(foodItem)
+    }) 
+    .then(res => {
+        console.log('in res', res.body);
+        console.log('data sent');
+        dispatch( trackFood(res));
+      return res.json(); 
+    })
 	.catch(error => {
 		console.log('error: ', error);
 	})
-}
+};
 
 export const postSymptoms = (symptom) => dispatch => {
 	myFetch(`${API_BASE_URL}/foodlist`, {method: 'POST', body: symptom} )

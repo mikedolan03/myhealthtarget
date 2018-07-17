@@ -5,8 +5,9 @@ import React from 'react';
 export default function PercentBox(props) {
     return (
         <div className="percent-box-container">
-            <h2>{props.number}%</h2>
-            <h3>{props.description}</h3>
+            <h2>{props.heading}</h2>
+            <h3>{props.number}{props.unit}</h3>
+            <h4>{props.description}</h4>
 
         </div>
     );
