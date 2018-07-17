@@ -2,10 +2,11 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Chart from 'chart.js';
 import './chart.css';
+var moment = require('moment');
  
 export class MyChart extends React.Component {
 
-    componentDidMount() {
+    componentDidUpdate(prevProps) {
       // only update chart if the data has changed
       //if (prevProps.data !== this.props.data) {
       //  this.chart = c3.load({
@@ -13,13 +14,24 @@ export class MyChart extends React.Component {
        // });
       //}
 
+          console.log('component did update');    
+
+
       this.buildChart();
 
     }
 
-    buildChart() {    
+    componentDidMount() {
 
-        if(this.props.symptomList.length > 0) {
+        console.log('in compnent did mount', this.props.foodList);
+
+        this.buildChart();
+    }
+
+    buildChart() { 
+
+    console.log('in build chart');    
+
 
         let ctx = document.getElementById("myChart").getContext('2d');
 
@@ -54,7 +66,7 @@ export class MyChart extends React.Component {
 
         dates[count] = mm + '/' + (parseInt(dd)-i).toString();
         count--; 
-               console.log('date', dates[count]); 
+             //  console.log('date', dates[count]); 
 
     }
 //this.props.symptomList[0].severity
@@ -64,35 +76,148 @@ export class MyChart extends React.Component {
     let symptomSeverityData = [];
     let foodData = [];
 
-    this.props.symptomList.forEach( symptom => {
-        symptomSeverityData.push( parseInt(symptom.severity));
-    });
+   // this.props.symptomList.forEach( symptom => {
+    //    symptomSeverityData.push( parseInt(symptom.severity));
+   // });
 
-    this.props.foodList.forEach( food => {
+   // this.props.foodList.forEach( food => {
     
     //randomly set whether a food was eaten or not. will need to 
     //do a db search for days trigger consumed that match symptom 
     //time frame.
 
-    let rNumber = Math.floor(Math.random() * 10); 
-    let ateFood = 0;
+    //let rNumber = Math.floor(Math.random() * 10); 
+    //let ateFood = 0;
 
-    if(rNumber > 5) { 
-            ateFood = 10; 
-    }
+   // if(rNumber > 5) { 
+    //        ateFood = 10; 
+    //}
 
 
-        foodData.push(ateFood);
-    });
+     //   foodData.push(ateFood);
+   // });
 
     console.log('data: ', symptomSeverityData);
+
+    let myDays = this.props.foodList.splice();
+    let mydates = [];
+    let severity = [];
+    let foods = []; 
+    let myData = { };
+    let myDataSets = [];
+
+
+    for(let i = 0; i < this.props.foodList.length; i++)
+    {
+
+        
+       mydates.push( moment(this.props.foodList[i].date).format("MM-DD-YYYY") );
+
+       for(let ii = 0; ii < this.props.foodList[i].foodList.length; ii++)
+       {
+        let newdata = [{},{},{},{},{},{},{}]; 
+         newdata.splice(i, 0, { x:5, y:ii});
+
+        myDataSets.push( 
+                        {
+                        "label": this.props.foodList[i].foodList[ii].name,
+                        "data":newdata,
+                        "fill": "false",
+                        "borderColor":"#ff7800",
+                        "lineTension":0.1  
+                        }
+            );
+            
+
+      /*  myDataSets.push( 
+                        {
+                        type: "bar",
+                        label: this.props.foodList[i].foodList[ii].name,
+                        data:[5,3,6],
+                        fill: "true",
+                        borderColor:"rgb(75, 192, 192)",
+                        lineTension:"0.1"  
+                        }
+            );
+            */
+
+
+        }
+       
+
+       }
+
+      
+       
+
+      /* myDataSets.push( {
+                "type":"line",
+                "label":"Symptom",
+                "data":symptomSeverityData,
+                "fill":false,
+                "borderColor":"#ff7800",
+                "lineTension":0.1
+                } ); 
+                */
+
+        myDataSets.push( 
+                        {
+                        "label": this.props.foodList[0].foodList[0].name,
+                        "data":[5,3,6, 3, 9, 10, 2, 4],
+                        "fill": "false",
+                        "borderColor":"#ff7800",
+                        "lineTension":0.1  
+                        }
+            );
+
+         myDataSets.push( 
+                        {
+                        "label": this.props.foodList[0].foodList[1].name,
+                        "data":[
+                        { x:1, y:1 }],
+                        "fill": "false",
+                        "borderColor":"#ff7800",
+                        "lineTension":0.1  
+                        }
+            );
+
+         let newdata = [{},{},{},{},{},{},{}]; 
+         newdata.splice(2, 0, { x:5, y:2});
+         myDataSets.push( 
+                        {
+                        "label": this.props.foodList[0].foodList[2].name,
+                        "data":newdata,
+                        "fill": "false",
+                        "borderColor":"#ff7800",
+                        "lineTension":0.1,
+                        "type":"scatter"
+                        }
+            );
+
+    myData.labels = mydates; 
+
+
+                   console.log('dates', mydates); 
+                   console.log('mydata', myDataSets); 
+
 
     let myChart = new Chart( ctx,
     {
         "type":"line",
         "data":{
-            "labels":[ dates[0],dates[1],dates[2],dates[3],dates[4],dates[5],today],
-            "datasets":[
+            "labels": mydates,
+            "datasets": myDataSets
+        },
+        "options":{
+            legend: {
+                display: false
+            }
+        }
+    });
+
+    /*    
+
+[
                 {
                 "label":"Ate Trigger Food",
                 "data":foodData,
@@ -107,11 +232,8 @@ export class MyChart extends React.Component {
                 "borderColor":"#ff7800",
                 "lineTension":0.1
                 }]
-        },
-        "options":{}
-    });
 
-    /*    var myChart = new Chart(ctx, {
+    var myChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
@@ -148,32 +270,51 @@ export class MyChart extends React.Component {
             }
         });
         */
-    }
+    
     }
 
     render() {
 
-           // console.log('do we have props', this.props.symptomList);
-           if(this.props.symptomList.length > 0) {
-            console.log('symp sev', parseInt(this.props.symptomList[0].severity) ); 
-           
-           if(document.getElementById("myChart") != null){
+           if(this.props.loaded) {
 
-                this.buildChart(); 
+            if(document.getElementById("myChart") != null){
+
+               // this.buildChart(); 
             }
 
-                }
-        return (
-            <div className="chartcontainer">
+            return (
+                <div>
+                <h2>{this.props.foodList[0].date}</h2>
+            <div className="chartcontainer datareturned">
+            <canvas id="myChart" width="300" height="300"></canvas>
+            
+            </div>
+            
+            </div>
+
+            );
+
+
+           } else {
+
+            return (
+            <div className="chartcontainer nodata">
             <canvas id="myChart" width="300" height="300"></canvas>
             </div>
             );
 
-    }
+           }
+           
+
+        }
+        
+
+    
 
 }
 const mapStateToProps = state => ({
     foodList: state.reducer.foodList,
-    symptomList: state.reducer.symptomList
+    symptomList: state.reducer.symptomList,
+    loaded: state.reducer.loaded
 });
 export default connect(mapStateToProps)(MyChart);

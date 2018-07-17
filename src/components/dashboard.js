@@ -51,14 +51,27 @@ export class DashBoard extends React.Component {
 
 								console.log('loaded');
 
+								if(this.props.foodList.length <=0 ){
 
-				return (
+									return( 
+										<section className="dashboard"> 
+
+										<h2>Start tracking food and symptoms so we can analyze your data!</h2>
+
+									</section> 
+									); 
+
+								} else { 
+
+									return (
 
 				<section className="dashboard"> 
 
 				<h2>Recent Correlations</h2> 
 
 				{this.props.foodList[0].foodList[0].name}
+
+				<MyChart />
 
 				<PercentBox number="50" description="hello" />
 
@@ -82,6 +95,11 @@ export class DashBoard extends React.Component {
 
 
 					);
+
+								}
+
+
+				
 				} else {
 
 				console.log('Getting data');
