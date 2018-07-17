@@ -305,8 +305,16 @@ console.log('adding', foodItem);
 	})
 };
 
-export const postSymptoms = (symptom) => dispatch => {
-	myFetch(`${API_BASE_URL}/foodlist`, {method: 'POST', body: symptom} )
+export const postSymptoms = (symptom) => (dispatch, getState) => {
+	 const authToken = getState().auth.authToken;
+    return fetch(`${API_BASE_URL}/daylists/`, { 
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(symptom)
+    }) 
 	.then(responseData => { 
 		console.log('data sent');
 		dispatch( trackSymptom(responseData));

@@ -18,8 +18,8 @@ export class DashBoard extends React.Component {
         //this.props.dispatch(fetchProtectedData());
         let myQueryObj = {sdate: '7-4-2018', edate: '7-11-2018', symptom:'Gas'};
 
-        //this.props.dispatch(fetchFoodList('daylists/getcauses', myQueryObj) );
-        this.props.dispatch(fetchFoodList('daylists', {}) );
+        this.props.dispatch(fetchFoodList('daylists/getcauses', myQueryObj) );
+        //this.props.dispatch(fetchFoodList('daylists', {}) );
 
     }
 
