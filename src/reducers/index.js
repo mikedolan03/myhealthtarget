@@ -1,12 +1,13 @@
 //import * as actions '../actions';
-import {TRACK_FOOD, TRACK_SYMPTOM, UPDATE_SCORE, FETCH_FOODLIST_REQUEST, FETCH_FOODLIST_SUCCESS, FETCH_SYMPTOMLIST_SUCCESS} from '../actions';
+import {TRACK_FOOD, TRACK_SYMPTOM, CHANGE_SYMPTOM, FETCH_FOODLIST_REQUEST, FETCH_FOODLIST_SUCCESS, FETCH_SYMPTOMLIST_SUCCESS} from '../actions';
 
 
 const initialState = {
       foodList: [],
       symptomList: [],
       loading: false,
-      loaded: false
+      loaded: false,
+      symptom: 'Gas'
     };
 
  export const htReducer = (state=initialState, action) => {
@@ -52,10 +53,10 @@ const initialState = {
 
         		} else {
 
-                 	if(action.type === UPDATE_SCORE) {
+                 	if(action.type === CHANGE_SYMPTOM) {
 
                     	return Object.assign({}, state, {
-                    	score: action.score
+                    	symptom: action.symptomvalue
                     	});
 
                     } else {

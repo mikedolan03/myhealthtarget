@@ -7,13 +7,7 @@ var moment = require('moment');
 export class MyChart extends React.Component {
 
     componentDidUpdate(prevProps) {
-      // only update chart if the data has changed
-      //if (prevProps.data !== this.props.data) {
-      //  this.chart = c3.load({
-       //   data: this.props.data
-       // });
-      //}
-
+    
           console.log('component did update');    
 
 
@@ -33,7 +27,7 @@ export class MyChart extends React.Component {
     console.log('in build chart');    
 
 
-        let ctx = document.getElementById("myChart").getContext('2d');
+    let ctx = document.getElementById("myChart").getContext('2d');
 
 
 //this.props.symptomList[0].severity
@@ -71,18 +65,32 @@ export class MyChart extends React.Component {
     let foods = []; 
     let myData = { };
     let myDataSets = [];
-
+    let sympData = []; 
+    let sympFound = false; 
 
     for(let i = 0; i < this.props.foodList.daylists.length; i++)
     {
 
+        sympFound = false;
+
         
        mydates.push( moment(this.props.foodList.daylists[i].date).format("MM-DD-YYYY") );
+
+       //check to see if this day had the symptom
+       for (var iii=0; iii < this.props.foodList.daylists[i].symptomList.length; iii++) {
+
+            if (this.props.foodList.daylists[i].symptomList[iii].name === this.props.symptom) {
+               sympFound = true; 
+               sympData.push(this.props.foodList.daylists[i].symptomList[iii].severity);
+            }
+        }
+
+        if(!sympFound) sympData.push(0); 
 
        for(let ii = 0; ii < this.props.foodList.daylists[i].foodList.length; ii++)
        {
         let newdata = [{},{},{},{},{},{},{}]; 
-         newdata.splice(i, 0, { x:5, y:ii});
+         newdata.splice(i, 0, { x:5, y:(ii+.5)});
 
         myDataSets.push( 
                         {
@@ -90,7 +98,9 @@ export class MyChart extends React.Component {
                         "data":newdata,
                         "fill": "false",
                         "borderColor":"#ff7800",
-                        "lineTension":0.1  
+                        "lineTension":0.1,
+                        "pointStyle": "rect", 
+                        "radius": 4 
                         }
             );
             
@@ -128,10 +138,10 @@ export class MyChart extends React.Component {
 
         myDataSets.push( 
                         {
-                        "label": this.props.foodList.daylists[0].foodList[0].name,
-                        "data":[5,3,6, 3, 9, 10, 2, 4],
+                        "label": this.props.symptom,
+                        "data": sympData,
                         "fill": "false",
-                        "borderColor":"#ff7800",
+                        "borderColor":"#ffce56",
                         "lineTension":0.1  
                         }
             );
@@ -251,9 +261,9 @@ export class MyChart extends React.Component {
 
             return (
                 <div>
-                <h2>{this.props.foodList.daylists[0].symptomList[0].name}</h2>
+                <h2>{this.props.symptom}</h2>
             <div className="chartcontainer datareturned">
-            <canvas id="myChart" width="300" height="300"></canvas>
+            <canvas id="myChart" width="300" height="150"></canvas>
             
             </div>
             
@@ -266,7 +276,7 @@ export class MyChart extends React.Component {
 
             return (
             <div className="chartcontainer nodata">
-            <canvas id="myChart" width="300" height="300"></canvas>
+            <canvas id="myChart" width="300" height="150"></canvas>
             </div>
             );
 
@@ -282,6 +292,7 @@ export class MyChart extends React.Component {
 const mapStateToProps = state => ({
     foodList: state.reducer.foodList,
     symptomList: state.reducer.symptomList,
-    loaded: state.reducer.loaded
+    loaded: state.reducer.loaded,
+    symptom: state.reducer.symptom
 });
 export default connect(mapStateToProps)(MyChart);

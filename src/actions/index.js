@@ -45,10 +45,10 @@ export const trackSymptom = symptomObj => ({
     symptomObj
 });
 
-export const UPDATE_SCORE = 'UPDATE_SCORE';
-export const updateScore = (score) => ({
-    type: UPDATE_SCORE,
-    score
+export const CHANGE_SYMPTOM = 'CHANGE_SYMPTOM';
+export const changeSymptom = (symptomvalue) => ({
+    type: CHANGE_SYMPTOM,
+    symptomvalue
 });
 
 export const FETCH_FOODLIST_REQUEST = 'FETCH_FOODLIST_REQUEST';

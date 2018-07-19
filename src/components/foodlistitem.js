@@ -3,11 +3,25 @@ import React from 'react';
 //import './foodlistitem.css';
 
 export default function FoodListItem(props) {
-    return (
+
+if(props.showTags) { 
+
+	 return (
         <div className="food-list-item">
-            {props.name} - {props.tags} - {props.date} at {props.time}
+            {props.name} - {props.tags}
         </div>
     );
+
+} else {
+
+	 return (
+        <div className="food-list-item">
+            {props.name}
+        </div>
+    );
+
+}
+
 };
 
 FoodListItem.defaultProps = {

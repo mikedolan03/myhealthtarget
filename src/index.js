@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import './index.css';
 import store from './store';
-import {MyTest} from './components/dash'
 import FactorForm from './components/factorForm';
 import showResults from './components/showResults';
 import App from './components/app';

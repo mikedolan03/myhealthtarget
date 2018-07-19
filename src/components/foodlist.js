@@ -18,12 +18,12 @@ render() {
 
   			//let currentStore = store.getState(); 
 
-  			if(this.props.foodList.length > 0) {
+  			if(this.props.foodList.combinedFoods.length > 0) {
   				console.log('we have foods');
 
-  				  lists = this.props.foodList.map((list, index) => (
+  				  lists = this.props.foodList.combinedFoods.map((list, index) => (
             		<li className="list-item" key={index}>
-                		<FoodListItem {...list} />
+                		<FoodListItem {...list} showTags="true" />
             		</li>
             		));
 
@@ -33,7 +33,7 @@ render() {
 
 	return (
 		<div className="food-list">
-		<h3>Recent Foods Eaten</h3>
+		<h3>Foods That Might Cause {this.props.symptom}</h3>
 		<ul>
 		{lists}
 		</ul>
@@ -46,7 +46,9 @@ render() {
 
 const mapStateToProps = state => ({
     foodList: state.reducer.foodList,
-    symptomList: state.reducer.symptomList
+    symptomList: state.reducer.symptomList,
+    loaded: state.reducer.loaded,
+    symptom: state.reducer.symptom
 });
 
 export default connect(mapStateToProps)(FoodList);
