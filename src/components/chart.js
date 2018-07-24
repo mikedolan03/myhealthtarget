@@ -77,6 +77,12 @@ export class MyChart extends React.Component {
                     boxWidth: 3,
                     fontSize: 12 }
             },
+            title: {
+                display: true,
+                position: 'top',
+                fontSize: 12,
+                text: 'Likely Causes'
+            },
             responsive: true,
             maintainAspectRatio: false,
             cutoutPercentage: 90           

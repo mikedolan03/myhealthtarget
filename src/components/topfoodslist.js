@@ -15,7 +15,8 @@ render() {
 
   			lists = this.props.foodList.foodCounts.slice(0,5).map((list, index) => (
           <div className="list-item" key={index}>
-            <button><TopFoodItem {...list} percent={ (list.count / this.props.foodList.daylists.length) * 100 }/></button>
+            <button><TopFoodItem {...list} 
+            percent={ (list.count / this.props.foodList.daylists.length) * 100 } totalDays={this.props.foodList.daylists.length}/></button>
           </div>
         ));
 

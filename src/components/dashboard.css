@@ -25,9 +25,10 @@ text-align: left;
     border-style: none;
     border-radius: 10px;
     margin-top: 70px;
-    margin-bottom: 25px;
-    padding-bottom: 20px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
     padding-top: 5px;
-    box-shadow: 3px 3px #00000040;
+    /*box-shadow: 3px 3px #00000040;*/
+    box-shadow: 5px 5px #8888881c;
     border-radius: 10px;
 }

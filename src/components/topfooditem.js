@@ -8,7 +8,7 @@ export default function TopFoodItem(props) {
         <div className="topfood-item">
             <div className="top-name">{props.name}</div><div className="data-bar-box">
           <span style={{width: props.percent+'%'}}></span>
-        </div><div className="top-number">{props.count}</div>  
+        </div><div className="top-number">{props.count}/{props.totalDays} days</div>  
         </div>
     );
 
@@ -21,5 +21,6 @@ TopFoodItem.defaultProps = {
     date: '',
     time: '',
     percent: '',
-    count: ''
+    count: '',
+    totalDays: ''
 };
