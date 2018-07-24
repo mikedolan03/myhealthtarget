@@ -9,9 +9,14 @@ import FoodList from './foodlist';
 import MyChart from './chart';
 import PercentBox from './percentbox';
 import DataBar from './databar';
+import SymptomDateBar from './symptomdatebar';
 import TopFoodsList from './topfoodslist';
 import {fetchFoodList} from '../actions';
 import {changeSymptom} from '../actions';
+import {changeDates} from '../actions';
+import {showModal} from '../actions';
+import SymptomPickerModal from './symptompickermodal';
+import NavBar from './navbar';
 
 var moment = require('moment');
 moment().format();
@@ -22,7 +27,10 @@ export class DashBoard extends React.Component {
     super(props);
     this.changedSymptom = this.changedSymptom.bind(this);
     this.input = React.createRef();
-  }
+    this.dateinput = React.createRef();
+    this.state = { isModalOpen: false };
+    }
+  
 
 	componentDidMount() {
         //this.props.dispatch(fetchProtectedData());
@@ -77,6 +85,20 @@ export class DashBoard extends React.Component {
        
     }
 
+    openModal() {
+      //this.setState({ isModalOpen: true })
+           this.props.dispatch(showModal(true));
+           			console.log('any props? ', this.props ); 
+
+
+    }
+
+    closeModal() {
+           this.props.dispatch(showModal(false));
+    }
+
+   
+
 	render( ) {
 
 			let mySymptoms; 
@@ -93,10 +115,15 @@ export class DashBoard extends React.Component {
 
 				console.log('loading');
 
-				return(	
+				return(
+					<div>
+					 <header className="headerwidth"> 
+					  <h1 className="logo"><Link to="/">My Health Target</Link></h1>
+				   </header>	
 					<section className="dashboard">
 					<h2>Loading... </h2>
 					</section>	
+					</div>
 					 );
 
 			} else if (this.props.loaded) {
@@ -106,6 +133,10 @@ export class DashBoard extends React.Component {
 								if(this.props.foodList.length <=0 ){
 
 									return( 
+										<div>
+					 					<header className="headerwidth"> 
+					  				<h1 className="logo"><Link to="/">My Health Target</Link></h1>
+				   					</header>
 										<section className="dashboard"> 
 
 										<h2>Start tracking food and symptoms so we can analyze your data!</h2>
@@ -119,6 +150,7 @@ export class DashBoard extends React.Component {
 										</button>
 
 									</section> 
+									</div>
 									); 
 
 								} else { 
@@ -126,13 +158,36 @@ export class DashBoard extends React.Component {
 								let myPercent; //=	(this.props.foodList.foodCounts[0].count / this.props.foodList.daylists.length) * 100; 
 								myPercent = Math.round( ((this.props.foodList.foodCounts[0].count / this.props.foodList.daylists.length) * 100) );
 								return (
+								<div>
+								<SymptomPickerModal isOpen={this.props.showSymptomModal} onClose={()=> this.closeModal()} />
+
 								<section className="dashboard"> 
+
 									<div className="dashboard-container">
+									<NavBar />
+ 											<div className="row">
+ 												<div className="col-12">
+													<div className="chart-area-container">
+												
+														<SymptomDateBar onOpen={()=> this.openModal()} symptom={this.props.symptom} startDate={this.props.startDate} endDate={this.props.endDate}/>
+													
+														<MyChart />
+													</div>
+												</div>
+											</div>
+									
 											<div className="row">
-												<div className="col-12">
-												<h2>What foods are causing {this.props.symptom}?</h2>
-												<h4>Change Symptom:  </h4>
-												<label>What are you experiencing?</label> 
+												<div className="col-6">
+													<TopFoodsList />
+													<PercentBox number={this.props.foodList.foodCounts[0].count} unit=' times'
+														heading={this.props.foodList.foodCounts[0].name} description="# times eaten before symptom"/> 
+												</div>
+											</div>
+											<div className="row">
+												<div className="col-6">
+													<h2>What foods are causing {this.props.symptom}?</h2>
+													<h4>Change Symptom:  </h4>
+													<label>What are you experiencing?</label> 
 
             <select name="selectSymptom" ref={this.input} onChange={()=> {this.changedSymptom()} }>
               
@@ -189,6 +244,7 @@ export class DashBoard extends React.Component {
 											</div>
 									</div>
 								</section>
+							</div>
 
 					);
 
@@ -202,9 +258,14 @@ export class DashBoard extends React.Component {
 
 
 					return(	
+					<div>
+					 <header className="headerwidth"> 
+					  <h1 className="logo"><Link to="/">My Health Target</Link></h1>
+				   </header>
 					<section className="dashboard">
 					<h2>Getting data... </h2>
 					</section>	
+					</div>
 					 );
 				}
 			}
@@ -216,7 +277,11 @@ const mapStateToProps = state => ({
     symptomList: state.reducer.symptomList,
     loading: state.reducer.loading,
     loaded: state.reducer.loaded,
-    symptom: state.reducer.symptom
+    symptom: state.reducer.symptom,
+    startDate: state.reducer.startDate,
+    endDate: state.reducer.endDate,
+    showSymptomModal: state.reducer.showSymptomModal
+
 });
 
 export default connect(mapStateToProps)(DashBoard);

@@ -51,6 +51,19 @@ export const changeSymptom = (symptomvalue) => ({
     symptomvalue
 });
 
+export const CHANGE_DATES = 'CHANGE_DATES';
+export const changeDates = (start_Date, end_Date) => ({
+    type: CHANGE_DATES,
+    start_Date,
+    end_Date
+});
+
+export const SHOW_MODAL = 'SHOW_MODAL';
+export const showModal = (show) => ({
+    type: SHOW_MODAL,
+    show
+});
+
 export const FETCH_FOODLIST_REQUEST = 'FETCH_FOODLIST_REQUEST';
 export const fetchFoodListRequest = () => ({
     type: FETCH_FOODLIST_REQUEST

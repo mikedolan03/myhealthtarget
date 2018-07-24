@@ -27,9 +27,6 @@ export class App extends React.Component {
 	return (
 		<Router> 
 			<div className="app">
-				<header className="headerwidth"> 
-					<h1 className="logo"><Link to="/">My Health Target</Link></h1>
-				</header>
 				<main>
 					<Route exact path="/" component={LandingPage} />
 					<Route exact path="/loggedin/dashboard/" component={DashBoard} />

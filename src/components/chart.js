@@ -6,7 +6,7 @@ var moment = require('moment');
  
 export class MyChart extends React.Component {
 
-    componentDidUpdate(prevProps) {
+ componentDidUpdate(prevProps) {
     
           console.log('component did update');    
 
@@ -15,48 +15,94 @@ export class MyChart extends React.Component {
 
     }
 
-    componentDidMount() {
+ componentDidMount() {
 
         console.log('in compnent did mount', this.props.foodList);
 
         this.buildChart();
     }
 
-    buildChart() { 
+
+ buildChart() { 
+
+            
+    let donutChart = true; 
+    let myFoodData = []; 
+    let myFoodNames = [];
+
+     if(donutChart) {
+
+        let numberOfFoods = 5;
+
+        if(this.props.foodList.foodCounts.length > 0) {
+            if(this.props.foodList.foodCounts.length < 5) {
+                numberOfFoods = this.props.foodList.foodCounts.length;
+            }
+        }
+
+        for(let i = 0; i < numberOfFoods; i++)
+        {
+
+            myFoodData.push(this.props.foodList.foodCounts[i].count)
+            myFoodNames.push(this.props.foodList.foodCounts[i].name)
+        }
+
+        console.log('in build chart');
+        let ctx = document.getElementById("myChart").getContext('2d'); 
+        Chart.defaults.global.defaultFontColor = 'white';   
+
+
+        var myDoughnutChart = new Chart(ctx, {
+        'type': 'doughnut',
+        'data': {
+            'datasets': [{
+                data: myFoodData,
+                "backgroundColor":[ 
+                '#fe8d07',
+                '#c86dd7',
+                '#00c7ff', 
+                '#28c97c', 
+                '#fc4661' ],
+                'borderColor': ['#fa9620', '#c87cd5', '#14c7fa', '#40d08b', '#ff637a' ],
+                'borderWidth': [2,2,2,2,2]
+            }],
+
+            'labels': myFoodNames
+        },
+        "options":{
+            legend: {
+                display: true,
+                position: 'bottom',
+                labels: {
+                    boxWidth: 3,
+                    fontSize: 12 }
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+            cutoutPercentage: 90           
+
+        }
+        });
+
+
+
+
+     } else { 
+
+
+
 
     console.log('in build chart');    
 
 
     let ctx = document.getElementById("myChart").getContext('2d');
 
-
-//this.props.symptomList[0].severity
         
     Chart.defaults.global.defaultFontColor = 'white';
 
     let symptomSeverityData = [];
     let foodData = [];
 
-   // this.props.symptomList.forEach( symptom => {
-    //    symptomSeverityData.push( parseInt(symptom.severity));
-   // });
-
-   // this.props.foodList.forEach( food => {
-    
-    //randomly set whether a food was eaten or not. will need to 
-    //do a db search for days trigger consumed that match symptom 
-    //time frame.
-
-    //let rNumber = Math.floor(Math.random() * 10); 
-    //let ateFood = 0;
-
-   // if(rNumber > 5) { 
-    //        ateFood = 10; 
-    //}
-
-
-     //   foodData.push(ateFood);
-   // });
 
     console.log('data: ', symptomSeverityData);
 
@@ -105,36 +151,12 @@ export class MyChart extends React.Component {
             );
             
 
-      /*  myDataSets.push( 
-                        {
-                        type: "bar",
-                        label: this.props.foodList[i].foodList[ii].name,
-                        data:[5,3,6],
-                        fill: "true",
-                        borderColor:"rgb(75, 192, 192)",
-                        lineTension:"0.1"  
-                        }
-            );
-            */
-
-
         }
        
 
        }
 
-      
-       
-
-      /* myDataSets.push( {
-                "type":"line",
-                "label":"Symptom",
-                "data":symptomSeverityData,
-                "fill":false,
-                "borderColor":"#ff7800",
-                "lineTension":0.1
-                } ); 
-                */
+ 
 
         myDataSets.push( 
                         {
@@ -146,30 +168,6 @@ export class MyChart extends React.Component {
                         }
             );
 
-        /* myDataSets.push( 
-                        {
-                        "label": this.props.foodList[0].foodList[1].name,
-                        "data":[
-                        { x:1, y:1 }],
-                        "fill": "false",
-                        "borderColor":"#ff7800",
-                        "lineTension":0.1  
-                        }
-            );
-
-         let newdata = [{},{},{},{},{},{},{}]; 
-         newdata.splice(2, 0, { x:5, y:2});
-         myDataSets.push( 
-                        {
-                        "label": this.props.foodList[0].foodList[2].name,
-                        "data":newdata,
-                        "fill": "false",
-                        "borderColor":"#ff7800",
-                        "lineTension":0.1,
-                        "type":"scatter"
-                        }
-            );
-*/
     myData.labels = mydates; 
 
 
@@ -192,63 +190,9 @@ export class MyChart extends React.Component {
         }
     });
 
-    /*    
-
-[
-                {
-                "label":"Ate Trigger Food",
-                "data":foodData,
-                "fill":false,
-                "borderColor":"rgb(75, 192, 192)",
-                "lineTension":0.1
-                },
-                {
-                "label":"Symptom",
-                "data":symptomSeverityData,
-                "fill":false,
-                "borderColor":"#ff7800",
-                "lineTension":0.1
-                }]
-
-    var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255,99,132,1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero:true
-                        }
-                    }]
-                }
-            }
-        });
-        */
-    
     }
+    
+ }
 
     render() {
 
@@ -260,10 +204,9 @@ export class MyChart extends React.Component {
             }
 
             return (
-                <div>
-                <h2>{this.props.symptom}</h2>
+            <div className="chart-component">
             <div className="chartcontainer datareturned">
-            <canvas id="myChart" width="300" height="150"></canvas>
+            <canvas id="myChart" width="300" height="200"></canvas>
             
             </div>
             
@@ -276,7 +219,7 @@ export class MyChart extends React.Component {
 
             return (
             <div className="chartcontainer nodata">
-            <canvas id="myChart" width="300" height="150"></canvas>
+            <canvas id="myChart" width="300" height="200"></canvas>
             </div>
             );
 

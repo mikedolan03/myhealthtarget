@@ -1,13 +1,17 @@
 //import * as actions '../actions';
-import {TRACK_FOOD, TRACK_SYMPTOM, CHANGE_SYMPTOM, FETCH_FOODLIST_REQUEST, FETCH_FOODLIST_SUCCESS, FETCH_SYMPTOMLIST_SUCCESS} from '../actions';
-
+import {TRACK_FOOD, TRACK_SYMPTOM, CHANGE_SYMPTOM, SHOW_MODAL, CHANGE_DATES, FETCH_FOODLIST_REQUEST, FETCH_FOODLIST_SUCCESS, FETCH_SYMPTOMLIST_SUCCESS} from '../actions';
+var moment = require('moment');
+moment().format();
 
 const initialState = {
       foodList: [],
       symptomList: [],
       loading: false,
       loaded: false,
-      symptom: 'Gas'
+      symptom: 'Gas',
+      startDate: moment(moment().format()).subtract(7, 'days').format('MM[/]DD'),
+      endDate: moment().format('MM[/]DD'),
+      showSymptomModal: false
     };
 
  export const htReducer = (state=initialState, action) => {
@@ -61,6 +65,23 @@ const initialState = {
 
                     } else {
 
+                        if(action.type === SHOW_MODAL) {
+
+                        return Object.assign({}, state, {
+                        showSymptomModal: action.show
+                        });
+
+                    } else {
+
+                        if(action.type === CHANGE_DATES) {
+
+                        return Object.assign({}, state, {
+                        startDate: action.start_Date,
+                        endDate: action.end_Date
+                        });
+
+                    } else {
+
                         if(action.type === FETCH_FOODLIST_REQUEST) {
                          console.log('FF Request');
 
@@ -102,6 +123,8 @@ const initialState = {
                                 }
                     }
                   }
+              }
+          }
                  }
                 }
             }
