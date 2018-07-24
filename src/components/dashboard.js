@@ -54,7 +54,7 @@ export class DashBoard extends React.Component {
 
 				today = moment(today).format("MM-DD-YYYY");
 
-				let startDay = moment(today).subtract(7, 'days');
+				let startDay = moment(today).subtract(7, 'days').format("MM-DD-YYYY");
         
         let myQueryObj = {sdate: startDay, edate: today, symptom: this.props.symptom};
 
@@ -124,13 +124,13 @@ export class DashBoard extends React.Component {
 					<h2>Loading... </h2>
 					</section>	
 					</div>
-					 );
+					 ); 
 
 			} else if (this.props.loaded) {
 
-								console.log('loaded');
+								console.log('loaded', this.props.foodList.length);
 
-								if(this.props.foodList.length <=0 ){
+								if(!this.props.foodList.foodCounts){
 
 									return( 
 										<div>
@@ -160,11 +160,11 @@ export class DashBoard extends React.Component {
 								return (
 								<div>
 								<SymptomPickerModal isOpen={this.props.showSymptomModal} onClose={()=> this.closeModal()} />
-
-								<section className="dashboard"> 
-
+								<NavBar />
+								<section className="dashboard">  
+								
 									<div className="dashboard-container">
-									<NavBar />
+									
  											<div className="row">
  												<div className="col-12">
 													<div className="chart-area-container">
@@ -232,7 +232,7 @@ export class DashBoard extends React.Component {
 													Add symptom	to track
 													</button>
 
-													<FoodList show='5'/>
+													
 													<button className="big-button" onClick={()=> this.props.history.push('/loggedin/factortracker/')}>
 													Add food to track
 													</button>

@@ -1,32 +1,85 @@
 .symptom-picker-popup {
-    position: absolute;
-    top: 5%;
+    position: fixed;
+    top: 0%;
     left: 50%;
-    transform: translate(-50%, 30%);
-    z-index: 9999;
-    background: #ffffffe0;
+    transform: translate(-50%, 19%);
+    z-index: 1010;
+    background: #292d50;
     display: block;
     border-style: solid;
-    border-width: 1px;
-    width: 200px;
-    height: 200px;
+    border-width: 0px;
+    border-radius: 10px;
+    width: 600px;
+    max-width: 80%;
+    height: 400px;
+    max-height: 95%;
+    color: white;
+    box-shadow: 5px 5px #8888881c;
+
     }
 
+.pop-content select {
+  width: 100%;
+  height: 50px;
+  background-color: grey;
+  border-width: 0px;
+  border-radius: 10px;
+  padding: 10px;
+
+}
+
+.symptom-picker-popup button {
+  position: absolute;
+  bottom: 1px;
+  left: 0px;
+  width: 100%;
+  height: 60px;
+  background-color: orange;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-width: 0px;
+  border-style: none;
+  outline: none;
+  padding: 10px;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-left: 0px;
+
+}
+
 .modal {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     top: 0px;
     left: 0px;
-    z-index: 9998;
-    background: #8080806b;
+    z-index: 1000;
+    background-color: #0000008c;
     display: block;
     border-style: none;
     border-width: 0px;
     }
 
-    .symptom-picker-container {
+.symptom-picker-container {
       position: relative;
       width: 100%;
       height: 100%;
     }
+
+  .pop-content {
+
+  /* other stuff we already covered */
+
+  /* cover the modal */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  padding: 20px 20px 20px 20px;
+
+  /* let it scroll */
+  overflow: auto;
+  
+}

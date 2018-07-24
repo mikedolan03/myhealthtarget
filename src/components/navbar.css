@@ -2,7 +2,7 @@ nav {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
+  width: 100%;
   z-index: 10;
  background: rgb(106,0,255); /* Old browsers */
 background: -moz-linear-gradient(left, rgba(106,0,255,1) 1%, rgba(170,160,255,1) 100%); /* FF3.6-15 */

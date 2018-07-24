@@ -251,7 +251,7 @@ export const fetchFoodList = (endpoint, myQueryObj ={}) => (dispatch, getState) 
     myUrl = myUrl + myQuery;
     } 
     
-     console.log('in the fetchfoodlistpromise');
+     console.log('in the fetchfoodlistpromise', myUrl);
      //myFetch(`${API_BASE_URL}/foodlist`, {method: 'GET'} )
     const authToken = getState().auth.authToken;
     return fetch(`${myUrl}`, { 
@@ -265,8 +265,13 @@ export const fetchFoodList = (endpoint, myQueryObj ={}) => (dispatch, getState) 
       return res.json(); 
     })
     .then(foodList => {
-      console.log('foodlist after res', foodList  );
+      console.log('foodlist after res', foodList);
+
+      if(foodList.message) {
+        foodList.UserMessage  = "We couldn't find any entries!";
+      }
         dispatch(fetchFoodListSuccess(foodList));
+      
     })
     .catch(error => { 
   		console.log('error: ', error);
