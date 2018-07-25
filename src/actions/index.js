@@ -65,9 +65,10 @@ export const loggingIn = loggingInVar => ({
 });
 
 export const SHOW_MODAL = 'SHOW_MODAL';
-export const showModal = (show) => ({
+export const showModal = (symptomShow, dateShow) => ({
     type: SHOW_MODAL,
-    show
+    symptomShow,
+    dateShow
 });
 
 export const FETCH_FOODLIST_REQUEST = 'FETCH_FOODLIST_REQUEST';

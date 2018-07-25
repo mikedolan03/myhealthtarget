@@ -22,26 +22,43 @@ export class SymptomPickerModal extends React.Component {
 
     changedSymptom(event) {
 
-        //event.preventDefault();
-        //console.log('in change symp 1', this.props);
         console.log('in change symp 2', this.input.current.value);
         
-     this.props.dispatch(changeSymptom(this.input.current.value));
-             this.props.dispatch(showModal(false));
-
-
-
-    // this.setUpQuery(); 
-       
+        this.props.dispatch(changeSymptom(this.input.current.value));
+        this.props.dispatch(showModal(false));
     }
 
     render() {
 
-        if (this.props.isOpen === false)
-        return null
+       // if (this.props.isOpen === false)
+       // return null
 
     //onClick={e => this.close(e)}
+        if(this.props.showDateModal )
+        {
 
+            return (
+           <div className="symptom-picker-container">
+            <div className="modal">
+            
+            </div>
+            
+            <div className="symptom-picker-popup">
+             <div className="pop-content">
+              <h2>What date range would you like to look at?</h2>
+
+              <label>Start Date</label> <input type="date" name="sdate" />
+              <label>End Date</label> <input type="date" name="edate" />
+             </div>
+             <button onClick={e => this.close(e)}>Cancel</button>
+            </div>
+           </div> 
+        );
+
+        }
+
+    if(this.props.showSymptomModal )
+        {
         return (
     	   <div className="symptom-picker-container">
     	    <div className="modal">
@@ -68,6 +85,10 @@ export class SymptomPickerModal extends React.Component {
             </div>
            </div> 
         );
+    }
+
+    return null;
+
     };
 };
 
@@ -79,7 +100,8 @@ const mapStateToProps = state => ({
     symptom: state.reducer.symptom,
     startDate: state.reducer.startDate,
     endDate: state.reducer.endDate, 
-    showSymptomModal: state.reducer.showSymptomModal
+    showSymptomModal: state.reducer.showSymptomModal,
+    showDateModal: state.reducer.showDateModal
 });
 
 export default connect(mapStateToProps)(SymptomPickerModal);

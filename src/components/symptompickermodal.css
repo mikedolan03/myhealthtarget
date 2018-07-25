@@ -18,10 +18,20 @@
 
     }
 
+.pop-content input {
+  width: 100%;
+  height: 50px;
+  background-color: white;
+  border-width: 0px;
+  border-radius: 10px;
+  padding: 10px;
+
+}
+
 .pop-content select {
   width: 100%;
   height: 50px;
-  background-color: grey;
+  background-color: white;
   border-width: 0px;
   border-radius: 10px;
   padding: 10px;

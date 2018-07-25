@@ -1,7 +1,16 @@
 
+.top{
+
+position: relative;
+    /* margin-top: 1px; */
+    /* z-index: 10; */
+    top: -195px;
+}
+
 .sd-bar {
 display: block;
-margin-top: 1px;
+    /* margin-top: 1px; */
+    /* z-index: 10; */
 
 }
 

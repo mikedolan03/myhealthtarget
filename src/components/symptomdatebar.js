@@ -39,8 +39,19 @@ export class SymptomDateBar extends React.Component {
 
  changedDate(event) {
 
-     console.log('in change date', this.dateinput.current.value);
+     //console.log('in change date', this.dateinput.current.value);
+      event.preventDefault();
+
+      this.props.dispatch(showModal(false, true));
         
+        
+        console.log('clicked change symptom');
+                        console.log('any props? ', this.props ); 
+
+
+        if(this.props.OnOpen) {
+            this.props.onOpenD()
+        }  
     // this.props.dispatch(changeDates(this.sdateinput.current.value, this.edateinput.current.value));
 
        
@@ -48,14 +59,28 @@ export class SymptomDateBar extends React.Component {
 
 	render() {
 
+    if(this.props.top) { 
+
 		return ( 
-			<div className="sd-bar">
+			<div className="sd-bar top">
 				<ul>
 					<li><button onClick={e => this.changeSymptom(e)}><IoSad size={32} /> {this.props.symptom}</button></li>
-					<li className="floatright"><button>{this.props.startDate} - {this.props.endDate}</button></li>
+					<li className="floatright"><button onClick={e => this.changedDate(e)} >{this.props.startDate} - {this.props.endDate}</button></li>
 				</ul>
 			</div>
 			);
+     }
+     else 
+     {
+      return ( 
+      <div className="sd-bar">
+        <ul>
+          <li><button onClick={e => this.changeSymptom(e)}>Change Symptom{this.props.symptom}</button></li>
+          <li className="floatright"><button onClick={e => this.changedDate(e)} >Change Date</button></li>
+        </ul>
+      </div>
+      );
+     }
 	}
 }
 
@@ -69,7 +94,9 @@ const mapStateToProps = state => ({
     symptom: state.reducer.symptom,
     startDate: state.reducer.startDate,
     endDate: state.reducer.endDate, 
-    showSymptomModal: state.reducer.showSymptomModal
+    showSymptomModal: state.reducer.showSymptomModal,
+    showDateModal: state.reducer.showDateModal
+
 });
 
 export default connect(mapStateToProps)(SymptomDateBar);

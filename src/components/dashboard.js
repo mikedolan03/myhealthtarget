@@ -85,16 +85,15 @@ export class DashBoard extends React.Component {
        
     }
 
-    openModal() {
+    openModal(symptomM, dateM) {
       //this.setState({ isModalOpen: true })
-           this.props.dispatch(showModal(true));
+           this.props.dispatch(showModal(symptomM, dateM));
            			console.log('any props? ', this.props ); 
-
 
     }
 
     closeModal() {
-           this.props.dispatch(showModal(false));
+           this.props.dispatch(showModal(false, false));
     }
 
    
@@ -135,7 +134,7 @@ export class DashBoard extends React.Component {
 									return( 
 										<div>
 					 					<header className="headerwidth"> 
-					  				<h1 className="logo"><Link to="/">My Health Target</Link></h1>
+					  				<h1 className="logo"><Link to="/">Symptom Hacker</Link></h1>
 				   					</header>
 										<section className="dashboard"> 
 
@@ -159,7 +158,7 @@ export class DashBoard extends React.Component {
 								myPercent = Math.round( ((this.props.foodList.foodCounts[0].count / this.props.foodList.daylists.length) * 100) );
 								return (
 								<div>
-								<SymptomPickerModal isOpen={this.props.showSymptomModal} onClose={()=> this.closeModal()} />
+								<SymptomPickerModal isOpen={this.props.showSymptomModal} isOpenD={this.props.showDateModal} onClose={()=> this.closeModal()} />
 								<NavBar />
 								<section className="dashboard">  
 								
@@ -168,10 +167,11 @@ export class DashBoard extends React.Component {
  											<div className="row">
  												<div className="col-12">
 													<div className="chart-area-container">
-												
-														<SymptomDateBar onOpen={()=> this.openModal()} symptom={this.props.symptom} startDate={this.props.startDate} endDate={this.props.endDate}/>
-													
+	
 														<MyChart />
+													<SymptomDateBar top="true" onOpen={()=> this.openModal(true, false)} onOpenD={()=> this.openModal(false, true)} symptom={this.props.symptom} startDate={this.props.startDate} endDate={this.props.endDate}/>
+													<SymptomDateBar onOpen={()=> this.openModal(true, false)} onOpenD={()=> this.openModal(false, true)} symptom={this.props.symptom} startDate={this.props.startDate} endDate={this.props.endDate}/>
+
 													</div>
 												</div>
 											</div>
@@ -280,7 +280,9 @@ const mapStateToProps = state => ({
     symptom: state.reducer.symptom,
     startDate: state.reducer.startDate,
     endDate: state.reducer.endDate,
-    showSymptomModal: state.reducer.showSymptomModal
+    showSymptomModal: state.reducer.showSymptomModal,
+    showDateModal: state.reducer.showDateModal
+
 
 });
 
