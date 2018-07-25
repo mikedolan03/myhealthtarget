@@ -4,22 +4,61 @@
 
 }
 
-.food-form-container form {
+.add-food-form {
 
+}
+
+.food-entry {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border-width: 1px;
+  border-style: solid;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  border-radius: 10px;
+  width: 90%;
+}
+
+.food-form-container form {
+text-align: left;
+margin-left: 10px;
 
 }
 
 .food-form-container label {
-display: block;
+display: none;
+
 }
 
 .food-form-container input{
-background-color: green;
-
+color: white;
+width: 80%;
+height: 30px;
+background-color: transparent;
+border-width: 0;
+border-bottom-width: 1px;
+border-style: dashed;
+border-color: white;
+margin-top: 10px; 
 }
 
 .foodlist-section {
 
 margin-top: 10px; 
 
+}
+
+.food-form-container ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: white;
+}
+.food-form-container ::-moz-placeholder { /* Firefox 19+ */
+  color: white;
+}
+.food-form-container :-ms-input-placeholder { /* IE 10+ */
+  color: white;
+}
+.food-form-container :-moz-placeholder { /* Firefox 18- */
+  color: white;
 }

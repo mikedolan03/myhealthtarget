@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import FactorForm from './factorForm';
 import showResults from "./showResults";
 import FoodList from './foodlist';
-
+import './factortracker.css';
 export class FactorTracker extends React.Component {
 
 	submitFactorData(values) {

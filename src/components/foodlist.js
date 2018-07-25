@@ -46,7 +46,7 @@ render() {
 			console.log('my prop based data in food list', this.props.foodList.daylists);
 
 
-  			if(this.props.foodList.todayList.foodList != null) {
+  			if(this.props.foodList.todayList != null) {
   				console.log('we have foods');
 
   				lists = this.props.foodList.todayList.foodList.map((list, index) => (

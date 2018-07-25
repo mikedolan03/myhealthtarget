@@ -58,6 +58,12 @@ export const changeDates = (start_Date, end_Date) => ({
     end_Date
 });
 
+export const LOGGING_IN = 'LOGGING_IN';
+export const loggingIn = loggingInVar => ({
+    type: LOGGING_IN,
+    loggingInVar
+});
+
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const showModal = (show) => ({
     type: SHOW_MODAL,

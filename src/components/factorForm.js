@@ -16,35 +16,39 @@ const renderFoods = ({fields}) => {
 
  <div className="add-food-form">
 
-    <button type="button" onClick={() => fields.push()}>Add Food</button>
 
     {fields.map((food, index) =>
-      <div key={index}>
-        <label>Food:</label>
+      <div key={index} className="food-entry dark-box">
+        <label for={`${food}.name`}>Food:</label>
         <Field
           name={`${food}.name`}
           type="text"
           component="input"
+          placeholder="What did you eat?"
           label={`Food #${index + 1}`}/>
-          <label>Tags:</label>
+          <label for={`${food}.tags`}>Tags:</label>
           <Field
           name={`${food}.tags`}
           type="text"
           component="input"
+          placeholder="Add any tags about food..."
           label={`Tags for #${index + 1}`}/>
-          <label>Time:</label>
+          <label for={`${food}.time`}>Time:</label>
           <Field
           name={`${food}.time`}
           type="text"
           component="input"
-          label={`Tags for #${index + 1}`}/>
+          placeholder="what time did you eat?"
+          label={`Time for #${index + 1}`}/>
           <button
+          className="floatRight"
           type="button"
           title="Remove Food"
           onClick={() => fields.remove(index)}>-</button>
           </div>
     
     )}
+    <button type="button" onClick={() => fields.push()}>Add Food</button>
 
   </div>
 

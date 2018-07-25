@@ -1,0 +1,69 @@
+.sign-up-form-container {
+	
+}
+
+.sign-up-form-container input{
+display: block;
+color: white;
+width: 90%;
+height: 20px;
+background-color: transparent;
+border-width: 0;
+border-bottom-width: 1px;
+border-style: dashed;
+border-color: white;
+margin-top: 10px; 
+font-size: 12px; 
+}
+
+.sign-up-form-container .extra-space {
+	    margin-top: 23px;
+	    margin-bottom: 23px;
+}
+
+.sign-up-form-container form {
+text-align: left;
+margin-left: 10px;
+
+}
+
+.sign-up-form-container label {
+display: none;
+
+}
+
+.sign-up-form-container button {
+	  display: block;
+    position: absolute;
+    bottom: 1px;
+    left: 0px;
+    width: 100%;
+    height: 30px;
+    background-color: orange;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-width: 0px;
+    border-style: none;
+    outline: none;
+    padding: 10px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+    color: white;
+    font-weight: 800;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.sign-up-form-container ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: white;
+}
+.sign-up-form-container ::-moz-placeholder { /* Firefox 19+ */
+  color: white;
+}
+.sign-up-form-container :-ms-input-placeholder { /* IE 10+ */
+  color: white;
+}
+.sign-up-form-container :-moz-placeholder { /* Firefox 18- */
+  color: white;
+}

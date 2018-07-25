@@ -19,6 +19,8 @@ export class LoginForm extends React.Component {
             );
         }
         return (
+        <div className="sign-up-form-container">
+            <em>Welcome back!</em>
             <form
                 className="login-form"
                 onSubmit={this.props.handleSubmit(values =>
@@ -27,24 +29,29 @@ export class LoginForm extends React.Component {
                 {error}
                 <label htmlFor="username">Username</label>
                 <Field
+                    className="extra-space"
                     component="input"
                     type="text"
                     name="username"
                     id="username"
+                    placeholder="Username"
                     validate={[required, nonEmpty]}
                 />
                 <label htmlFor="password">Password</label>
                 <Field
+                    className="extra-space"
                     component="input"
                     type="password"
                     name="password"
                     id="password"
+                    placeholder="Password"
                     validate={[required, nonEmpty]}
                 />
                 <button disabled={this.props.pristine || this.props.submitting}>
                     Log in
                 </button>
             </form>
+        </div>
         );
     }
 }

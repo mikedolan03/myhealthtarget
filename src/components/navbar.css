@@ -11,6 +11,11 @@ background: linear-gradient(to right, rgba(106,0,255,1) 1%,rgba(170,160,255,1) 1
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6a00ff', endColorstr='#aaa0ff',GradientType=1 ); /* IE6-9 */
 }
 
+nav h1 {
+  font-family: 'Aldrich', sans-serif; 
+
+}
+
 .nav3 {
   position: fixed;
   top: 0;

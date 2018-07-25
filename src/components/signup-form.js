@@ -3,6 +3,7 @@ import {Field, reduxForm, focus} from 'redux-form';
 import {signUpUser} from '../actions';
 import {login} from '../actions/auth';
 //import Input from './input';
+import './signup-form.css';
 import {required, nonEmpty, matches, length, isTrimmed} from '../validators';
 const passwordLength = length({min: 10, max: 72});
 const matchesPassword = matches('password');
@@ -18,44 +19,41 @@ export class SignUpForm extends React.Component {
 
     render() {
         return (
+            <div className="sign-up-form-container">
+            <em>Join and hack your symptoms today!</em>
             <form
-                className="login-form"
+                className="signup-form"
                 onSubmit={this.props.handleSubmit(values =>
                     this.onSubmit(values)
                 )}>
-                <label htmlFor="firstName">First name</label>
-                <Field component="input" type="text" name="firstName" />
-                <label htmlFor="lastName">Last name</label>
-                <Field component="input" type="text" name="lastName" />
-                 <label htmlFor="firstName">Email</label>
-                <Field component="input" type="email" name="email" />
-                <label htmlFor="username">Username</label>
+              <label htmlFor="username">Username</label>
                 <Field
                     component="input"
                     type="text"
                     name="username"
                     validate={[required, nonEmpty, isTrimmed]}
-                />
+                placeholder="Username"/>
                 <label htmlFor="password">Password</label>
                 <Field
                     component="input"
                     type="password"
                     name="password"
                     validate={[required, passwordLength, isTrimmed]}
-                />
+                placeholder="Password"/>
                 <label htmlFor="passwordConfirm">Confirm password</label>
                 <Field
                     component="input"
                     type="password"
                     name="passwordConfirm"
                     validate={[required, nonEmpty, matchesPassword]}
-                />
+                placeholder="Retype Password"/>
                 <button
                     type="submit"
                     disabled={this.props.pristine || this.props.submitting}>
                     Sign Up
                 </button>
             </form>
+        </div>
         );
     }
 }
