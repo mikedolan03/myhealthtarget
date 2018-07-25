@@ -3,7 +3,7 @@ import React from 'react';
 //import store from '../store';
 import {connect} from 'react-redux';
 
-//import './syomptomlist.css';
+import './foodlist.css';
 import FoodListItem from './foodlistitem';
 import {fetchFoodList} from '../actions';
 
@@ -45,37 +45,40 @@ render() {
 
 			console.log('my prop based data in food list', this.props.foodList.daylists);
 
-     // console.log('compare dates: '+ moment(this.props.foodList.daylists[3].date).format("MM-DD-YYYY")+' to ' + moment('7/4/18').format("MM-DD-YYYY"));
-
-
-      //const result = this.props.foodList.daylists.find( day => moment(day.date).format("MM-DD-YYYY") === moment('7/4/18').format("MM-DD-YYYY") ); 
-     // console.log('result of find:', result);
-
-  			//let currentStore = store.getState(); 
 
   			if(this.props.foodList.todayList.foodList != null) {
   				console.log('we have foods');
 
-  				  lists = this.props.foodList.todayList.foodList.map((list, index) => (
-            		<li className="list-item" key={index}>
-                		<FoodListItem {...list} showTags="true" />
-            		</li>
-            		));
+  				lists = this.props.foodList.todayList.foodList.map((list, index) => (
+            <li className="list-item" key={index}>
+              <FoodListItem {...list} showTags="true" />
+            </li>
+            ));
+
+          return (
+                  <div className="food-list">
+                  <h3>All the foods you ate today:</h3>
+                  <ul>
+                  {lists}
+                  </ul>
+                  </div>
+                  );
 
   				
-  			}
+  			} else {
+
+          return (
+                  <div className="food-list">
+                  <h3>You currently have no food entries for today. Add some!</h3>
+                  </div>
+                  );
+
+        }
 
 
-	return (
-		<div className="food-list">
-		<h3>All the foods you ate today:</h3>
-		<ul>
-		{lists}
-		</ul>
-		</div>
-		);
+	
 
-}
+  }
 
 }
 

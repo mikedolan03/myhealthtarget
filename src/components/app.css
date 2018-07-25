@@ -27,8 +27,8 @@ height: 100%;
 margin: 0;
 background-repeat: no-repeat;
 background-attachment: fixed;
-padding-left: 20px;
-padding-right: 20px; 
+/*padding-left: 20px;
+padding-right: 20px; */
 
 color: white;
 background-color: rgb(47,60,130); /* Old browsers */

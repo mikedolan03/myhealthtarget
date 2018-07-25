@@ -5,7 +5,7 @@
 import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
-const queryString = require('query-string');
+//const queryString = require('query-string');
 
 
 //const API_BASE_URL = '/'; 
@@ -247,8 +247,11 @@ export const fetchFoodList = (endpoint, myQueryObj ={}) => (dispatch, getState) 
     
     //if query sent - add it
     if(myQueryObj !== {}) {
-    myQuery = '?' + queryString.stringify(myQueryObj); 
-    myUrl = myUrl + myQuery;
+   // myQuery = '?' + queryString.stringify(myQueryObj); 
+    
+    myQuery = Object.keys(myQueryObj).map(key => key + '=' + myQueryObj[key]).join('&');
+    
+    myUrl = myUrl + "?" + myQuery;
     } 
     
      console.log('in the fetchfoodlistpromise', myUrl);

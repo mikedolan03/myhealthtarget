@@ -26,7 +26,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93abff', end
 }
 
 
-ul {
+nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -34,26 +34,28 @@ ul {
     /*background-color: #b1b1b13b;*/
 }
 
-li {
+nav li {
     float: left;
+    padding-right: 5px;
+
 }
 
-li a {
+nav li a {
     display: block;
     color: white;
     text-align: center;
-    padding-left: 5px;
-    padding-right: 5px;
+    /*padding-left: 5px;
+    padding-right: 5px; */
     padding-top: 15px;
     padding-bottom: 5px;
     text-decoration: none;
 }
 
-li h1 a {
+nav li h1 a {
 padding-top: 0px;
 padding-top: 5px;
 font-size: 20px;
-
+padding-left: 10px;
 }
 
 li a:hover:not(.active) {

@@ -5,6 +5,9 @@ import { withRouter} from 'react-router-dom';
 import {trackFood} from '../actions';
 import {fetchFoodList} from '../actions';
 import {postFoodItems} from '../actions';
+import './factorform.css'; 
+
+ 
 const renderFoods = ({fields}) => {
   
   if(fields.length < 1) fields.push(); 
@@ -72,6 +75,7 @@ export class FactorForm extends React.Component {
      console.log("history in form: ", this.props.history); 
 
     return (
+     <div className="food-form-container">
       <form onSubmit={this.props.handleSubmit(values =>this.onSubmit(values))}>
          <div> 
          <FieldArray name="fooditems" component={renderFoods} />
@@ -92,6 +96,8 @@ export class FactorForm extends React.Component {
           <button type="button" onClick={()=> this.props.dispatch(fetchFoodList()) }>load from server</button>
         </div>
       </form>
+     </div>
+
       );
   };
  }

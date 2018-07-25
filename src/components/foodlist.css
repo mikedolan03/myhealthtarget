@@ -1,0 +1,16 @@
+.food-list ul {
+	list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.food-list {
+	border-style: solid;
+  border-width: 0;
+  padding: 10px;
+	background-color: #0a1042;
+  color: #00d1fe;
+  box-shadow: 5px 5px #8888881c;
+  border-radius: 10px;
+}

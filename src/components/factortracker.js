@@ -21,20 +21,26 @@ export class FactorTracker extends React.Component {
 		return (
 
 			<section className="factortracker-container">
-			<h2>This is the food activity tracking form page</h2>
-
-
-			<FactorForm submitData={this.submitFactorData}/>
-
-
-			<h3><Link to="/loggedin/dashboard/">Go back to Dashboard (without saving)</Link></h3>
-		
-		<button onClick={()=> this.props.history.push('/loggedin/dashboard/')}>
-				Go back to dash
-			</button>
-
-			<FoodList />
-
+				<div className="row">
+ 					<div className="col-12">
+						<h2>What did you eat today?</h2>
+							<FactorForm submitData={this.submitFactorData}/>
+					</div>
+				</div>
+				<div className="row">
+ 					<div className="col-12">
+						<button onClick={()=> this.props.history.push('/loggedin/dashboard/')}>
+						Go back to dash
+						</button>
+					</div>
+				</div>
+				<div className="row">
+ 					<div className="col-12">
+ 						<div className="foodlist-section">
+							<FoodList />
+						</div>
+					</div>
+				</div>
 			</section>
 
 			);
