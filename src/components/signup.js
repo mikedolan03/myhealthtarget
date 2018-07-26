@@ -22,7 +22,7 @@ if (props.loggingIn) {
      <div className="sign-up-container">
             <LoginForm />
             <div className="login-link">
-                <button onClick={() => props.dispatch(loggingIn(false)) }>No account, yet? Need to sign up?</button>
+                <button onClick={() => props.dispatch(loggingIn(false)) }>No account, yet? Join!</button>
             </div>
         </div>
 
@@ -33,7 +33,7 @@ if (props.loggingIn) {
         <div className="sign-up-container">
             <SignUpForm />
             <div className="login-link">
-                <button onClick={() => props.dispatch(loggingIn(true)) }>No account, yet? Need to sign up?</button>
+                <button onClick={() => props.dispatch(loggingIn(true)) }>Already have an account? Log in!</button>
             </div>
         </div>
         

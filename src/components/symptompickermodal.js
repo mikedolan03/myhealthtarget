@@ -18,8 +18,16 @@ export class SymptomPickerModal extends React.Component {
     }
 
     close(e) {
+        e.preventDefault();
+       console.log('close pop up triggered ');
+
+        this.props.dispatch(showModal(false, false, 'noshow'));
+
+    }
+
+    closeNoData(e) {
         e.preventDefault() 
-        this.props.dispatch(showModal(false));
+        this.props.dispatch(showModal(false, false, 'seen'));
 
     }
 
@@ -28,13 +36,13 @@ export class SymptomPickerModal extends React.Component {
         console.log('in change symp 2', this.input.current.value);
         
         this.props.dispatch(changeSymptom(this.input.current.value));
-        this.props.dispatch(showModal(false, false));
+        this.props.dispatch(showModal(false, false, 'noshow'));
     }
 
     changedDates(event) {
 
         this.props.dispatch(changeDates(this.sdinput.current.value, this.edinput.current.value));
-        this.props.dispatch(showModal(false, false));
+        this.props.dispatch(showModal(false, false, 'noshow'));
 
     }
 
@@ -44,8 +52,35 @@ export class SymptomPickerModal extends React.Component {
        // return null
 
     //onClick={e => this.close(e)}
+       if(this.props.showNoDataModal == "show")
+        {
+
+                    console.log('rendering no data ');
+
+
+            return (
+           <div className="symptom-picker-container">
+            <div className="modal">
+            
+            </div>
+            
+            <div className="symptom-picker-popup">
+             <div className="pop-content">
+              <h3>We couldn't find data match that symptom and date range.</h3>
+              <h3>Try a different date range and/or symptom. Or add more symptoms and food items!</h3>
+             </div>
+             <button onClick={e => this.closeNoData(e)}>Got it!</button>
+            </div>
+           </div> 
+        );
+
+        }
+
         if(this.props.showDateModal )
         {
+
+                    console.log('rendering date picker');
+
 
             return (
            <div className="symptom-picker-container">
@@ -72,6 +107,9 @@ export class SymptomPickerModal extends React.Component {
 
     if(this.props.showSymptomModal )
         {
+
+          console.log('rendering symptom picker');
+
         return (
     	   <div className="symptom-picker-container">
     	    <div className="modal">
@@ -114,7 +152,8 @@ const mapStateToProps = state => ({
     startDate: state.reducer.startDate,
     endDate: state.reducer.endDate, 
     showSymptomModal: state.reducer.showSymptomModal,
-    showDateModal: state.reducer.showDateModal
+    showDateModal: state.reducer.showDateModal,
+    showNoDataModal: state.reducer.showNoDataModal
 });
 
 export default connect(mapStateToProps)(SymptomPickerModal);

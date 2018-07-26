@@ -10,7 +10,7 @@ render() {
 
 			let lists;
 
-  		if(this.props.foodList.foodCounts.length > 0) {
+  		if(this.props.foodList.foodCounts) {
   			console.log('we have foods');
 
   			lists = this.props.foodList.foodCounts.slice(0,5).map((list, index) => (

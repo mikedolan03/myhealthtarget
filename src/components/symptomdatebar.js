@@ -31,7 +31,7 @@ export class SymptomDateBar extends React.Component {
 
         event.preventDefault();
 
-			this.props.dispatch(showModal(true));
+			this.props.dispatch(showModal(true, false, 'noshow'));
         
         
         console.log('clicked change symptom');
@@ -49,7 +49,7 @@ export class SymptomDateBar extends React.Component {
      //console.log('in change date', this.dateinput.current.value);
       event.preventDefault();
 
-      this.props.dispatch(showModal(false, true));
+      this.props.dispatch(showModal(false, true, 'noshow'));
         
         
         console.log('clicked change symptom');
@@ -111,11 +111,13 @@ export class SymptomDateBar extends React.Component {
 
 		return ( 
 			<div className="sd-bar top">
+      <div className="top-positioner">
 				<ul>
 					<li><button onClick={e => this.changeSymptom(e)}><IoSad size={32} /> {this.props.symptom}</button></li>
-					<li className="floatright topfloater"><button onClick={e => this.changedDate(e)} >{moment(this.props.startDate).format('MM[/]DD')} - {moment(this.props.endDate).format('MM[/]DD')}</button></li>
+					<li className="nofloat sd-date"><button onClick={e => this.changedDate(e)} >{moment(this.props.startDate).format('MM[/]DD')} - {moment(this.props.endDate).format('MM[/]DD')}</button></li>
 				</ul>
 			</div>
+      </div>
 			);
      }
      else { if (this.props.addbuttons)  
@@ -155,7 +157,8 @@ const mapStateToProps = state => ({
     startDate: state.reducer.startDate,
     endDate: state.reducer.endDate, 
     showSymptomModal: state.reducer.showSymptomModal,
-    showDateModal: state.reducer.showDateModal
+    showDateModal: state.reducer.showDateModal,
+    showNoDataModal: state.reducer.showNoDataModal
 
 });
 

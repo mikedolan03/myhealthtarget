@@ -29,6 +29,55 @@ export class MyChart extends React.Component {
     let donutChart = true; 
     let myFoodData = []; 
     let myFoodNames = [];
+    let nodata  = true;
+
+    if(this.props.nodata=='true') {
+
+        let ctx = document.getElementById("myChart").getContext('2d'); 
+        Chart.defaults.global.defaultFontColor = 'white';   
+
+
+        var myDoughnutChart = new Chart(ctx, {
+        'type': 'doughnut',
+        'data': {
+            'datasets': [{
+                data: [1],
+                "backgroundColor":[ 
+                '#fe8d07',
+                '#c86dd7',
+                '#00c7ff', 
+                '#28c97c', 
+                '#fc4661' ],
+                'borderColor': ['#fa9620', '#c87cd5', '#14c7fa', '#40d08b', '#ff637a' ],
+                'borderWidth': [2,2,2,2,2]
+            }],
+
+            'labels': ['no data']
+        },
+        "options":{
+            legend: {
+                display: true,
+                position: 'bottom',
+                labels: {
+                    boxWidth: 3,
+                    fontSize: 12 }
+            },
+            title: {
+                display: true,
+                position: 'top',
+                fontSize: 12,
+                text: 'No Data'
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+            cutoutPercentage: 90           
+
+        }
+        });
+
+
+            return; 
+    }
 
      if(donutChart) {
 
@@ -84,7 +133,7 @@ export class MyChart extends React.Component {
                 text: 'Likely Causes'
             },
             responsive: true,
-            maintainAspectRatio: false,
+            maintainAspectRatio: true,
             cutoutPercentage: 90           
 
         }
@@ -212,7 +261,7 @@ export class MyChart extends React.Component {
             return (
             <div className="chart-component">
             <div className="chartcontainer datareturned">
-            <canvas id="myChart" width="300" height="200"></canvas>
+            <canvas id="myChart" width="500" height="300"></canvas>
             
             </div>
             
@@ -225,7 +274,7 @@ export class MyChart extends React.Component {
 
             return (
             <div className="chartcontainer nodata">
-            <canvas id="myChart" width="300" height="200"></canvas>
+            <canvas id="myChart" width="500" height="300"></canvas>
             </div>
             );
 
@@ -238,6 +287,11 @@ export class MyChart extends React.Component {
     
 
 }
+
+MyChart.defaultProps = {
+    nodata: 'false'
+};
+
 const mapStateToProps = state => ({
     foodList: state.reducer.foodList,
     symptomList: state.reducer.symptomList,

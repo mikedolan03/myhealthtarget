@@ -41,16 +41,38 @@ export class DashBoard extends React.Component {
 
     componentDidUpdate(prevProps) {
     
-      console.log('component did update');    
+      console.log('component did update');
+
+      if(!this.props.foodList.foodCounts && 
+      	this.props.showNoDataModal=="noshow" &&
+      	!this.props.showSymptomModal &&
+      	!this.props.showDateModal) {
+
+      	console.log('show no data pop up');
+
+      	this.openModal(false, false, 'show');
+      }
+
+      if(this.props.foodList.foodCounts  &&
+      	this.props.showNoDataModal=="show") {
+
+      	console.log('oops hide data pop up');
+
+      	this.openModal(false, false, 'noshow');
+      }
+
 
 
       if( prevProps.symptom != this.props.symptom) this.setUpQuery();
 
-      	if(prevProps.startDate != this.props.startDate) { 
+      	if(prevProps.startDate != this.props.startDate) {
+      	
+ 
       		this.setUpQuery(); 
       	} else {
       		
-      		if(prevProps.startDate != this.props.startDate) { 
+      		if(prevProps.startDate != this.props.startDate) {
+      		  
       			this.setUpQuery();
       			}
       	}
@@ -58,6 +80,9 @@ export class DashBoard extends React.Component {
     }
 
   setUpQuery( ) {
+
+  	//reset modal -just in case there is no data
+      		  this.openModal(false, false, 'noshow'); 
 
   	 let today = moment()._d; 
 
@@ -94,15 +119,15 @@ export class DashBoard extends React.Component {
        
     }
 
-    openModal(symptomM, dateM) {
+    openModal(symptomM, dateM, nodataM) {
       //this.setState({ isModalOpen: true })
-           this.props.dispatch(showModal(symptomM, dateM));
+           this.props.dispatch(showModal(symptomM, dateM, nodataM));
            			console.log('any props? ', this.props ); 
 
     }
 
     closeModal() {
-           this.props.dispatch(showModal(false, false));
+           this.props.dispatch(showModal(false, false, false));
     }
 
    
@@ -136,35 +161,18 @@ export class DashBoard extends React.Component {
 
 			} else if (this.props.loaded) {
 
+
+
 								console.log('loaded', this.props.foodList.length);
+			
+								let nodata = 'false';
 
-								if(!this.props.foodList.foodCounts){
+								if(!this.props.foodList.foodCounts){ 
 
-									return( 
-										<div>
-					 					<header className="headerwidth"> 
-					  				<h1 className="logo"><Link to="/">Symptom Hacker</Link></h1>
-				   					</header>
-										<section className="dashboard"> 
+									nodata = 'true';
 
-										<h2>Start tracking food and symptoms so we can analyze your data!</h2>
+								}
 
-										<button className="big-button" onClick={()=> this.props.history.push('/loggedin/symptomtracker/')}	>
-										Add symptom	to track
-										</button>
-
-										<button className="big-button" onClick={()=> this.props.history.push('/loggedin/factortracker/')}>
-										Add food to track
-										</button>
-
-									</section> 
-									</div>
-									); 
-
-								} else { 
-
-								let myPercent; //=	(this.props.foodList.foodCounts[0].count / this.props.foodList.daylists.length) * 100; 
-								myPercent = Math.round( ((this.props.foodList.foodCounts[0].count / this.props.foodList.daylists.length) * 100) );
 								return (
 								<div>
 								<SymptomPickerModal isOpen={this.props.showSymptomModal} isOpenD={this.props.showDateModal} onClose={()=> this.closeModal()} />
@@ -175,7 +183,7 @@ export class DashBoard extends React.Component {
  											<div className="row">
  												<div className="col-12">
 													<div className="chart-area-container">
-													 <MyChart />
+													 <MyChart nodata={nodata}/>
 													 <SymptomDateBar onOpen={()=> this.openModal(true, false)} onOpenD={()=> this.openModal(false, true)} symptom={this.props.symptom} startDate={this.props.startDate} endDate={this.props.endDate}/>
 													 <SymptomDateBar addbuttons="true" onOpen={()=> this.openModal(true, false)} onOpenD={()=> this.openModal(false, true)} symptom={this.props.symptom} startDate={this.props.startDate} endDate={this.props.endDate}/>
 													 <SymptomDateBar top="true" onOpen={()=> this.openModal(true, false)} onOpenD={()=> this.openModal(false, true)} symptom={this.props.symptom} startDate={this.props.startDate} endDate={this.props.endDate}/>
@@ -186,55 +194,33 @@ export class DashBoard extends React.Component {
 											<div className="row">
 												<div className="col-6">
 													<TopFoodsList />
-													<PercentBox number={this.props.foodList.foodCounts[0].count} unit=' times'
-														heading={this.props.foodList.foodCounts[0].name} description="# times eaten before symptom"/> 
+												</div>
+												<div className="col-6">
+												<div className="dark-box">
+												{this.props.foodList.foodCounts	 ? <DataBar symptom={this.props.symptom} description= {this.props.foodList.foodCounts[0].name } number={`${Math.round( ((this.props.foodList.foodCounts[0].count / this.props.foodList.daylists.length) * 100) )}%`} /> : <DataBar nodata='true' />}		
+												</div>
 												</div>
 											</div>
 											<div className="row">
 												<div className="col-6">
-													<h2>What foods are causing {this.props.symptom}?</h2>
-													<h4>Change Symptom:  </h4>
-													<label>What are you experiencing?</label> 
-
-            <select name="selectSymptom" ref={this.input} onChange={()=> {this.changedSymptom()} }>
-              
-              <option value="Stomach Ache">Stomach Ache</option>
-              <option value="Head Ache">Head Ache</option>
-              <option value="Heartburn">Heartburn</option>
-              <option value="Gas">Gas</option>
-              <option value="Sick Stomach">sick stomach</option>
-              <option value="Tired">Tired</option>
-              <option value="Skin Rash">Skin Rash</option>
-              <option value="Pain">Pain</option>
-            </select> 
-												</div>
-											</div>
-											<div className="row">
-												<div className="col-6">
-													<MyChart />
-												</div>
-												<div className="col-6">
-												<TopFoodsList />
-												<PercentBox number={this.props.foodList.foodCounts[0].count} unit=' times'
-														heading={this.props.foodList.foodCounts[0].name} description="# times eaten before symptom"/> 
+												
 												</div>
 											</div>
 											<div className="row">
 												<div className="col-4">
-													<DataBar percent={myPercent} symptom={this.props.symptom} description= {this.props.foodList.foodCounts[0].name} number={`${Math.round( ((this.props.foodList.foodCounts[0].count / this.props.foodList.daylists.length) * 100) )}%`} />
+												{this.props.foodList.foodCounts	 ? <DataBar symptom={this.props.symptom} description= {this.props.foodList.foodCounts[0].name } number={`${Math.round( ((this.props.foodList.foodCounts[0].count / this.props.foodList.daylists.length) * 100) )}%`} /> : <DataBar nodata='true' />}
+													
 												</div>
 												<div className="col-4">
-													<DataBar percent={myPercent} symptom={this.props.symptom} description= {this.props.foodList.foodCounts[1].name} number={`${Math.round( ((this.props.foodList.foodCounts[1].count / this.props.foodList.daylists.length) * 100) )}%`} />
+												{this.props.foodList.foodCounts	 ? <DataBar symptom={this.props.symptom} description= {this.props.foodList.foodCounts[1].name } number={`${Math.round( ((this.props.foodList.foodCounts[1].count / this.props.foodList.daylists.length) * 100) )}%`} /> : <DataBar nodata='true' />}
 												</div>
 												<div className="col-4">
-													<DataBar percent={myPercent} symptom={this.props.symptom} description= {this.props.foodList.foodCounts[2].name} number={`${Math.round( ((this.props.foodList.foodCounts[2].count / this.props.foodList.daylists.length) * 100) )}%`} />
+												{this.props.foodList.foodCounts	 ? <DataBar  symptom={this.props.symptom} description= {this.props.foodList.foodCounts[2].name } number={`${Math.round( ((this.props.foodList.foodCounts[2].count / this.props.foodList.daylists.length) * 100) )}%`} /> : <DataBar nodata='true' />}
 												</div>
 											</div>
 											<div className="row">
 												<div className="col-12">
-													{this.props.foodList.daylists[0].foodList.length > 0 ? this.props.foodList.daylists[0].foodList[0].name : "No food" }
-
-													<SymptomList show='5'/>
+													<FoodList />
 													<button className="big-button" onClick={()=> this.props.history.push('/loggedin/symptomtracker/')}	>
 													Add symptom	to track
 													</button>
@@ -255,7 +241,7 @@ export class DashBoard extends React.Component {
 
 					);
 
-								}
+								
 
 
 				
@@ -288,8 +274,8 @@ const mapStateToProps = state => ({
     startDate: state.reducer.startDate,
     endDate: state.reducer.endDate,
     showSymptomModal: state.reducer.showSymptomModal,
-    showDateModal: state.reducer.showDateModal
-
+    showDateModal: state.reducer.showDateModal,
+    showNoDataModal: state.reducer.showNoDataModal
 
 });
 

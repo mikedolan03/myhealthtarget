@@ -37,7 +37,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2f3c82', end
 
 }
 
-
+button {
+	background-color: #6a00ff;
+    border-style: solid;
+    border-radius: 20px;
+    border-width: 0px;
+    color: white;
+    font-weight: 800; 
+}
 
 .darkgray {
 	background-color: #2f3a4c; 
@@ -90,8 +97,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2f3c82', end
 
 }
 
+.blue-text {
+		color: 	#00c7ff; 
+
+}
+
 .orange {
 		background-color: #fe8d07; 
+
+}
+
+.orange-text {
+		color: #fe8d07; 
 
 }
 

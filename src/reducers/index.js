@@ -13,6 +13,7 @@ const initialState = {
       endDate: moment().format('MM[/]DD[/]YY'),
       showSymptomModal: false,
       showDateModal: false,
+      showNoDataModal: 'noshow',
       loggingIn: false
     };
 
@@ -71,7 +72,8 @@ const initialState = {
 
                         return Object.assign({}, state, {
                         showSymptomModal: action.symptomShow,
-                        showDateModal: action.dateShow
+                        showDateModal: action.dateShow,
+                        showNoDataModal: action.noDataShow
 
                         });
 
