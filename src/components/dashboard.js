@@ -45,6 +45,15 @@ export class DashBoard extends React.Component {
 
 
       if( prevProps.symptom != this.props.symptom) this.setUpQuery();
+      
+      	if(prevProps.startDate != this.props.startDate) { 
+      		this.setUpQuery(); 
+      	} else {
+      		
+      		if(prevProps.startDate != this.props.startDate) { 
+      			this.setUpQuery();
+      			}
+      	}
 
     }
 
@@ -56,7 +65,7 @@ export class DashBoard extends React.Component {
 
 				let startDay = moment(today).subtract(7, 'days').format("MM-DD-YYYY");
         
-        let myQueryObj = {sdate: startDay, edate: today, symptom: this.props.symptom};
+        let myQueryObj = {sdate: this.props.startDate, edate: this.props.endDate	, symptom: this.props.symptom};
 
         console.log('my search: ', myQueryObj); 
 

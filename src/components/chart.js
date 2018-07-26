@@ -8,7 +8,7 @@ export class MyChart extends React.Component {
 
  componentDidUpdate(prevProps) {
     
-          console.log('component did update');    
+     console.log('component did update');    
 
 
       this.buildChart();
@@ -242,6 +242,8 @@ const mapStateToProps = state => ({
     foodList: state.reducer.foodList,
     symptomList: state.reducer.symptomList,
     loaded: state.reducer.loaded,
-    symptom: state.reducer.symptom
+    symptom: state.reducer.symptom,
+    startDate: state.reducer.startDate,
+    endDate: state.reducer.endDate
 });
 export default connect(mapStateToProps)(MyChart);

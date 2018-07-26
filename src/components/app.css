@@ -64,37 +64,34 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2f3c82', end
  /* use for component panel boxes */
 }
 
-.blue {
-		background-color: 	#00bfe9;
-}
 
 .darkblue {
 	background-color: #56bdde;
 }
 
 .green {
-	background-color: 	#6cc7be;
+	background-color: #28c97c;
 }
 
-.lightgreen {
-	background-color: #c9ede9;
+.red {
+	background-color: #fc4661;
 }
 
 .purple {
-		background-color: #b198dc; 
+		background-color: #c86dd7; 
 }
 
 .lightpurple {
 		background-color: #e7dff3;
 }
 
-.yellow {
-		background-color: 	#ffc300; 
+.blue {
+		background-color: 	#00c7ff; 
 
 }
 
 .orange {
-		background-color: #fc8864; 
+		background-color: #fe8d07; 
 
 }
 

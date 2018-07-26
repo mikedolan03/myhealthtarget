@@ -274,13 +274,13 @@ export const fetchFoodList = (endpoint, myQueryObj ={}) => (dispatch, getState) 
         console.log('in res', res.body);
       return res.json(); 
     })
-    .then(foodList => {
-      console.log('foodlist after res', foodList);
+    .then(newfoodList => {
+      console.log('foodlist after res', newfoodList);
 
-      if(foodList.message) {
-        foodList.UserMessage  = "We couldn't find any entries!";
+      if(newfoodList.message) {
+        newfoodList.UserMessage  = "We couldn't find any entries!";
       }
-        dispatch(fetchFoodListSuccess(foodList));
+        dispatch(fetchFoodListSuccess(newfoodList));
       
     })
     .catch(error => { 

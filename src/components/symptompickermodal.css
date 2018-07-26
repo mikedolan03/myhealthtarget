@@ -2,7 +2,7 @@
     position: fixed;
     top: 0%;
     left: 50%;
-    transform: translate(-50%, 19%);
+    transform: translate(-50%, 15%);
     z-index: 1010;
     background: #292d50;
     display: block;
@@ -18,14 +18,19 @@
 
     }
 
+.pop-content label {
+  color: #00c7ff
+}
 .pop-content input {
   width: 100%;
-  height: 50px;
+  height: 40px;
   background-color: white;
   border-width: 0px;
   border-radius: 10px;
   padding: 10px;
-
+  font-size: 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .pop-content select {
@@ -41,10 +46,9 @@
 .symptom-picker-popup button {
   position: absolute;
   bottom: 1px;
-  left: 0px;
   width: 100%;
   height: 60px;
-  background-color: orange;
+  background-color: #fe8d07;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
   border-width: 0px;
@@ -54,6 +58,23 @@
   margin-top: 0px;
   margin-right: 0px;
   margin-left: 0px;
+  color:  white;
+  font-weight:  800;
+
+}
+
+.symptom-picker-popup .submit-button {
+width: 45%;
+left: 0px;
+border-bottom-right-radius: 0px;
+
+}
+
+.symptom-picker-popup .cancel-button {
+width: 45%;
+right: 0px;
+border-bottom-left-radius: 0px;
+background-color: #fc4661;
 
 }
 
@@ -93,3 +114,4 @@
   overflow: auto;
   
 }
+

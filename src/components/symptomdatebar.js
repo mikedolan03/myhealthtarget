@@ -65,7 +65,7 @@ export class SymptomDateBar extends React.Component {
 			<div className="sd-bar top">
 				<ul>
 					<li><button onClick={e => this.changeSymptom(e)}><IoSad size={32} /> {this.props.symptom}</button></li>
-					<li className="floatright"><button onClick={e => this.changedDate(e)} >{this.props.startDate} - {this.props.endDate}</button></li>
+					<li className="floatright topfloater"><button onClick={e => this.changedDate(e)} >{moment(this.props.startDate).format('MM[/]DD')} - {moment(this.props.endDate).format('MM[/]DD')}</button></li>
 				</ul>
 			</div>
 			);
@@ -75,8 +75,8 @@ export class SymptomDateBar extends React.Component {
       return ( 
       <div className="sd-bar">
         <ul>
-          <li><button onClick={e => this.changeSymptom(e)}>Change Symptom{this.props.symptom}</button></li>
-          <li className="floatright"><button onClick={e => this.changedDate(e)} >Change Date</button></li>
+          <li><button className="bar-button" onClick={e => this.changeSymptom(e)}>Change Symptom</button></li>
+          <li className="floatright"><button className="bar-button" onClick={e => this.changedDate(e)} >Change Date</button></li>
         </ul>
       </div>
       );

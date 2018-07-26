@@ -12,16 +12,20 @@ export default class NavBar extends React.Component {
 
 		return ( 
 			<nav className="navbar">
-				<ul>
-					<li><h1><Link to="/loggedin/dashboard/">Symptom Hacker</Link></h1></li>
-					<li className="floatright"><Link to="/"><IoAndroidExit size={32}/></Link></li>
-					<li className="floatright"><Link to="/loggedin/symptomtracker/">
-					<IoSadOutline size={32} /></Link></li>
-					<li className="floatright"><Link to="/loggedin/factortracker/">
-					<IoSpoon size={32}/>
-					</Link></li>
-					
-				</ul>
+			<div className="row">
+ 				<div className="col-12">
+					<ul>
+						<li><h1><Link to="/loggedin/dashboard/">Symptom Hacker</Link></h1></li>
+						<li className="floatright"><Link to="/"><IoAndroidExit size={32}/></Link></li>
+						<li className="floatright"><Link to="/loggedin/symptomtracker/">
+						<IoSadOutline size={32} /></Link></li>
+						<li className="floatright"><Link to="/loggedin/factortracker/">
+						<IoSpoon size={32}/>
+						</Link></li>
+						
+					</ul>
+				</div>
+				</div>
 			</nav>
 			);
 	}

@@ -9,8 +9,8 @@ const initialState = {
       loading: false,
       loaded: false,
       symptom: 'Gas',
-      startDate: moment(moment().format()).subtract(7, 'days').format('MM[/]DD'),
-      endDate: moment().format('MM[/]DD'),
+      startDate: moment(moment().format()).subtract(30, 'days').format('MM[/]DD[/]YY'),
+      endDate: moment().format('MM[/]DD[/]YY'),
       showSymptomModal: false,
       showDateModal: false,
       loggingIn: false
@@ -109,7 +109,7 @@ const initialState = {
                         if(action.type === FETCH_FOODLIST_SUCCESS) {
 
                             console.log('FETCH_FOODLIST_SUCCESS');
-                            console.log('foodlist', action.foodlist); 
+                            console.log('foodlist updating', action.foodlist); 
 
                         return Object.assign({}, state, {
                         foodList: action.foodList,

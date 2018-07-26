@@ -12,6 +12,9 @@ export class SymptomPickerModal extends React.Component {
     super(props);
     this.changedSymptom = this.changedSymptom.bind(this);
     this.input = React.createRef();
+    this.changedDates = this.changedDates.bind(this);
+    this.sdinput = React.createRef();
+    this.edinput = React.createRef();
     }
 
     close(e) {
@@ -25,7 +28,14 @@ export class SymptomPickerModal extends React.Component {
         console.log('in change symp 2', this.input.current.value);
         
         this.props.dispatch(changeSymptom(this.input.current.value));
-        this.props.dispatch(showModal(false));
+        this.props.dispatch(showModal(false, false));
+    }
+
+    changedDates(event) {
+
+        this.props.dispatch(changeDates(this.sdinput.current.value, this.edinput.current.value));
+        this.props.dispatch(showModal(false, false));
+
     }
 
     render() {
@@ -47,10 +57,13 @@ export class SymptomPickerModal extends React.Component {
              <div className="pop-content">
               <h2>What date range would you like to look at?</h2>
 
-              <label>Start Date</label> <input type="date" name="sdate" />
-              <label>End Date</label> <input type="date" name="edate" />
+              <label>Start Date</label> <input  ref={this.sdinput} type="date" name="sdate" />
+              <label>End Date</label> <input  ref={this.edinput} type="date" name="edate" />
+              
+              <button className="submit-button"  onClick={e => this.changedDates(e)}>Change Dates</button>
+
              </div>
-             <button onClick={e => this.close(e)}>Cancel</button>
+             <button className="cancel-button" onClick={e => this.close(e)}>Cancel</button>
             </div>
            </div> 
         );
