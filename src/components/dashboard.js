@@ -45,7 +45,7 @@ export class DashBoard extends React.Component {
 
 
       if( prevProps.symptom != this.props.symptom) this.setUpQuery();
-      
+
       	if(prevProps.startDate != this.props.startDate) { 
       		this.setUpQuery(); 
       	} else {
@@ -172,15 +172,13 @@ export class DashBoard extends React.Component {
 								<section className="dashboard">  
 								
 									<div className="dashboard-container">
-									
  											<div className="row">
  												<div className="col-12">
 													<div className="chart-area-container">
-	
-														<MyChart />
-													<SymptomDateBar top="true" onOpen={()=> this.openModal(true, false)} onOpenD={()=> this.openModal(false, true)} symptom={this.props.symptom} startDate={this.props.startDate} endDate={this.props.endDate}/>
-													<SymptomDateBar onOpen={()=> this.openModal(true, false)} onOpenD={()=> this.openModal(false, true)} symptom={this.props.symptom} startDate={this.props.startDate} endDate={this.props.endDate}/>
-
+													 <MyChart />
+													 <SymptomDateBar onOpen={()=> this.openModal(true, false)} onOpenD={()=> this.openModal(false, true)} symptom={this.props.symptom} startDate={this.props.startDate} endDate={this.props.endDate}/>
+													 <SymptomDateBar addbuttons="true" onOpen={()=> this.openModal(true, false)} onOpenD={()=> this.openModal(false, true)} symptom={this.props.symptom} startDate={this.props.startDate} endDate={this.props.endDate}/>
+													 <SymptomDateBar top="true" onOpen={()=> this.openModal(true, false)} onOpenD={()=> this.openModal(false, true)} symptom={this.props.symptom} startDate={this.props.startDate} endDate={this.props.endDate}/>
 													</div>
 												</div>
 											</div>

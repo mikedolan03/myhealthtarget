@@ -4,11 +4,14 @@
 position: relative;
     /* margin-top: 1px; */
     /* z-index: 10; */
-    top: -195px;
+    top: -285px;
+    margin-bottom:  -40px;
 }
 
 .sd-bar {
 display: block;
+margin-top: 7px;
+padding-top:  10px;
     /* margin-top: 1px; */
     /* z-index: 10; */
 
@@ -25,7 +28,7 @@ color: #00d1fe;
     border-style: solid;
     border-radius: 20px;
     border-width: 0px;
-    height: 25px;
+    height: 22px;
     /* width: 124px; */
     margin-left: 5px;
     margin-right: 5px;
@@ -67,3 +70,24 @@ float: right;
 .sd-bar .floatright {
 float: right;
 }
+
+.sd-bar .green {
+    background-color: #28c97c;
+}
+
+.sd-bar .red {
+    background-color: #fc4661;
+}
+
+.sd-bar .purple {
+        background-color: #c86dd7; 
+}
+
+.sd-bar .blue {
+        background-color:   #00c7ff; 
+
+}
+
+.sd-bar .orange {
+        background-color: #fe8d07; 
+    }

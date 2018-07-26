@@ -1,11 +1,14 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import './symptomdatebar.css';
 import 'font-awesome/css/font-awesome.min.css';
 import {IoSad, IoAndroidCalendar} from 'react-icons/lib/io';
 import {connect} from 'react-redux';
 import {changeDates} from '../actions';
 import {showModal} from '../actions';
+import PropTypes from 'prop-types'
+import { withRouter } from 'react-router'
+
 var moment = require('moment');
 moment().format();
 
@@ -16,9 +19,13 @@ export class SymptomDateBar extends React.Component {
     super(props);
     this.sdateinput = React.createRef();
     this.edateinput = React.createRef();
-
+    this.state = {
+      gotoSymptoms: false,
+      gotoFoods: false
+    }
 
   }
+
 
   changeSymptom(event) {
 
@@ -57,7 +64,48 @@ export class SymptomDateBar extends React.Component {
        
     } 
 
+  clickAddFood(event) {
+
+    console.log('clicked food');
+      event.preventDefault();
+
+        this.setState({
+          gotoFoods: true 
+        });
+          
+
+      } 
+
+    clickAddSymptom(event) {
+    console.log('clicked symp');
+
+     //console.log('in change date', this.dateinput.current.value);
+      event.preventDefault();
+
+        this.setState({
+          gotoSymptoms: true 
+        });
+          
+
+      }  
 	render() {
+   
+   if(this.state.gotoFoods) {
+    this.setState({
+          gotoFoods: false
+        });
+      return <Redirect to="/loggedin/factortracker" />;
+
+   }
+
+   if(this.state.gotoSymptoms) {
+    this.setState({
+          gotoSymptoms: false 
+        });
+      return <Redirect to="/loggedin/symptomtracker" />;
+
+   }
+
 
     if(this.props.top) { 
 
@@ -70,17 +118,29 @@ export class SymptomDateBar extends React.Component {
 			</div>
 			);
      }
-     else 
-     {
-      return ( 
-      <div className="sd-bar">
-        <ul>
-          <li><button className="bar-button" onClick={e => this.changeSymptom(e)}>Change Symptom</button></li>
-          <li className="floatright"><button className="bar-button" onClick={e => this.changedDate(e)} >Change Date</button></li>
-        </ul>
-      </div>
-      );
-     }
+     else { if (this.props.addbuttons)  
+            {
+              return ( 
+              <div className="sd-bar">
+                <ul>
+                  <li><button className="bar-button blue"  onClick={e => this.clickAddSymptom(e)}>Add Symptom</button></li>
+                  <li className="floatright"><button className="bar-button red" onClick={e => this.clickAddFood(e)} >Add food</button></li>
+                </ul>
+              </div>
+              );
+            }
+            else {
+
+            return ( 
+              <div className="sd-bar">
+                <ul>
+                  <li><button className="bar-button orange" onClick={e => this.changeSymptom(e)}>Change Symptom</button></li>
+                  <li className="floatright "><button className="bar-button purple" onClick={e => this.changedDate(e)} >Change Date</button></li>
+                </ul>
+              </div>
+              );
+          }
+        }
 	}
 }
 
