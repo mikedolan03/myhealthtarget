@@ -51,4 +51,18 @@
   .col-12 {
     width: 100%;
   }
+
+  .aligner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.aligner-item {
+  max-width: 50%;
+}
+
+.add-vert-space {
+    margin-top: 15px;
+}
 }

@@ -130,6 +130,55 @@ export class DashBoard extends React.Component {
            this.props.dispatch(showModal(false, false, false));
     }
 
+
+    renderPercentBoxes( ) {
+
+    	let percentboxes = [];
+    	let count = 0; 
+
+
+    	if(!this.props.foodList.foodCounts){
+    		return null;
+    	} else 
+    			{
+    				if(this.props.foodList.foodCounts.length > 1) {
+    					for(let ci = 1; ci < this.props.foodList.foodCounts.length; ci++) {
+
+    						count = count + 1; 
+
+    						if(count%2 != 0) { percentboxes.push(<div className="col-4 add-vert-space" key={'db'+count}>
+    							<div className="dark-box">
+    							<DataBar symptom={this.props.symptom} description= {this.props.foodList.foodCounts[ci].name } number={`${Math.round( ((this.props.foodList.foodCounts[ci].count / this.props.foodList.daylists.length) * 100) )}%`} /> 
+    							</div>
+    							</div>
+    							); 
+    						} else {
+
+    							percentboxes.push(<div className="col-4 add-vert-space" key={'db'+count}>
+    							<div className="dark-box">
+    							<DataBar symptom={this.props.symptom} number={`${Object.keys(this.props.foodList.symptomOnlyDays).length} days`} symptomCount="true"/> 
+    							</div>
+    							</div>
+    							); 
+
+    						}
+
+    						if(count == 3) break;
+    					}
+    				
+    					return percentboxes; 
+
+    				} else {
+    					return null; 
+    				}
+
+
+
+    			}
+
+
+    }
+
    
 
 	render( ) {
@@ -161,7 +210,7 @@ export class DashBoard extends React.Component {
 
 			} else if (this.props.loaded) {
 
-
+					
 
 								console.log('loaded', this.props.foodList.length);
 			
@@ -191,35 +240,26 @@ export class DashBoard extends React.Component {
 												</div>
 											</div>
 									
-											<div className="row">
+											<div className="row aligner">
 												<div className="col-6">
+									
 													<TopFoodsList />
+												
 												</div>
-												<div className="col-6">
+												<div className="col-6 aligner-item">
 												<div className="dark-box">
 												{this.props.foodList.foodCounts	 ? <DataBar symptom={this.props.symptom} description= {this.props.foodList.foodCounts[0].name } number={`${Math.round( ((this.props.foodList.foodCounts[0].count / this.props.foodList.daylists.length) * 100) )}%`} /> : <DataBar nodata='true' />}		
 												</div>
 												</div>
 											</div>
 											<div className="row">
-												<div className="col-6">
+											
+												{this.renderPercentBoxes()} 
 												
-												</div>
 											</div>
+									
 											<div className="row">
-												<div className="col-4">
-												{this.props.foodList.foodCounts	 ? <DataBar symptom={this.props.symptom} description= {this.props.foodList.foodCounts[0].name } number={`${Math.round( ((this.props.foodList.foodCounts[0].count / this.props.foodList.daylists.length) * 100) )}%`} /> : <DataBar nodata='true' />}
-													
-												</div>
-												<div className="col-4">
-												{this.props.foodList.foodCounts	 ? <DataBar symptom={this.props.symptom} description= {this.props.foodList.foodCounts[1].name } number={`${Math.round( ((this.props.foodList.foodCounts[1].count / this.props.foodList.daylists.length) * 100) )}%`} /> : <DataBar nodata='true' />}
-												</div>
-												<div className="col-4">
-												{this.props.foodList.foodCounts	 ? <DataBar  symptom={this.props.symptom} description= {this.props.foodList.foodCounts[2].name } number={`${Math.round( ((this.props.foodList.foodCounts[2].count / this.props.foodList.daylists.length) * 100) )}%`} /> : <DataBar nodata='true' />}
-												</div>
-											</div>
-											<div className="row">
-												<div className="col-12">
+												<div className="col-12 add-vert-space">
 													<FoodList />
 													<button className="big-button" onClick={()=> this.props.history.push('/loggedin/symptomtracker/')}	>
 													Add symptom	to track
