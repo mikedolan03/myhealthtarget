@@ -1,4 +1,113 @@
 
 .factortracker-container {
-	margin-top: 60px;
+	margin-top: 50px;
 }
+
+.ft-positioner {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    min-width: 290px;
+}
+
+.factortracker-container h2 {
+	margin: 0;
+	margin: 0;
+	text-align: center;
+}
+
+.factortracker-container .savebutton {
+    width: 240px;
+    height: 25px;
+    margin-top: 8px;
+}
+
+.trash-button {
+	  float: right;
+    margin-top: 5px;
+   background-color: transparent;
+}
+
+.foodformbox {
+	border-style: solid;
+  border-width: 0;
+  background-color: #0a1042;
+  -webkit-box-shadow: 5px 5px #8888881c;
+  box-shadow: 5px 5px #8888881c;
+  border-radius: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-bottom: 10px;
+}
+
+.align-center {
+text-align: center;
+
+}
+
+.align-right {
+text-align: right;
+margin-right: 5px;
+}
+
+.food-form-container.show label{
+	display: block;
+}
+
+.date-section {
+	margin-top: 5px; 
+	  text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+.date-section label{
+	margin-right: 8px; 
+}
+
+.date-section input{
+	border-width: 1px;
+	border-style: solid;
+	background-color: white;
+	color: #0a1042; 
+	font-weight: 800;
+	text-align: center;
+	border-radius: 10px;
+}
+
+.date-section button{
+	background-color: transparent;
+	color: #00c7ff;
+}
+
+.back-to-dash-button {
+	   margin-top: 4px;
+    margin-bottom: 0px;
+}
+
+.foodlist-section {
+
+margin-top: 10px; 
+
+}
+
+@media only screen and (min-width: 640px) {
+
+.factortracker-container .savebutton {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.add-food-button {
+	margin-right: 5px;
+}
+
+.foodlist-section {
+
+margin-top: 0; 
+
+}
+
+}
+   

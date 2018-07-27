@@ -7,8 +7,8 @@ export default function FoodListItem(props) {
 if(props.showTags) { 
 
 	 return (
-        <div className="food-list-item">
-            {props.name} - {props.tags}
+        <div className="food-list-item align-center">
+            <div className="blue-text fooditemblock">Food: {props.name}</div> <div className="purple-text fooditemblock">  Tags: {props.tags}</div>
         </div>
     );
 

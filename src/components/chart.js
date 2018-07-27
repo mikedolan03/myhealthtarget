@@ -25,7 +25,6 @@ export class MyChart extends React.Component {
 
  buildChart() { 
 
-            
     let donutChart = true; 
     let myFoodData = []; 
     let myFoodNames = [];
@@ -34,7 +33,9 @@ export class MyChart extends React.Component {
     if(this.props.nodata=='true') {
 
         let ctx = document.getElementById("myChart").getContext('2d'); 
-        Chart.defaults.global.defaultFontColor = 'white';   
+        Chart.defaults.global.defaultFontColor = 'white'; 
+        Chart.defaults.global.defaultFontSize = 12;       
+  
 
 
         var myDoughnutChart = new Chart(ctx, {
@@ -65,7 +66,7 @@ export class MyChart extends React.Component {
             title: {
                 display: true,
                 position: 'top',
-                fontSize: 12,
+                fontSize: 18,
                 text: 'No Data'
             },
             responsive: true,
@@ -99,6 +100,7 @@ export class MyChart extends React.Component {
         console.log('in build chart');
         let ctx = document.getElementById("myChart").getContext('2d'); 
         Chart.defaults.global.defaultFontColor = 'white';   
+        Chart.defaults.global.defaultFontSize = 12;       
 
 
         var myDoughnutChart = new Chart(ctx, {
@@ -129,8 +131,8 @@ export class MyChart extends React.Component {
             title: {
                 display: true,
                 position: 'top',
-                fontSize: 12,
-                text: 'Likely Causes'
+                fontSize: 18,
+                text: `Likely Causes of ${this.props.symptom}`
             },
             responsive: true,
             maintainAspectRatio: true,

@@ -80,8 +80,16 @@ button {
 	background-color: #28c97c;
 }
 
+.green-text {
+	color: #28c97c;
+}
+
 .red {
 	background-color: #fc4661;
+}
+
+.red-text {
+	color: #fc4661;
 }
 
 .purple {

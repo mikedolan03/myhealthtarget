@@ -109,11 +109,12 @@ export class SymptomDateBar extends React.Component {
 
     if(this.props.top) { 
 
+      /* <li><button onClick={e => this.changeSymptom(e)}><IoSad size={32} /> {this.props.symptom}</button></li>*/
+
 		return ( 
 			<div className="sd-bar top">
       <div className="top-positioner">
 				<ul>
-					<li><button onClick={e => this.changeSymptom(e)}><IoSad size={32} /> {this.props.symptom}</button></li>
 					<li className="nofloat sd-date"><button onClick={e => this.changedDate(e)} >{moment(this.props.startDate).format('MM[/]DD')} - {moment(this.props.endDate).format('MM[/]DD')}</button></li>
 				</ul>
 			</div>

@@ -57,7 +57,7 @@ render() {
 
           return (
                   <div className="food-list">
-                  <h3>All the foods you ate today:</h3>
+                  <h3 className="orange-text align-center">All the foods you ate today:</h3>
                   <ul>
                   {lists}
                   </ul>
@@ -68,7 +68,8 @@ render() {
   			} else {
 
           return (
-                  <div className="food-list">
+                  <div className="food-list align-center">
+                  <h3 className="orange-text">All the foods you ate today:</h3>
                   <h3>You currently have no food entries for today. Add some!</h3>
                   </div>
                   );

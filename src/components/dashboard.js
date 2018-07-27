@@ -225,7 +225,7 @@ export class DashBoard extends React.Component {
 								return (
 								<div>
 								<SymptomPickerModal isOpen={this.props.showSymptomModal} isOpenD={this.props.showDateModal} onClose={()=> this.closeModal()} />
-								<NavBar />
+							
 								<section className="dashboard">  
 								
 									<div className="dashboard-container">

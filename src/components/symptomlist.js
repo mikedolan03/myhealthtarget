@@ -25,7 +25,8 @@ export class SymptomList extends React.Component {
 
 	sortList() {
 
-		let array = this.props.symptomList.slice(0, parseInt(this.props.show));
+	//	let array = this.props.foodList.todayList.symptomList.slice(0, parseInt(this.props.show));
+		let array = this.buildList().slice(0, parseInt(this.props.show));
 
 		array.sort(function(a, b) {
     			a = new Date(a.date);
@@ -37,7 +38,35 @@ export class SymptomList extends React.Component {
 		return array; 
 	}
 
+	buildList() {
+
+		let combinedSymptoms = []; 
+
+		 	this.props.foodList.daylists.map( dlist => { 
+
+		 		let symListtoAdd = dlist.symptomList; 
+
+		 		symListtoAdd.map(sympListitem => { 
+
+		 			sympListitem.date = dlist.date; 
+
+		 		})
+
+		 		combinedSymptoms = combinedSymptoms.concat(symListtoAdd); 
+
+			   });
+
+		 	console.log('combined Symptoms', combinedSymptoms);
+
+		 	return combinedSymptoms; 
+
+	}
+
 render() {
+
+	if(!this.props.foodList.daylists) return null; 
+
+  this.buildList();
 
 			let mySymptoms; 
 			let lists;
@@ -47,31 +76,23 @@ render() {
 
   			//let currentStore = store.getState(); 
 
-  			if(this.props.symptomList.length > 0) {
+  			if(this.props.foodList.todayList.symptomList.length > 0) {
   				console.log('we have symptoms');
-				
-
-//  	lists = this.props.symptomList.slice(0, parseInt(this.props.show)).map((list, index) => (
-
-  	lists = this.sortList().map((list, index) => (
-            		<li className="list-wrapper" key={index}>
+			
+ 				 	lists = this.sortList().map((list, index) => (
+            		<div className="list-wrapper" key={index}>
                 		<SymptomListItem {...list} />
-                		<button className="info-button" onClick={(index)=> { this.showMoreInfo() } }>i</button>
-            		
-
-            		</li>
+            		</div>
             		));
-
-  				
   			}
 
 
 	return (
-		<div className="symptom-list">
-		<h3>Recent Symptoms</h3>
-		<ul>
+		<div className="symptom-list dark-box">
+		<h3>Your Recent Symptoms</h3>
+		<div>
 		{lists}
-		</ul>
+		</div>
 		</div>
 		);
 

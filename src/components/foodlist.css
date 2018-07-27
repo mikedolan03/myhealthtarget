@@ -18,3 +18,9 @@
 .food-list h3 {
   margin-top: 3px;
 }
+
+.fooditemblock {
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 16px;
+}

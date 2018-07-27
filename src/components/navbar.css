@@ -4,6 +4,7 @@ nav {
   left: 0;
   width: 100%;
   z-index: 10;
+  height: 50px;
  background: rgb(106,0,255); /* Old browsers */
 background: -moz-linear-gradient(left, rgba(106,0,255,1) 1%, rgba(170,160,255,1) 100%); /* FF3.6-15 */
 background: -webkit-linear-gradient(left, rgba(106,0,255,1) 1%,rgba(170,160,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
@@ -51,16 +52,22 @@ nav li a {
     text-align: center;
     /*padding-left: 5px;
     padding-right: 5px; */
-    padding-top: 15px;
-    padding-bottom: 5px;
+    margin-top: 5px;
+    padding: 0;
     text-decoration: none;
 }
 
+nav li h1 {
+  margin: 0;
+  padding: 0;
+}
+
 nav li h1 a {
+margin: 0;
 padding-top: 0px;
-padding-top: 5px;
 font-size: 20px;
 padding-left: 10px;
+margin-top: 8px;
 }
 
 li a:hover:not(.active) {
@@ -73,4 +80,12 @@ li a:hover:not(.active) {
 
 float: right;
 
+}
+
+@media only screen and (min-width: 640px) {
+nav li h1 a {
+padding-top: 0px;
+font-size: 32px;
+padding-left: 10px;
+}
 }
