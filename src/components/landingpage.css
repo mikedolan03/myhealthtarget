@@ -111,7 +111,7 @@ section:nth-child(even) {
     position: absolute;
     top: 150px;
     left: 44%;
-    width: 50%;
+  /*  width: 50%; */
     padding-left: 10%;
     padding-right: 10%;
 }
@@ -126,9 +126,10 @@ section:nth-child(even) {
     position: absolute;
     top: 150px;
     left: 35%;
-    width: 70%;
+    /* width: 70%; */
     padding-left: 10%;
     padding-right: 10%;
+    margin-left: 20px;
 }
 
 }

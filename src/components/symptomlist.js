@@ -64,7 +64,7 @@ export class SymptomList extends React.Component {
 
 render() {
 
-	if(!this.props.foodList.todayList) {
+	if(!this.props.foodList.daylists) {
 
 		return (
 		<div className="symptom-list dark-box">
@@ -76,8 +76,6 @@ render() {
 		);
 	}
 
-  this.buildList();
-
 			let mySymptoms; 
 			let lists;
 
@@ -86,7 +84,7 @@ render() {
 
   			//let currentStore = store.getState(); 
 
-  			if(this.props.foodList.todayList.symptomList.length > 0) {
+  			if(this.props.foodList.daylists.length > 0) {
   				console.log('we have symptoms');
 			
  				 	lists = this.sortList().map((list, index) => (
