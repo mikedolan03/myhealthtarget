@@ -296,9 +296,7 @@ export class DashBoard extends React.Component {
 													Add food to track
 													</button>
 
-													<button className="big-button" onClick={()=> this.props.history.push('/loggedin/reviewscreen/')}	>
-													Review your Data
-													</button>
+												
 												</div>
 											</div>
 									</div>
@@ -341,8 +339,8 @@ const mapStateToProps = state => ({
     endDate: state.reducer.endDate,
     showSymptomModal: state.reducer.showSymptomModal,
     showDateModal: state.reducer.showDateModal,
-    showNoDataModal: state.reducer.showNoDataModal
-
+    showNoDataModal: state.reducer.showNoDataModal,
+    newUser: state.reducer.newUser
 });
 
 export default connect(mapStateToProps)(DashBoard);

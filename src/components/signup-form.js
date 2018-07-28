@@ -2,6 +2,7 @@ import React from 'react';
 import {Field, reduxForm, focus} from 'redux-form';
 import {signUpUser} from '../actions';
 import {login} from '../actions/auth';
+import {newUser} from '../actions';
 //import Input from './input';
 import './signup-form.css';
 import {required, nonEmpty, matches, length, isTrimmed} from '../validators';
@@ -14,7 +15,12 @@ export class SignUpForm extends React.Component {
         const user = {username, password, firstName, lastName, email};
         return this.props
             .dispatch(signUpUser(user))
-            .then(() => this.props.dispatch(login(username, password)));
+            .then(
+                () => {
+                this.props.dispatch(login(username, password))
+                this.props.dispatch(newUser(true))
+
+                })
     }
 
     render() {

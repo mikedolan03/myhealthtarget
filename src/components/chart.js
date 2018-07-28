@@ -71,7 +71,8 @@ export class MyChart extends React.Component {
             },
             responsive: true,
             maintainAspectRatio: false,
-            cutoutPercentage: 90           
+            cutoutPercentage: 90,
+             events: ['click', 'touchend']           
 
         }
         });
@@ -136,7 +137,8 @@ export class MyChart extends React.Component {
             },
             responsive: true,
             maintainAspectRatio: true,
-            cutoutPercentage: 90           
+            cutoutPercentage: 90,
+            events: ['click', 'touchend']          
 
         }
         });

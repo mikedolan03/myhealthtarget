@@ -64,7 +64,17 @@ export class SymptomList extends React.Component {
 
 render() {
 
-	if(!this.props.foodList.daylists) return null; 
+	if(!this.props.foodList.todayList) {
+
+		return (
+		<div className="symptom-list dark-box">
+		<h3>Your Recent Symptoms</h3>
+		<div>
+		Add more data so we can track your symptoms!
+		</div>
+		</div>
+		);
+	}
 
   this.buildList();
 

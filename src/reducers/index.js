@@ -1,5 +1,5 @@
 //import * as actions '../actions';
-import {TRACK_FOOD, TRACK_SYMPTOM, CHANGE_SYMPTOM, SHOW_MODAL, LOGGING_IN, CHANGE_DATES, FETCH_FOODLIST_REQUEST, FETCH_FOODLIST_SUCCESS, FETCH_SYMPTOMLIST_SUCCESS} from '../actions';
+import {TRACK_FOOD, TRACK_SYMPTOM, CHANGE_SYMPTOM, SHOW_MODAL, LOGGING_IN, NEW_USER, CHANGE_DATES, FETCH_FOODLIST_REQUEST, FETCH_FOODLIST_SUCCESS, FETCH_SYMPTOMLIST_SUCCESS} from '../actions';
 var moment = require('moment');
 moment().format();
 
@@ -14,7 +14,8 @@ const initialState = {
       showSymptomModal: false,
       showDateModal: false,
       showNoDataModal: 'noshow',
-      loggingIn: false
+      loggingIn: false,
+      newUserFlag: false
     };
 
  export const htReducer = (state=initialState, action) => {
@@ -87,6 +88,14 @@ const initialState = {
 
                     } else {
 
+                       if(action.type === NEW_USER) {
+
+                        return Object.assign({}, state, {
+                        newUserFlag: action.newUserFlag
+                        });
+
+                        } else {
+
                         if(action.type === CHANGE_DATES) {
 
                         return Object.assign({}, state, {
@@ -136,6 +145,7 @@ const initialState = {
                                 return state;
                                 }
                     }
+                  }
                   }
                 }
               }

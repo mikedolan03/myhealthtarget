@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {changeDates} from '../actions';
 import {showModal} from '../actions';
 import {changeSymptom} from '../actions';
+import {newUser} from '../actions';
 
 import './symptompickermodal.css';
 
@@ -31,6 +32,14 @@ export class SymptomPickerModal extends React.Component {
     closeNoData(e) {
         e.preventDefault() 
         this.props.dispatch(showModal(false, false, 'seen'));
+
+    }
+
+    closeNewUser(e) {
+        e.preventDefault() 
+        this.props.dispatch(newUser(false));
+                this.props.dispatch(showModal(false, false, 'seen'));
+
 
     }
 
@@ -64,22 +73,47 @@ export class SymptomPickerModal extends React.Component {
 
                     console.log('rendering no data ');
 
+            if(this.props.newUserFlag) {
+             // if(true) {
+
+              return (
+               <div className="symptom-picker-container">
+                <div className="modal">
+                
+                </div>
+                
+                <div className="symptom-picker-popup">
+                 <div className="pop-content">
+                  <h3>Welcome to Symptom Hacker!</h3>
+                  <h4>You are on the dashboard where, with a little data, you will be able to see what foods are causing your symptoms.</h4>
+                  <h4>Click the Add Food or Add Symptom buttons below the graph and try adding foods and symptoms for today.</h4>
+                  
+                 </div>
+                 <button onClick={e => this.closeNewUser(e)}>Got it!</button>
+                </div>
+               </div> 
+              );
+
+
+            } else { 
+
 
             return (
-           <div className="symptom-picker-container">
-            <div className="modal">
-            
-            </div>
-            
-            <div className="symptom-picker-popup">
-             <div className="pop-content">
-              <h3>We couldn't find data match that symptom and date range.</h3>
-              <h3>Try a different date range and/or symptom. Or add more symptoms and food items!</h3>
-             </div>
-             <button onClick={e => this.closeNoData(e)}>Got it!</button>
-            </div>
-           </div> 
-        );
+               <div className="symptom-picker-container">
+                <div className="modal">
+                
+                </div>
+                
+                <div className="symptom-picker-popup">
+                 <div className="pop-content">
+                  <h3>We couldn't find data match that symptom and date range.</h3>
+                  <h3>Try a different date range and/or symptom. Or add more symptoms and food items!</h3>
+                 </div>
+                 <button onClick={e => this.closeNoData(e)}>Got it!</button>
+                </div>
+               </div> 
+              );
+            }
 
         }
 
@@ -163,7 +197,8 @@ const mapStateToProps = state => ({
     endDate: state.reducer.endDate, 
     showSymptomModal: state.reducer.showSymptomModal,
     showDateModal: state.reducer.showDateModal,
-    showNoDataModal: state.reducer.showNoDataModal
+    showNoDataModal: state.reducer.showNoDataModal,
+    newUserFlag: state.reducer.newUserFlag
 });
 
 export default connect(mapStateToProps)(SymptomPickerModal);

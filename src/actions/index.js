@@ -32,6 +32,11 @@ export const signUpUser = user => dispatch => {
     });
 };
 
+export const NEW_USER = 'NEW_USER';
+export const newUser = (newUserFlag) => ({
+    type: NEW_USER,
+    newUserFlag
+});
 
 export const TRACK_FOOD = 'TRACK_FOOD';
 export const trackFood = foodobj => ({
@@ -95,167 +100,17 @@ export const sendFoodItemSuccess = (foodItem) => ({
 	foodItem
 });
 
-//myFetch(url, options, redirect, refer, body) {
-   function myFetch(url, options) {
-	
-   	if( Math.floor(Math.random() * 10) == 1 ) {
-   		return Promise.reject('Error with api');
-   	}
-
-	let myData;
-
-	if(!options) { 
-	 	options = { 
-	 		method: 'GET' 
-	 	};
-	}
-
-	//probably should be `${API_BASE_URL}/foodlist`
-   	if(url == `${API_BASE_URL}/foodlist` &&
-   		options.method == 'GET') {
 
 
-
-
-
-   		 myData =[ 
-       		{name: 'carrot', tags: 'orange, veg', time: "01:00", date: "2018-06-27"},
-       		{name: 'spaghetti', tags: 'pasta, gluten', time: "11:30", date: "2018-06-25"},
-       		{name: 'pizza', tags: 'cheese, wheat, tomato, veg', time: "01:00", date: "2018-06-28"},
-       		{name: 'blueberries', tags: 'fruit, blue', time: "5:30", date: "2018-06-25"},
-       		{name: 'cheerios', tags: 'cereal, oats, milk', time: "06:00", date: "2018-06-28"},
-       		{name: 'spaghetti', tags: 'pasta, gluten', time: "07:30", date: "2018-06-26"},
-       		{name: 'ice cream', tags: 'dairy, sugar', time: "08:00", date: "2018-06-28"},
-       		{name: 'ravioli', tags: 'pasta, gluten', time: "14:30", date: "2018-06-26"}
-			];
-			let error = false; 
-
-   	}
-
-   	if(url == `${API_BASE_URL}/foodlist` &&
-   		options.method == 'POST') {
-
-   		 myData = options.body; 
-   		
-   	}
-
-   if(url == `${API_BASE_URL}/foodlist` &&
-   		options.method == 'PUT') {
-   	//edit entry
-   		   		
-   		   myData = options.body; 
-
-   	}
-
-   if(url == `${API_BASE_URL}/symptomlist` &&
-   		options.method == 'GET') {
-   		
-   		 myData =[ 
-       		{name: 'sick stomach', severity: '5', time: "01:00", date: "2018-06-28"},
-       		{name: 'heartburn', severity: '2', time: "01:30", date: "2018-06-29"},
-       		{name: 'sick stomach', severity: '3', time: "01:00", date: "2018-06-29"},
-       		{name: 'headache', severity: '6', time: "01:30", date: "2018-06-30"},
-       		{name: 'sick stomach', severity: '5', time: "01:00", date: "2018-06-29"},
-       		{name: 'heartburn', severity: '10', time: "01:30", date: "2018-06-28"},
-       		{name: 'gas', severity: '5', time: "01:00", date: "2018-06-28"},
-       		{name: 'heartburn', severity: '8', time: "01:30", date: "2018-06-27"},
-       		{name: 'gas', severity: '4', time: "01:00", date: "2018-06-28"},
-       		{name: 'heartburn', severity: '2', time: "01:30", date: "2018-06-30"}
-			];
-   	}
-
-   if(url == `${API_BASE_URL}/symptomlist` &&
-   		options.method == 'POST') {
-   		   		   		
-   		   	 myData = options.body; 
-
-   	}
-
-    if(url == `${API_BASE_URL}/symptomlist` &&
-   		options.method == 'PUT') {
-   		   	
-   		   	 myData = options.body; 
-
-   	}
-   	//if url and no options or option.method=get return requested data
-   	//implement search filters on server side - here just return simple sorted data
-   	//
-
-    return new Promise((resolve, reject)=>{
-     
-
-
-    		let error = false; 
-
-			
-			//or test error 
-			//error = "ahhhhh something went wrong!"; 
-
-            if (error)  { reject(error); 
-            }
-            else resolve(myData);
-        
-    });
-}
-
-function getDataSymptoms() {
-    return new Promise((resolve, reject)=>{
-     
-    	
-			let error = false; 
-			
-			//or test error 
-			//error = "ahhhhh something went wrong!"; 
-
-            if (error)  { reject(error); 
-            }
-            else resolve();
-        
-    });
-}
-
-function sendData(data) {
-    return new Promise((resolve, reject)=>{
-     
-    	
-			let error = false; 
-			
-			//or test error 
-			//error = "ahhhhh something went wrong!"; 
-
-            if (error)  { reject(error); 
-            }
-            else resolve(data);
-        
-    });
-}
-
-
-//now we need to do this a pretend post. 
-//so maybe we make the myData global in here - then we add our new food to it, then return
-//it like its a json response then we send the success and do the TrackFood action.
-//track food should probably be renamed Add_Food or somethting since we are adding it to the
-//db
-
-
-/*export const signUpUser = user => dispatch => {
-    return fetch(`${API_BASE_URL}/users`, {
-   method: 'POST',
-   headers: {
-    'content-type': 'application/json'
-   },
-   body: JSON.stringify(user)
-   })*/
+//MAIN WAY WE GET OUR DATA TO FILL THE DASHBOARD
 
 export const fetchFoodList = (endpoint, myQueryObj ={}) => (dispatch, getState) => {
     if(endpoint == '') { endpoint = 'daylists';}
     let myQuery;
     let myUrl = `${API_BASE_URL}/${endpoint}/`; 
-    //let myQueryObj = {sdate: '7-4-2018', edate: '7-11-2018'};
     
     //if query sent - add it
     if(myQueryObj !== {}) {
-   // myQuery = '?' + queryString.stringify(myQueryObj); 
     
     myQuery = Object.keys(myQueryObj).map(key => key + '=' + myQueryObj[key]).join('&');
     
@@ -263,7 +118,6 @@ export const fetchFoodList = (endpoint, myQueryObj ={}) => (dispatch, getState) 
     } 
     
      console.log('in the fetchfoodlistpromise', myUrl);
-     //myFetch(`${API_BASE_URL}/foodlist`, {method: 'GET'} )
     const authToken = getState().auth.authToken;
     return fetch(`${myUrl}`, { 
       method: 'GET',
@@ -291,23 +145,8 @@ export const fetchFoodList = (endpoint, myQueryObj ={}) => (dispatch, getState) 
     });
 };
 
-export const fetchSymptomList = () => dispatch => {
-    //fetch(`${API_BASE_URL}/foodlist`).then(res => {
-     //   if (!res.ok) {
-      //      return Promise.reject(res.statusText);
-      //  }
-       // return res.json();
-     console.log('in the fetchsymptomlistpromise');
-     
-     myFetch(`${API_BASE_URL}/symptomlist`, {method: 'GET'} )
-    .then(symptomList => {
-        dispatch(fetchSymptomListSuccess(symptomList));
-    })
-    .catch(error => { 
-  		console.log('error: ', error);
 
-    });
-};
+//How we add food items to our db
 
 export const postFoodItems = (foodItem) => (dispatch, getState) => {
 
@@ -333,6 +172,9 @@ console.log('adding', foodItem);
 		console.log('error: ', error);
 	})
 };
+
+
+//how we add Symptoms to our db
 
 export const postSymptoms = (symptom) => (dispatch, getState) => {
 	 const authToken = getState().auth.authToken;
