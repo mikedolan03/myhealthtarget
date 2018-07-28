@@ -2,6 +2,8 @@ import React from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import SignUp from './signup';
 import './landingpage.css'
+import screenshot from './shgraph.png';
+import screenshotb from './shdeskdash.png';
 
 export default class LandingPage extends React.Component { 
 
@@ -13,7 +15,7 @@ render() {
 			<div className="logo">Symptom Hacker</div>
 			<div className="banner-text-container">
 				<h1>Ever wonder what foods are making you feel sick?</h1>
-				<h3>Use the Symptom Hacker to find those foods, eliminate them from your diet.</h3>
+				<h3>Use the Symptom Hacker to find problem foods and eliminate them from your diet.</h3>
 			</div>
 		</div>
 		<div className="sign-up-section">
@@ -21,6 +23,18 @@ render() {
 		</div>
 
 			<section>
+			<div className="row">
+				<div className="col-8">
+					<h2>Symptom Hacker helps you figure out what foods are causing you health problems.</h2>
+					<h2>Use the app to record what foods you have been eating and when you have symptoms.</h2>
+					<h2>Then let the app compare all the data you collect and create a dashboard that helps you connect the dots between foods and symptoms.</h2>
+					<img src={screenshotb} width="100%"/>
+				</div>
+				<div className="col-4">
+				<img src={screenshot} />
+				</div>
+
+			</div>
 			  -screen shot of dashboard-
 			  <h4>My Health Target helps you figure out what lifestyle factors are keeping you from hitting your health targets.</h4>
 			</section>

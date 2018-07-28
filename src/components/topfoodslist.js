@@ -6,6 +6,22 @@ import './topfoodslist.css';
 
 export class TopFoodsList extends React.Component {
 
+  generatePercent(number1, number2) {
+
+    let newPercent;
+
+    newPercent = Math.round( ((number1 / number2) * 100) );
+
+    if(newPercent > 100) newPercent = 100;
+
+    if(newPercent < 0) newPercent =0; 
+
+    return newPercent;  
+                      
+
+  }
+
+
 render() {
 
 			let lists;
@@ -16,7 +32,7 @@ render() {
   			lists = this.props.foodList.foodCounts.slice(0,5).map((list, index) => (
           <div className="list-item" key={index}>
             <button><TopFoodItem {...list} 
-            percent={ (list.count / this.props.foodList.daylists.length) * 100 } totalDays={this.props.foodList.daylists.length}/></button>
+            percent={ this.generatePercent(list.count,this.props.foodList.daylists.length)} totalDays={this.props.foodList.daylists.length}/></button>
           </div>
         ));
 

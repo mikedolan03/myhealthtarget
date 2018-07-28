@@ -204,6 +204,21 @@ export class DashBoard extends React.Component {
 
   }
 
+  generatePercent(number1, number2) {
+
+  	let newPercent;
+
+  	newPercent = Math.round( ((number1 / number2) * 100) );
+
+  	if(newPercent > 100) newPercent = 100;
+
+  	if(newPercent < 0) newPercent =0; 
+
+  	return newPercent; 	
+											
+
+  }
+
    
 
 	render( ) {
@@ -274,7 +289,8 @@ export class DashBoard extends React.Component {
 												</div>
 												<div className="col-6 aligner-item">
 												<div className="dark-box">
-												{this.props.foodList.foodCounts	 ? <DataBar symptom={this.props.symptom} description= {this.props.foodList.foodCounts[0].name } number={`${Math.round( ((this.props.foodList.foodCounts[0].count / this.props.foodList.daylists.length) * 100) )}%`} /> : <DataBar nodata='true' />}		
+												{this.props.foodList.foodCounts	 ? <DataBar symptom={this.props.symptom} description= {this.props.foodList.foodCounts[0].name } 
+													number={`${this.generatePercent(this.props.foodList.foodCounts[0].count, this.props.foodList.daylists.length)}%`} /> : <DataBar nodata='true' />}		
 												</div>
 												</div>
 											</div>
