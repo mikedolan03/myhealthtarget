@@ -15,23 +15,22 @@ export default class SymptomTracker extends React.Component {
 
 			<section className="factortracker-container">
 				<div className="row">
- 					<div className="col-12">
+ 					<div className="col-8">						
+ 					  <h2 className="extra-space-below">Add symptoms to track</h2>
+ 					</div>
+ 				</div>
+ 				<div className="row">
+ 					<div className="col-8">	
  						<div className="ft-positioner">
-							<h2 className="extra-space-below">Add symptoms to track</h2>
 								<SymptomForm history={this.props.history}/>
 						</div>
-					</div>
-				</div>
-				<div className="row">
- 					<div className="col-12">
-						<div className="align-center"><button className="back-to-dash-button red savebutton" onClick={()=> this.props.history.push('/loggedin/dashboard/')}>
-						Cancel
-						</button>
+						<div className="align-center">
+							<button className="back-to-dash-button red savebutton" onClick={()=> this.props.history.push('/loggedin/dashboard/')}>
+							Cancel
+							</button>
 						</div>
 					</div>
-				</div>
-				<div className="row">
- 					<div className="col-12">
+ 					<div className="col-4">
  						<div className="foodlist-section">
 							<SymptomList show="10"/>
 						</div>

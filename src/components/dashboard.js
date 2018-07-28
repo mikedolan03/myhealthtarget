@@ -18,7 +18,7 @@ import {showModal} from '../actions';
 import SymptomPickerModal from './symptompickermodal';
 import NavBar from './navbar';
 
-var moment = require('moment');
+let moment = require('moment');
 moment().format();
 
 export class DashBoard extends React.Component {
@@ -100,6 +100,24 @@ export class DashBoard extends React.Component {
         //this.props.dispatch(fetchFoodList('daylists', {}) );
   }  
 
+  buildTags() {
+
+		let tags = '';
+
+		 	this.props.foodList.combinedFoods.slice(0,10).map( flist => { 
+
+		 	
+		 		tags += (flist.tags+" ") ; 
+		 	
+
+			   });
+
+		 	console.log('combined tags', tags);
+
+		 	return tags; 
+
+	}
+
 
 	clickedTrackFood() {
 
@@ -142,42 +160,49 @@ export class DashBoard extends React.Component {
     	} else 
     			{
     				if(this.props.foodList.foodCounts.length > 1) {
+
     					for(let ci = 1; ci < this.props.foodList.foodCounts.length; ci++) {
 
     						count = count + 1; 
 
-    						if(count%2 != 0) { percentboxes.push(<div className="col-4 add-vert-space" key={'db'+count}>
-    							<div className="dark-box">
-    							<DataBar symptom={this.props.symptom} description= {this.props.foodList.foodCounts[ci].name } number={`${Math.round( ((this.props.foodList.foodCounts[ci].count / this.props.foodList.daylists.length) * 100) )}%`} /> 
-    							</div>
-    							</div>
-    							); 
-    						} else {
+    						if(count == 1){ 
+	    							percentboxes.push(<div className="col-4 add-vert-space" key={'db'+count}>
+	    							<div className="dark-box">
+	    							<DataBar tagVersion="true" symptom={this.props.symptom} description= {this.buildTags()} /> 
+	    							</div>
+	    							</div>
+	    							); 
+	    					} else 
+    							{
 
-    							percentboxes.push(<div className="col-4 add-vert-space" key={'db'+count}>
-    							<div className="dark-box">
-    							<DataBar symptom={this.props.symptom} number={`${Object.keys(this.props.foodList.symptomOnlyDays).length} days`} symptomCount="true"/> 
-    							</div>
-    							</div>
-    							); 
+    								if(count==2) { 
+		    							percentboxes.push(<div className="col-4 add-vert-space" key={'db'+count}>
+		    							<div className="dark-box">
+		    							<DataBar outOfVersion="true" symptom={this.props.symptom} description= {this.props.foodList.foodCounts[ci].name } number={this.props.foodList.foodCounts[ci].count} totals={this.props.foodList.daylists.length} /> 
+		    							</div>
+		    							</div>
+		    							); 
+    								} else {
 
-    						}
-
-    						if(count == 3) break;
+			    							percentboxes.push(<div className="col-4 add-vert-space" key={'db'+count}>
+			    							<div className="dark-box">
+			    							<DataBar symptom={this.props.symptom} number={`${Object.keys(this.props.foodList.symptomOnlyDays).length} days`} symptomCount="true"/> 
+			    							</div>
+			    							</div>
+			    							); 
+	    								}
+	    						}
+								if(count == 3) break;
     					}
+
+    						
+    				}
     				
     					return percentboxes; 
 
-    				} else {
-    					return null; 
-    				}
+    			} 
 
-
-
-    			}
-
-
-    }
+  }
 
    
 
@@ -238,6 +263,7 @@ export class DashBoard extends React.Component {
 													 <SymptomDateBar top="true" onOpen={()=> this.openModal(true, false)} onOpenD={()=> this.openModal(false, true)} symptom={this.props.symptom} startDate={this.props.startDate} endDate={this.props.endDate}/>
 													</div>
 												</div>
+
 											</div>
 									
 											<div className="row aligner">

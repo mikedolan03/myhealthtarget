@@ -15,6 +15,9 @@ export class SymptomPickerModal extends React.Component {
     this.changedDates = this.changedDates.bind(this);
     this.sdinput = React.createRef();
     this.edinput = React.createRef();
+    this.state = {value: 'Stomach Ache'};
+
+    this.handleChange = this.handleChange.bind(this);
     }
 
     close(e) {
@@ -37,6 +40,10 @@ export class SymptomPickerModal extends React.Component {
         
         this.props.dispatch(changeSymptom(this.input.current.value));
         this.props.dispatch(showModal(false, false, 'noshow'));
+    }
+
+    handleChange(event) {
+      this.setState({value: event.target.value});
     }
 
     changedDates(event) {
@@ -120,7 +127,7 @@ export class SymptomPickerModal extends React.Component {
             <div className="pop-content">
             <h2>Pick a symptom so we can find what foods are causing it!</h2>
 
-             <select name="selectSymptom" ref={this.input} onChange={()=> {this.changedSymptom()} }>
+             <select name="selectSymptom" value={this.state.value} onChange={this.handleChange} ref={this.input} >
               
               <option value="Stomach Ache">Stomach Ache</option>
               <option value="Head Ache">Head Ache</option>
@@ -131,8 +138,11 @@ export class SymptomPickerModal extends React.Component {
               <option value="Skin Rash">Skin Rash</option>
               <option value="Pain">Pain</option>
             </select> 
-            </div>
-            <button onClick={e => this.close(e)}>Cancel</button>
+            
+            <button className="submit-button"  onClick={e => this.changedSymptom()}>Change Symptom</button>
+
+             </div>
+             <button className="cancel-button" onClick={e => this.close(e)}>Cancel</button>
             </div>
            </div> 
         );
