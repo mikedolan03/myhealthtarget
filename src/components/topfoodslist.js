@@ -21,6 +21,18 @@ export class TopFoodsList extends React.Component {
 
   }
 
+  renderTitle() {
+
+
+          if(this.props.dataStatus =='general') {
+
+            return ( <h3>Top Foods Eaten</h3> );
+
+          } else {
+                  return ( <h3>Foods That Might Cause {this.props.symptom}</h3>);
+                  }
+ }
+
 
 render() {
 
@@ -36,9 +48,11 @@ render() {
           </div>
         ));
 
+         
+
       return (
     		<div className="food-list">
-    		  <h3>Foods That Might Cause {this.props.symptom}</h3>
+    		  {this.renderTitle()}
     		  <div>
     		   {lists}
     		  </div>
@@ -61,7 +75,9 @@ const mapStateToProps = state => ({
     foodList: state.reducer.foodList,
     symptomList: state.reducer.symptomList,
     loaded: state.reducer.loaded,
-    symptom: state.reducer.symptom
+    symptom: state.reducer.symptom,
+    dataStatus: state.reducer.dataStatus
+
 });
 
 export default connect(mapStateToProps)(TopFoodsList);

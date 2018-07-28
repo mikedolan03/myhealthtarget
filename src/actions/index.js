@@ -88,6 +88,12 @@ export const fetchFoodListSuccess = (foodList) => ({
     foodList
 });
 
+export const FETCH_FOODLIST_DATASTATUS = 'FETCH_FOODLIST_DATASTATUS';
+export const fetchFoodListDataStatus = (dataStatus) => ({
+    type: FETCH_FOODLIST_DATASTATUS,
+    dataStatus
+});
+
 export const FETCH_SYMPTOMLIST_SUCCESS = 'FETCH_SYMPTOMLIST_SUCCESS';
 export const fetchSymptomListSuccess = (symptomList) => ({
     type: FETCH_SYMPTOMLIST_SUCCESS,
@@ -117,8 +123,10 @@ export const fetchFoodList = (endpoint, myQueryObj ={}) => (dispatch, getState) 
     myUrl = myUrl + "?" + myQuery;
     } 
     
-     console.log('in the fetchfoodlistpromise', myUrl);
+    console.log('in the fetchfoodlistpromise', myUrl);
     const authToken = getState().auth.authToken;
+
+
     return fetch(`${myUrl}`, { 
       method: 'GET',
       headers: {
@@ -134,8 +142,32 @@ export const fetchFoodList = (endpoint, myQueryObj ={}) => (dispatch, getState) 
 
       if(newfoodList.message) {
         newfoodList.UserMessage  = "We couldn't find any entries!";
+
+        if(newfoodList.message = "No search data") {
+
+        //dispatch an action to set a state that we are showing last months data
+
+        dispatch(fetchFoodListDataStatus('general'));
+
+        } else {
+
+              //dispatch an action to set a state that we have no data
+        dispatch(fetchFoodListDataStatus('none'));
+
+
+        }
+
+
+
+      } else {
+
+        dispatch(fetchFoodListDataStatus('good'));
+
       }
+                
+
         dispatch(fetchFoodListSuccess(newfoodList));
+
       
     })
     .catch(error => { 

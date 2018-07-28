@@ -83,6 +83,18 @@ export class MyChart extends React.Component {
 
      if(donutChart) {
 
+        let chartTitle = ''; 
+
+        if(this.props.dataStatus == "general") {
+
+            chartTitle = "Top Foods Eaten";
+
+
+        } else {
+                    chartTitle = `Likely Causes of ${this.props.symptom}`;
+
+        }
+
         let numberOfFoods = 5;
 
         if(this.props.foodList.foodCounts.length > 0) {
@@ -133,7 +145,7 @@ export class MyChart extends React.Component {
                 display: true,
                 position: 'top',
                 fontSize: 18,
-                text: `Likely Causes of ${this.props.symptom}`
+                text: chartTitle
             },
             responsive: true,
             maintainAspectRatio: true,
@@ -302,6 +314,7 @@ const mapStateToProps = state => ({
     loaded: state.reducer.loaded,
     symptom: state.reducer.symptom,
     startDate: state.reducer.startDate,
-    endDate: state.reducer.endDate
+    endDate: state.reducer.endDate,
+    dataStatus: state.reducer.dataStatus
 });
 export default connect(mapStateToProps)(MyChart);

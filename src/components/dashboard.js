@@ -33,7 +33,6 @@ export class DashBoard extends React.Component {
   
 
 	componentDidMount() {
-        //this.props.dispatch(fetchProtectedData());
 
        this.setUpQuery( );
 
@@ -62,18 +61,21 @@ export class DashBoard extends React.Component {
       }
 
 
-
+      //changed the symptom lets send the query
       if( prevProps.symptom != this.props.symptom) this.setUpQuery();
 
-      	if(prevProps.startDate != this.props.startDate) {
+      //changed our start or end date - send query
+
+      if(prevProps.startDate != this.props.startDate) {
       	
- 
-      		this.setUpQuery(); 
+      		this.setUpQuery();
+
       	} else {
       		
-      		if(prevProps.startDate != this.props.startDate) {
+      		if(prevProps.endDate != this.props.endDate) {
       		  
       			this.setUpQuery();
+
       			}
       	}
 
@@ -82,21 +84,18 @@ export class DashBoard extends React.Component {
   setUpQuery( ) {
 
   	//reset modal -just in case there is no data
-      		  this.openModal(false, false, 'noshow'); 
+     this.openModal(false, false, 'noshow'); 
 
-  	 let today = moment()._d; 
-
-				today = moment(today).format("MM-DD-YYYY");
-
-				let startDay = moment(today).subtract(7, 'days').format("MM-DD-YYYY");
+  	//let today = moment()._d; 
+		//today = moment(today).format("MM-DD-YYYY");
+		//let startDay = moment(today).subtract(7, 'days').format("MM-DD-YYYY");
         
-        let myQueryObj = {sdate: this.props.startDate, edate: this.props.endDate	, symptom: this.props.symptom};
-
-        console.log('my search: ', myQueryObj); 
+    let myQueryObj = {sdate: this.props.startDate, edate: this.props.endDate	, symptom: this.props.symptom};
+		console.log('my search: ', myQueryObj); 
 
         //let myQueryObj = {sdate: '7-4-2018', edate: '7-11-2018', symptom:'Gas'};
 
-        this.props.dispatch(fetchFoodList('daylists/getcauses', myQueryObj) );
+     this.props.dispatch(fetchFoodList('daylists/getcauses', myQueryObj) );
         //this.props.dispatch(fetchFoodList('daylists', {}) );
   }  
 
@@ -227,11 +226,7 @@ export class DashBoard extends React.Component {
 			let lists;
 
 
-			//console.log("date: ", today);
-
 			console.log('any props? ', this.props ); 
-
-			console.log('store in dash: ', store.getState());
 
 			if (this.props.loading) {
 
@@ -356,7 +351,8 @@ const mapStateToProps = state => ({
     showSymptomModal: state.reducer.showSymptomModal,
     showDateModal: state.reducer.showDateModal,
     showNoDataModal: state.reducer.showNoDataModal,
-    newUser: state.reducer.newUser
+    newUser: state.reducer.newUser,
+    dataStatus: state.reducer.dataStatus
 });
 
 export default connect(mapStateToProps)(DashBoard);

@@ -1,5 +1,5 @@
 //import * as actions '../actions';
-import {TRACK_FOOD, TRACK_SYMPTOM, CHANGE_SYMPTOM, SHOW_MODAL, LOGGING_IN, NEW_USER, CHANGE_DATES, FETCH_FOODLIST_REQUEST, FETCH_FOODLIST_SUCCESS, FETCH_SYMPTOMLIST_SUCCESS} from '../actions';
+import {TRACK_FOOD, TRACK_SYMPTOM, CHANGE_SYMPTOM, SHOW_MODAL, LOGGING_IN, NEW_USER, CHANGE_DATES, FETCH_FOODLIST_REQUEST, FETCH_FOODLIST_SUCCESS, FETCH_FOODLIST_DATASTATUS, FETCH_SYMPTOMLIST_SUCCESS} from '../actions';
 var moment = require('moment');
 moment().format();
 
@@ -15,7 +15,8 @@ const initialState = {
       showDateModal: false,
       showNoDataModal: 'noshow',
       loggingIn: false,
-      newUserFlag: false
+      newUserFlag: false,
+      dataStatus: 'none'
     };
 
  export const htReducer = (state=initialState, action) => {
@@ -130,6 +131,17 @@ const initialState = {
 
                         } else {
 
+                          if(action.type === FETCH_FOODLIST_DATASTATUS) {
+
+                            console.log('FETCH_FOODLIST_DATASTATUS');
+                            console.log('query failed', action.dataStatus); 
+
+                        return Object.assign({}, state, {
+                        dataStatus: action.dataStatus
+                        });
+
+                        } else {
+
                             if(action.type === FETCH_SYMPTOMLIST_SUCCESS) {
 
                             console.log('FETCH_SYMPTOMLIST_SUCCESS'); 
@@ -144,8 +156,9 @@ const initialState = {
                     
                                 return state;
                                 }
+                        }
+                      }
                     }
-                  }
                   }
                 }
               }
