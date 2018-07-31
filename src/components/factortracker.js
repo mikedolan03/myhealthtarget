@@ -6,16 +6,13 @@ import requiresLogin from './requires-login';
 import FactorForm from './factorForm';
 import FoodList from './foodlist';
 import './factortracker.css';
+
+
 export class FactorTracker extends React.Component {
 
-	submitFactorData(values) {
-		console.log('i submitted data!', values);
-
-	}
 
 	render() {
 
- 		console.log("history: ", this.props.history); 
 
 		return (
 
@@ -28,7 +25,7 @@ export class FactorTracker extends React.Component {
 				<div className="row">
  					<div className="col-8">
  						<div className="ft-positioner">
-								<FactorForm submitData={this.submitFactorData}/>
+								<FactorForm />
 						</div>
 						<div className="align-center"><button className="back-to-dash-button red savebutton" onClick={()=> this.props.history.push('/loggedin/dashboard/')}>
 						Cancel
@@ -46,10 +43,7 @@ export class FactorTracker extends React.Component {
 	}
 }
 
-const mapStateToProps = state => ({
-	userData: state.userData
-});
 
 const myFactorTracker = withRouter(FactorTracker);
 
-export default requiresLogin()(connect(mapStateToProps)(myFactorTracker));
+export default requiresLogin()(myFactorTracker);

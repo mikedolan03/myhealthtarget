@@ -130,9 +130,7 @@ export class FactorForm extends React.Component {
 
 
   render() {
-     console.log("history in form: ", this.props.history); 
 
-     
 
     return (
       <div className="food-form-container foodformbox">

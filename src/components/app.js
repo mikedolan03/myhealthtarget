@@ -6,7 +6,6 @@ import LandingPage from './landingpage';
 import DashBoard from './dashboard';
 import myFactorTracker from './factortracker';
 import SymptomTracker from './symptomtracker';
-import Login from './login';
 import SignUp from './signup';
 import NavBar from './navbar';
 import {refreshAuthToken} from '../actions/auth';
@@ -56,7 +55,6 @@ export class App extends React.Component {
 					<Route exact path="/" component={LandingPage} />
 					<Route path="/loggedin/" component={NavBar} />
 					<Route exact path="/loggedin/dashboard/" component={DashBoard} />
-					<Route exact path="/login/" component={Login} />
 					<Route exact path="/signup/" component={SignUp} />
 					<Route exact path="/loggedin/factortracker/" component={myFactorTracker} /> 
 					<Route exact path="/loggedin/symptomtracker/" component={SymptomTracker} /> 

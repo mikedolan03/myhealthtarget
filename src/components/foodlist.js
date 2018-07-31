@@ -40,7 +40,7 @@ render() {
 			let lists;
 
 
-			console.log('my prop based data in food list', this.props.foodList.daylists);
+		//	console.log('my prop based data in food list', this.props.foodList.daylists);
 
 
   			if(this.props.foodList.todayList != null) {
