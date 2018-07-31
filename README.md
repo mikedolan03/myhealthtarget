@@ -3,6 +3,11 @@ Symptom Hacker
 
 Follow this link to try Symptom Hacker: https://blooming-lake-36867.herokuapp.com/
 
+*Try a demo account to see what the app looks like with data:* 
+
+**username:** user999
+**password:** password123
+
 Summary
 ------------------
 
