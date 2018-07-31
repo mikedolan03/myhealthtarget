@@ -218,7 +218,18 @@ export class DashBoard extends React.Component {
 									console.log('status none nodata = ', nodata);
 								}
 
+								if(this.props.foodList.foodCounts) {
+									
+									if(!this.props.foodList.foodCounts.length <= 0) {
+										nodata='true';
+										console.log('foodcounts empty nodata = ', nodata);
+
+									}
+								}
+
 								console.log('nodata = ', nodata);
+
+
 
     	if(nodata=='false') {
 
