@@ -15,6 +15,7 @@ import {fetchFoodList} from '../actions';
 import {changeSymptom} from '../actions';
 import {changeDates} from '../actions';
 import {showModal} from '../actions';
+import {sendItemSuccess} from '../actions';
 import SymptomPickerModal from './symptompickermodal';
 import NavBar from './navbar';
 
@@ -80,7 +81,16 @@ export class DashBoard extends React.Component {
       }
       */
 
+      if(this.props.sentSuccess==true)
+      {
 
+      	console.log('new data posted so updating with new query');
+
+      	this.setUpQuery();
+
+      	this.props.dispatch(sendItemSuccess(false));
+
+      }
       //changed the symptom lets send the query
       if( prevProps.symptom != this.props.symptom) { 
       	this.setUpQuery();
@@ -478,7 +488,8 @@ const mapStateToProps = state => ({
     showDateModal: state.reducer.showDateModal,
     showNoDataModal: state.reducer.showNoDataModal,
     newUser: state.reducer.newUser,
-    dataStatus: state.reducer.dataStatus
+    dataStatus: state.reducer.dataStatus,
+    sentSuccess: state.reducer.sentSuccess
 });
 
 export default requiresLogin()(connect(mapStateToProps)(DashBoard));

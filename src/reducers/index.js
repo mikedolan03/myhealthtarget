@@ -1,5 +1,5 @@
 //import * as actions '../actions';
-import {CHANGE_SYMPTOM, SHOW_MODAL, LOGGING_IN, LOG_OUT, NEW_USER, CHANGE_DATES, FETCH_FOODLIST_REQUEST, FETCH_FOODLIST_SUCCESS, FETCH_FOODLIST_DATASTATUS, FETCH_SYMPTOMLIST_SUCCESS} from '../actions';
+import {CHANGE_SYMPTOM, SHOW_MODAL, LOGGING_IN, LOG_OUT, NEW_USER, CHANGE_DATES, SEND_ITEM_SUCCESS, FETCH_FOODLIST_REQUEST, FETCH_FOODLIST_SUCCESS, FETCH_FOODLIST_DATASTATUS} from '../actions';
 var moment = require('moment');
 moment().format();
 
@@ -16,7 +16,8 @@ const initialState = {
       showNoDataModal: 'noshow',
       loggingIn: false,
       newUserFlag: false,
-      dataStatus: 'none'
+      dataStatus: 'none',
+      sentSuccess: false
     };
 
  export const htReducer = (state=initialState, action) => {
@@ -106,21 +107,22 @@ const initialState = {
                           if(action.type === FETCH_FOODLIST_DATASTATUS) {
 
                             console.log('FETCH_FOODLIST_DATASTATUS');
-                            console.log('query failed', action.dataStatus); 
+                            console.log('query status', action.dataStatus); 
 
                         return Object.assign({}, state, {
                         dataStatus: action.dataStatus
                         });
 
+                        
+
                         } else {
 
-                            if(action.type === FETCH_SYMPTOMLIST_SUCCESS) {
+                          if(action.type === SEND_ITEM_SUCCESS) {
+                         console.log('sent item success');
 
-                            console.log('FETCH_SYMPTOMLIST_SUCCESS'); 
-
-                        return Object.assign({}, state, {
-                        symptomList: action.symptomList
-                        });
+                         return Object.assign({}, state, { 
+                            sentSuccess: action.sentSuccess
+                         });
 
                         } else {
 
@@ -129,9 +131,9 @@ const initialState = {
                                 return state;
                                 }
                         }
-                      
+                      }
                     }
-                  }
+                  
                 }
                 
               }

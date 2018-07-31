@@ -8,7 +8,7 @@ import './symptomlist.css';
 export class SymptomList extends React.Component {
 
 	constructor(props) {
-    super(props);
+    super(props); 
     this.state = {showInfo: false}
     this.showMoreInfo = this.showMoreInfo.bind(this);
   }
@@ -60,56 +60,54 @@ export class SymptomList extends React.Component {
 
 	}
 
-render() {
+	render() {
 
-	if(!this.props.foodList.daylists || this.props.dataStatus=='none') {
-
-		return (
-		<div className="symptom-list dark-box">
-		<h3>Your Recent Symptoms</h3>
-		<div>
-		Add more data so we can track your symptoms!
-		</div>
-		</div>
-		);
-	}
-
-			let mySymptoms; 
-			let lists;
+		let lists;
 
 
-			console.log('my prop based data in symp list', this.props.foodList); 
+		if(this.props.foodList.todayList != null) {
+  				console.log('we have foods');
 
+  				lists = this.props.foodList.todayList.symptomList.map((list, index) => (
+            <div className="list-wrapper" key={index}>
+                <SymptomListItem {...list} />
+            </div>
+            ));
 
-  			if(this.props.foodList.daylists.length > 0) {
-  				console.log('we have symptoms');
-			
- 				 	lists = this.sortList().map((list, index) => (
-            		<div className="list-wrapper" key={index}>
-                		<SymptomListItem {...list} />
-            		</div>
-            		));
-  			}
+          return (
+						<div className="symptom-list dark-box">
+							<h3>Today's Symptoms</h3>
+							<div>
+								{lists}
+							</div>
+						</div>
+					);
 
+  				
+  	} else {
 
-	return (
-		<div className="symptom-list dark-box">
-		<h3>Your Recent Symptoms</h3>
-		<div>
-		{lists}
-		</div>
-		</div>
-		);
+                 return (
+									<div className="symptom-list dark-box">
+										<h3>Today's Symptoms</h3>
+										<div>
+											Add more data so we can track your symptoms!
+										</div>
+									</div>
+									);
+                 
+
+        }
+  }
 
 }
 
-}
 
 const mapStateToProps = state => ({
     foodList: state.reducer.foodList,
     symptomList: state.reducer.symptomList,
-        dataStatus: state.reducer.dataStatus
-
+    loaded: state.reducer.loaded,
+    symptom: state.reducer.symptom,
+    sentSuccess: state.reducer.sentSuccess
 });
 
 export default connect(mapStateToProps)(SymptomList);

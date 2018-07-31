@@ -9,30 +9,6 @@ moment().format();
 
 export class FoodList extends React.Component {
 
-   setUpQuery( ) {
-
-     let today = moment()._d; 
-
-        today = moment(today).format("MM-DD-YYYY");
-
-        let startDay = moment(today).subtract(7, 'days');
-        
-        let myQueryObj = {date: '7/4/18'};
-
-        console.log('my search: ', myQueryObj); 
-
-        //let myQueryObj = {sdate: '7-4-2018', edate: '7-11-2018', symptom:'Gas'};
-
-        this.props.dispatch(fetchFoodList('daylists', myQueryObj) );
-        //this.props.dispatch(fetchFoodList('daylists', {}) );
-  }  
-
-  componentDidMount() {
-        //this.props.dispatch(fetchProtectedData());
-
-       //this.setUpQuery( );
-
-    }
 
 render() {
 
@@ -84,7 +60,8 @@ const mapStateToProps = state => ({
     foodList: state.reducer.foodList,
     symptomList: state.reducer.symptomList,
     loaded: state.reducer.loaded,
-    symptom: state.reducer.symptom
+    symptom: state.reducer.symptom,
+    sentSuccess: state.reducer.sentSuccess
 });
 
 export default connect(mapStateToProps)(FoodList);

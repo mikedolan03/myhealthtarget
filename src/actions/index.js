@@ -89,17 +89,15 @@ export const fetchFoodListDataStatus = (dataStatus) => ({
     dataStatus
 });
 
-export const FETCH_SYMPTOMLIST_SUCCESS = 'FETCH_SYMPTOMLIST_SUCCESS';
-export const fetchSymptomListSuccess = (symptomList) => ({
-    type: FETCH_SYMPTOMLIST_SUCCESS,
-    symptomList
+
+export const SEND_ITEM_SUCCESS = 'SEND_ITEM_SUCCESS';
+export const sendItemSuccess = (sentSuccess) => ({ 
+	type: SEND_ITEM_SUCCESS,
+	sentSuccess
 });
 
-export const SEND_FOODITEM_SUCCESS = 'SEND_FOODITEM_SUCCESS';
-export const sendFoodItemSuccess = (foodItem) => ({ 
-	type: SEND_FOODITEM_SUCCESS,
-	foodItem
-});
+
+
 
 
 
@@ -198,6 +196,8 @@ console.log('adding', foodItem);
     .then(res => {
        
         console.log('data sent');
+        dispatch(sendItemSuccess(true));
+
 
       return res.json(); 
     })
@@ -221,6 +221,9 @@ export const postSymptoms = (symptom) => (dispatch, getState) => {
     }) 
 	.then(responseData => { 
 		console.log('data sent');
+
+    dispatch(sendItemSuccess(true));
+
 	})
 	.catch(error => {
 		console.log('error: ', error);
