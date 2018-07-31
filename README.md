@@ -8,13 +8,13 @@ Summary
 
 Symptom Hacker helps you figure out what foods are causing you health problems. Users log food and symptoms into the app and then the app generates an interactive dashboard displaying food and symptom correlations. 
 
-![alt text](https://github.com/mikedolan03/myhealthtarget/src/components/shgraph.png "Symptom Hacker Dashboard Graph")
+![alt text](https://github.com/mikedolan03/myhealthtarget/tree/master/src/components/shgraph.png "Symptom Hacker Dashboard Graph")
 
 The dashboard of Symptom Hacker displays the top food culprits that might be causing a user symptoms. Other widgets on the page show different statistics based on user input. 
 
 Users can add and update daily logs of foods and symptoms. They can change their dashboard reports by selecting a different symptom or date range to examine. 
 
-![alt text](https://github.com/mikedolan03/myhealthtarget/src/components/shdeskdash.png "Symptom Hacker Dashboard Widgets Desktop version")
+![alt text](https://github.com/mikedolan03/myhealthtarget/tree/master/src/components/shdeskdash.png "Symptom Hacker Dashboard Widgets Desktop version")
 
 API
 ------------
