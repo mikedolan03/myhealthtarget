@@ -13,7 +13,7 @@ const renderDate =({ fields }) => {
 
   if(fields.length <= 0) {
 
-    let todayDate = moment().format('YYYY-MM-DD')
+    let todayDate = moment().format('YYYY-MM-DD');
     
     return ( 
       <div className="date-section extra-space-below">
@@ -23,29 +23,31 @@ const renderDate =({ fields }) => {
       )
 
   } 
-  else {
+    else {
 
-    return (
-            <div className="date-section extra-space-below">
-              {
-                fields.map( (date, index) =>
-                <div key={index}>
-                  <label htmlFor={`Date #${index + 1}`}>Date:</label>
-                   <Field
-                    name={`date${index + 1}`}
-                    component="input"
-                    type="date"
-                    />
-                </div>
-                )
-              }
-              {fields.error && <li className="error">{fields.error}</li>}
+      return (
+        <div className="date-section extra-space-below">
+          {
+            fields.map( (date, index) =>
+            <div key={index}>
+              <label htmlFor={`Date #${index + 1}`}>Date:</label>
+               <Field
+                name={`date${index + 1}`}
+                component="input"
+                type="date"
+                />
             </div>
-          ) 
-      }
+            )
+          }
+          {fields.error && <li className="error">{fields.error}</li>}
+        </div>
+      ) 
+    }
 }
 
 const renderSymptoms = ({fields}) => {
+  
+  //we want at least one entry field to start so push if the fields array is at 0
   
   if(fields.length < 1) fields.push(); 
 
@@ -119,17 +121,15 @@ export class SymptomForm extends React.Component {
 
   constructor(props) {
         super(props);
-
-      
     }
   
   onSubmit(values) {
-        //event.preventDefault();
+
+    //set the date to today if the user doesn't change it
 
     let todayDate = moment().format('YYYY-MM-DD'); 
 
-
-    console.log('sending: ', values);
+    //console.log('sending: ', values);
     
         if(!values.date1) { 
           
@@ -140,13 +140,13 @@ export class SymptomForm extends React.Component {
         } else {
           values.date = values.date1; 
           console.log('date was set: ', values);
-        }
+          }
 
 
      this.props.dispatch(postSymptoms(values));
        console.log(values);
        this.props.history.push('/loggedin/dashboard');
-    }
+  }
 
   render() {
      console.log("history in form: ", this.props.history); 
