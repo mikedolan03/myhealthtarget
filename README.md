@@ -1,7 +1,7 @@
 Symptom Hacker
 ================
 
-Link: [Follow this link to try Symptom Hacker](https://blooming-lake-36867.herokuapp.com/)
+[Follow this link to try Symptom Hacker: https://blooming-lake-36867.herokuapp.com/
 
 Summary
 ------------------
@@ -20,12 +20,21 @@ API
 ------------
 Symptom Hacker interacts with a seperate API built in Node.js using MongoDB. The API allows the Reach clientside app to send queries requesting the user's food and symptom data. The API also takes user input and stores user data in the database.  
 
+API Repo: https://github.com/mikedolan03/myhealthtargetapi
+
 Technology Used
 -----------
 * React
 * Redux
+* Chart.js
+* Moment.js
+* Enzyme.js 
+
+API
+------------
 * Node.js
 * Express.js
 * Mongodb
-* Chart.js
+* Mocha / Chai
+
 
