@@ -219,8 +219,8 @@ export class DashBoard extends React.Component {
 								}
 
 								if(this.props.foodList.foodCounts) {
-									
-									if(!this.props.foodList.foodCounts.length <= 0) {
+
+									if(this.props.foodList.foodCounts.length <= 0) {
 										nodata='true';
 										console.log('foodcounts empty nodata = ', nodata);
 
@@ -232,7 +232,6 @@ export class DashBoard extends React.Component {
 
 
     	if(nodata=='false') {
-
 
 
     		return (
