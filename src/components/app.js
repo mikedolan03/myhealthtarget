@@ -2,12 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
-
 import LandingPage from './landingpage';
 import DashBoard from './dashboard';
 import myFactorTracker from './factortracker';
 import SymptomTracker from './symptomtracker';
-import ReviewScreen from './reviewscreen';
 import Login from './login';
 import SignUp from './signup';
 import NavBar from './navbar';
@@ -62,7 +60,6 @@ export class App extends React.Component {
 					<Route exact path="/signup/" component={SignUp} />
 					<Route exact path="/loggedin/factortracker/" component={myFactorTracker} /> 
 					<Route exact path="/loggedin/symptomtracker/" component={SymptomTracker} /> 
-					<Route exact path="/loggedin/reviewscreen/" component={ReviewScreen}  />
 
 				</main>
 			</div>

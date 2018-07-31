@@ -1,7 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import SymptomForm from './symptomForm';
-import showResults from "./showResults";
 import SymptomList from './symptomlist';
 import requiresLogin from './requires-login';
 

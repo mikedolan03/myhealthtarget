@@ -8,7 +8,6 @@ import './dashboard.css';
 import SymptomList from './symptomlist';
 import FoodList from './foodlist';
 import MyChart from './chart';
-import PercentBox from './percentbox';
 import DataBar from './databar';
 import SymptomDateBar from './symptomdatebar';
 import TopFoodsList from './topfoodslist';

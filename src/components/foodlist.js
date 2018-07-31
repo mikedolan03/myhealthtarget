@@ -1,8 +1,5 @@
 import React from 'react';
-//import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
-//import store from '../store';
 import {connect} from 'react-redux';
-
 import './foodlist.css';
 import FoodListItem from './foodlistitem';
 import {fetchFoodList} from '../actions';

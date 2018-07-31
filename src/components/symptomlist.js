@@ -1,9 +1,7 @@
 import React from 'react';
-//import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
-//import store from '../store';
+
 import {connect} from 'react-redux';
 
-//import './syomptomlist.css';
 import SymptomListItem from './symptomlistitem';
 import './symptomlist.css';
 

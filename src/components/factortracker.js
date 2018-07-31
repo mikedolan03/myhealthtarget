@@ -3,10 +3,7 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import { withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import requiresLogin from './requires-login';
-
-
 import FactorForm from './factorForm';
-import showResults from "./showResults";
 import FoodList from './foodlist';
 import './factortracker.css';
 export class FactorTracker extends React.Component {

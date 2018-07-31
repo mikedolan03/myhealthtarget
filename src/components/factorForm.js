@@ -3,7 +3,6 @@ import { Field, FieldArray, reduxForm } from 'redux-form'
 import { formValues } from 'redux-form';
 import {BrowserRouter as Router, Route, Redirect, Link} from 'react-router-dom';
 import { withRouter} from 'react-router-dom';
-import {trackFood} from '../actions';
 import {fetchFoodList} from '../actions';
 import {postFoodItems} from '../actions';
 import {IoIosTrash, IoAndroidCalendar} from 'react-icons/lib/io';
