@@ -31,11 +31,11 @@ export class SymptomDateBar extends React.Component {
 
         event.preventDefault();
 
-			this.props.dispatch(showModal(true, false, 'noshow'));
+			this.props.dispatch(showModal(true, false));
         
         
         console.log('clicked change symptom');
-                   			console.log('any props? ', this.props ); 
+        console.log('any props? ', this.props ); 
 
 
         if(this.props.OnOpen) {
@@ -49,7 +49,7 @@ export class SymptomDateBar extends React.Component {
      //console.log('in change date', this.dateinput.current.value);
       event.preventDefault();
 
-      this.props.dispatch(showModal(false, true, 'noshow'));
+      this.props.dispatch(showModal(false, true));
         
         
         console.log('clicked change symptom');

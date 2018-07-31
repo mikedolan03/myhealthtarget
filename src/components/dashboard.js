@@ -2,6 +2,7 @@ import React from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import store from '../store';
 import {connect} from 'react-redux';
+import requiresLogin from './requires-login';
 
 import './dashboard.css';
 import SymptomList from './symptomlist';
@@ -42,6 +43,19 @@ export class DashBoard extends React.Component {
     
       console.log('component did update');
 
+      console.log('props before modal stuff? ', this.props ); 
+
+
+   
+
+      // if(this.props.dataStatus == 'good' && this.props.showNoDataModal=='show')
+    //  {
+    //  	      	this.openModal(false, false, 'noshow');
+//
+    //  }
+
+
+/*
       if(!this.props.foodList.foodCounts && 
       	this.props.showNoDataModal=="noshow" &&
       	!this.props.showSymptomModal &&
@@ -60,9 +74,18 @@ export class DashBoard extends React.Component {
       	this.openModal(false, false, 'noshow');
       }
 
+      if(this.props.dataStatus == 'general' && this.props.showNoDataModal=='noshow')
+      {
+      	      	this.openModal(false, false, 'show');
+
+      }
+      */
+
 
       //changed the symptom lets send the query
-      if( prevProps.symptom != this.props.symptom) this.setUpQuery();
+      if( prevProps.symptom != this.props.symptom) { 
+      	this.setUpQuery();
+      } else {
 
       //changed our start or end date - send query
 
@@ -76,15 +99,46 @@ export class DashBoard extends React.Component {
       		  
       			this.setUpQuery();
 
+      			} else {
+
+      				console.log('if no query is being sent then it loaded already - do modal if we need one');
+
+      				   if(this.props.dataStatus == 'general' && this.props.showNoDataModal=='noshow' && !this.props.loading)
+      						{
+      							 console.log('do no data modal');
+
+      	      			this.openModal(false, false, 'show');
+
+      							} else {
+
+      									if(this.props.dataStatus == 'none' && this.props.showNoDataModal=='noshow' && !this.props.loading) {
+
+      										//new user without data
+
+      									 console.log('do new user modal');
+
+
+      										this.openModal(false, false, 'show');
+
+
+      									}
+
+
+      								      console.log('data modal wasnt needed');
+
+      							}
+
+
       			}
       	}
+      }
 
     }
 
   setUpQuery( ) {
 
   	//reset modal -just in case there is no data
-     this.openModal(false, false, 'noshow'); 
+    // this.openModal(false, false, 'noshow'); 
 
   	//let today = moment()._d; 
 		//today = moment(today).format("MM-DD-YYYY");
@@ -105,8 +159,9 @@ export class DashBoard extends React.Component {
 
 		 	this.props.foodList.combinedFoods.slice(0,10).map( flist => { 
 
-		 	
-		 		tags += (flist.tags+" ") ; 
+		 		if(flist.tags != undefined) {
+		 			tags += (flist.tags+" ") ; 
+		 		}
 		 	
 
 			   });
@@ -147,6 +202,53 @@ export class DashBoard extends React.Component {
            this.props.dispatch(showModal(false, false, false));
     }
 
+    renderBigPercent() {
+
+    		let nodata = 'false';
+
+    		
+
+								if(!this.props.foodList.foodCounts){ 
+									nodata = 'true';
+									console.log('foodcounts missing nodata = ', nodata);
+								}
+
+								if(this.props.dataStatus =="none") {
+									nodata = 'true';
+									console.log('status none nodata = ', nodata);
+								}
+
+								console.log('nodata = ', nodata);
+
+    	if(nodata=='false') {
+
+
+
+    		return (
+    						<div className="dark-box">
+								<DataBar dataStatus={this.props.dataStatus} symptom={this.props.symptom} description= {this.props.foodList.foodCounts[0].name } 
+								number={`${this.generatePercent(this.props.foodList.foodCounts[0].count, this.props.foodList.daylists.length)}%`} nodata={nodata} />
+								</div>
+								)
+
+    	} else {
+
+    		return(
+
+    		<div className="dark-box">
+				<DataBar symptom={this.props.symptom} description= ''
+				number="0" nodata='true' dataStatus={this.props.dataStatus}/>
+				</div>
+
+				)
+
+
+    	}
+    
+
+
+    }
+
 
     renderPercentBoxes( ) {
 
@@ -158,6 +260,8 @@ export class DashBoard extends React.Component {
     		return null;
     	} else 
     			{
+
+
     				if(this.props.foodList.foodCounts.length > 1) {
 
     					for(let ci = 1; ci < this.props.foodList.foodCounts.length; ci++) {
@@ -167,7 +271,7 @@ export class DashBoard extends React.Component {
     						if(count == 1){ 
 	    							percentboxes.push(<div className="col-4 add-vert-space" key={'db'+count}>
 	    							<div className="dark-box">
-	    							<DataBar tagVersion="true" symptom={this.props.symptom} description= {this.buildTags()} /> 
+	    							<DataBar tagVersion="true" symptom={this.props.symptom} description= {this.buildTags()} dataStatus={this.props.dataStatus}/> 
 	    							</div>
 	    							</div>
 	    							); 
@@ -177,7 +281,7 @@ export class DashBoard extends React.Component {
     								if(count==2) { 
 		    							percentboxes.push(<div className="col-4 add-vert-space" key={'db'+count}>
 		    							<div className="dark-box">
-		    							<DataBar outOfVersion="true" symptom={this.props.symptom} description= {this.props.foodList.foodCounts[ci].name } number={this.props.foodList.foodCounts[ci].count} totals={this.props.foodList.daylists.length} /> 
+		    							<DataBar outOfVersion="true" symptom={this.props.symptom} dataStatus={this.props.dataStatus} description= {this.props.foodList.foodCounts[ci].name } number={this.props.foodList.foodCounts[ci].count} totals={this.props.foodList.daylists.length} /> 
 		    							</div>
 		    							</div>
 		    							); 
@@ -185,7 +289,7 @@ export class DashBoard extends React.Component {
 
 			    							percentboxes.push(<div className="col-4 add-vert-space" key={'db'+count}>
 			    							<div className="dark-box">
-			    							<DataBar symptom={this.props.symptom} number={`${Object.keys(this.props.foodList.symptomOnlyDays).length} days`} symptomCount="true"/> 
+			    							<DataBar symptom={this.props.symptom} dataStatus={this.props.dataStatus} number={`${Object.keys(this.props.foodList.symptomOnlyDays).length} days`} symptomCount="true"/> 
 			    							</div>
 			    							</div>
 			    							); 
@@ -254,8 +358,18 @@ export class DashBoard extends React.Component {
 								if(!this.props.foodList.foodCounts){ 
 
 									nodata = 'true';
+																	console.log('foodcounts missing nodata = ', nodata);
+
 
 								}
+
+								if(this.props.dataStatus =="none") {
+									nodata = 'true';
+																	console.log('status none nodata = ', nodata);
+
+								}
+
+								console.log('nodata = ', nodata);
 
 								return (
 								<div>
@@ -283,10 +397,7 @@ export class DashBoard extends React.Component {
 												
 												</div>
 												<div className="col-6 aligner-item">
-												<div className="dark-box">
-												{this.props.foodList.foodCounts	 ? <DataBar symptom={this.props.symptom} description= {this.props.foodList.foodCounts[0].name } 
-													number={`${this.generatePercent(this.props.foodList.foodCounts[0].count, this.props.foodList.daylists.length)}%`} /> : <DataBar nodata='true' />}		
-												</div>
+												{this.renderBigPercent()}
 												</div>
 											</div>
 											<div className="row">
@@ -298,6 +409,12 @@ export class DashBoard extends React.Component {
 											<div className="row">
 												<div className="col-12 add-vert-space">
 													<FoodList />
+												</div>
+											</div>
+											<div className="row">
+												<div className="col-12 add-vert-space">
+													<SymptomList show="10"/>
+
 													<button className="big-button" onClick={()=> this.props.history.push('/loggedin/symptomtracker/')}	>
 													Add symptom	to track
 													</button>
@@ -355,4 +472,4 @@ const mapStateToProps = state => ({
     dataStatus: state.reducer.dataStatus
 });
 
-export default connect(mapStateToProps)(DashBoard);
+export default requiresLogin()(connect(mapStateToProps)(DashBoard));

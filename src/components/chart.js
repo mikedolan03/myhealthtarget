@@ -29,8 +29,24 @@ export class MyChart extends React.Component {
     let myFoodData = []; 
     let myFoodNames = [];
     let nodata  = true;
+    let noCounts = false; 
 
-    if(this.props.nodata=='true') {
+    if(this.props.foodList) {
+        if(this.props.foodList.foodCounts)
+        {
+            if(this.props.foodList.foodCounts) {
+                if( this.props.foodList.foodCounts.length <= 0 ) {
+                    console.log ('no food counts to use'); 
+
+                    noCounts = true; 
+
+                }
+            }
+
+        }
+    }
+
+    if(this.props.nodata=='true' || this.props.dataStatus=='none' || noCounts ) {
 
         let ctx = document.getElementById("myChart").getContext('2d'); 
         Chart.defaults.global.defaultFontColor = 'white'; 
@@ -97,15 +113,20 @@ export class MyChart extends React.Component {
 
         let numberOfFoods = 5;
 
+
         if(this.props.foodList.foodCounts.length > 0) {
             if(this.props.foodList.foodCounts.length < 5) {
                 numberOfFoods = this.props.foodList.foodCounts.length;
             }
         }
 
+        console.log('foodCounts length', this.props.foodList.foodCounts.length);
+
+        console.log('number of foods: ', numberOfFoods); 
+
         for(let i = 0; i < numberOfFoods; i++)
         {
-
+            console.log('loop i = ', i);
             myFoodData.push(this.props.foodList.foodCounts[i].count)
             myFoodNames.push(this.props.foodList.foodCounts[i].name)
         }

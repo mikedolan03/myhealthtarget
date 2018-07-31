@@ -11,6 +11,8 @@ import ReviewScreen from './reviewscreen';
 import Login from './login';
 import SignUp from './signup';
 import NavBar from './navbar';
+import {refreshAuthToken} from '../actions/auth';
+
 
 import './app.css';
 import './grid.css';
@@ -18,9 +20,34 @@ import './grid.css';
 
 export class App extends React.Component {
 
- componentDidMount() {
-		//this.props.dispace(fetchUserData());
- }
+    componentDidUpdate(prevProps) {
+        if (!prevProps.loggedIn && this.props.loggedIn) {
+            // logged in, refresh the auth token 
+            this.startPeriodicRefresh();
+        } else if (prevProps.loggedIn && !this.props.loggedIn) {
+            // Stop refreshing log out
+            this.stopPeriodicRefresh();
+        }
+    }
+
+    componentWillUnmount() {
+        this.stopPeriodicRefresh();
+    }
+
+    startPeriodicRefresh() {
+        this.refreshInterval = setInterval(
+            () => this.props.dispatch(refreshAuthToken()),
+            60 * 60 * 1000 // One hour
+        );
+    }
+
+    stopPeriodicRefresh() {
+        if (!this.refreshInterval) {
+            return;
+        }
+
+        clearInterval(this.refreshInterval);
+    }
 
  render() {
 
@@ -46,7 +73,9 @@ export class App extends React.Component {
 }
 
 const mapStateToProps = state => ({
-	userData: state.userData
+	userData: state.userData,
+	 hasAuthToken: state.auth.authToken !== null,
+   loggedIn: state.auth.currentUser !== null
 });
 
 export default connect(mapStateToProps)(App);

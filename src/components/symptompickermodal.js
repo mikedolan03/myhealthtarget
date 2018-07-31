@@ -38,7 +38,7 @@ export class SymptomPickerModal extends React.Component {
     closeNewUser(e) {
         e.preventDefault() 
         this.props.dispatch(newUser(false));
-                this.props.dispatch(showModal(false, false, 'seen'));
+        this.props.dispatch(showModal(false, false, 'seen'));
 
 
     }
@@ -108,6 +108,7 @@ export class SymptomPickerModal extends React.Component {
                  <div className="pop-content">
                   <h3>We couldn't find data match that symptom and date range.</h3>
                   <h3>Try a different date range and/or symptom. Or add more symptoms and food items!</h3>
+                  <h4>In the mean time we will display data on your most recent foods eaten.</h4>
                  </div>
                  <button onClick={e => this.closeNoData(e)}>Got it!</button>
                 </div>

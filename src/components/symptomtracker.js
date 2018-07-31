@@ -3,8 +3,9 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import SymptomForm from './symptomForm';
 import showResults from "./showResults";
 import SymptomList from './symptomlist';
+import requiresLogin from './requires-login';
 
-export default class SymptomTracker extends React.Component {
+export class SymptomTracker extends React.Component {
 
 
 	render() {
@@ -42,3 +43,4 @@ export default class SymptomTracker extends React.Component {
 	}
 }
 
+export default requiresLogin()(SymptomTracker);

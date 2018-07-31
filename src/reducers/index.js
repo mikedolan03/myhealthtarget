@@ -1,5 +1,5 @@
 //import * as actions '../actions';
-import {TRACK_FOOD, TRACK_SYMPTOM, CHANGE_SYMPTOM, SHOW_MODAL, LOGGING_IN, NEW_USER, CHANGE_DATES, FETCH_FOODLIST_REQUEST, FETCH_FOODLIST_SUCCESS, FETCH_FOODLIST_DATASTATUS, FETCH_SYMPTOMLIST_SUCCESS} from '../actions';
+import {CHANGE_SYMPTOM, SHOW_MODAL, LOGGING_IN, LOG_OUT, NEW_USER, CHANGE_DATES, FETCH_FOODLIST_REQUEST, FETCH_FOODLIST_SUCCESS, FETCH_FOODLIST_DATASTATUS, FETCH_SYMPTOMLIST_SUCCESS} from '../actions';
 var moment = require('moment');
 moment().format();
 
@@ -22,45 +22,6 @@ const initialState = {
  export const htReducer = (state=initialState, action) => {
 
     console.log('in action: ', action); 
-
- 	if(action.type === TRACK_FOOD) {
-
-        console.log('TRACK_FOOD'); 
-
-        let newFoods = action.foodobj.foods; 
-
-        newFoods.map((obj) => {
-            obj.time = action.foodobj.time;
-            obj.date = action.foodobj.date;
-        });
-
- 		//return Object.assign({}, state, {
- 			//foodList: [...state.foodList,
-             //  newFoods]
- 		//});
-
-        return { 
-            ...state, 
-            foodList: state.foodList.concat(newFoods)
-        }
- 	} else { 
-
-        		if(action.type === TRACK_SYMPTOM) {
-	 		    console.log('TRACK_Symptom'); 
-
-                let newSymptoms = action.symptomObj.symptoms;
-
-                newSymptoms.map( (obj) => {
-                    obj.time = action.symptomObj.time;
-                    obj.date = action.symptomObj.date;
-                });
-
-	 				return {
-                        ...state,
-                        symptomList: state.symptomList.concat(newSymptoms)
-                    }
-
-        		} else {
 
                  	if(action.type === CHANGE_SYMPTOM) {
 
@@ -86,6 +47,15 @@ const initialState = {
                         return Object.assign({}, state, {
                         loggingIn: action.loggingInVar
                         });
+
+                    } else {
+
+                       if(action.type === LOG_OUT) {
+
+                        state = initialState;
+
+                        return state;
+                        
 
                     } else {
 
@@ -126,7 +96,9 @@ const initialState = {
                         return Object.assign({}, state, {
                         foodList: action.foodList,
                         loading: false,
-                        loaded: true
+                        loaded: true,
+                        dataStatus: action.dataStatus
+
                         });
 
                         } else {
@@ -157,10 +129,11 @@ const initialState = {
                                 return state;
                                 }
                         }
-                      }
+                      
                     }
                   }
                 }
+                
               }
           }
                  }

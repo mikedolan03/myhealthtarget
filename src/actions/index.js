@@ -38,17 +38,6 @@ export const newUser = (newUserFlag) => ({
     newUserFlag
 });
 
-export const TRACK_FOOD = 'TRACK_FOOD';
-export const trackFood = foodobj => ({
-    type: TRACK_FOOD,
-    foodobj
-});
-
-export const TRACK_SYMPTOM = 'TRACK_SYMPTOM';
-export const trackSymptom = symptomObj => ({
-    type: TRACK_SYMPTOM,
-    symptomObj
-});
 
 export const CHANGE_SYMPTOM = 'CHANGE_SYMPTOM';
 export const changeSymptom = (symptomvalue) => ({
@@ -69,6 +58,11 @@ export const loggingIn = loggingInVar => ({
     loggingInVar
 });
 
+export const LOG_OUT = 'LOG_OUT';
+export const logOut = () => ({
+    type: LOG_OUT
+});
+
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const showModal = (symptomShow, dateShow, noDataShow) => ({
     type: SHOW_MODAL,
@@ -83,9 +77,10 @@ export const fetchFoodListRequest = () => ({
 });
 
 export const FETCH_FOODLIST_SUCCESS = 'FETCH_FOODLIST_SUCCESS';
-export const fetchFoodListSuccess = (foodList) => ({
+export const fetchFoodListSuccess = (foodList, dataStatus) => ({
     type: FETCH_FOODLIST_SUCCESS,
-    foodList
+    foodList,
+    dataStatus
 });
 
 export const FETCH_FOODLIST_DATASTATUS = 'FETCH_FOODLIST_DATASTATUS';
@@ -143,30 +138,36 @@ export const fetchFoodList = (endpoint, myQueryObj ={}) => (dispatch, getState) 
       if(newfoodList.message) {
         newfoodList.UserMessage  = "We couldn't find any entries!";
 
-        if(newfoodList.message = "No search data") {
+        if(newfoodList.message == "No search data") {
 
-        //dispatch an action to set a state that we are showing last months data
+          //dispatch an action to set a state that we are showing last months data
 
-        dispatch(fetchFoodListDataStatus('general'));
-
-        } else {
-
-              //dispatch an action to set a state that we have no data
-        dispatch(fetchFoodListDataStatus('none'));
+          //dispatch(fetchFoodListDataStatus('general'));
+          dispatch(fetchFoodListSuccess(newfoodList, 'general'));
 
 
-        }
+          } else {
+
+               // newfoodList.message = "User has no recent data")  or error message
 
 
+                //dispatch an action to set a state that we have no data
+                  //dispatch(fetchFoodListDataStatus('none'));
+                dispatch(fetchFoodListSuccess(newfoodList, 'none'));
+
+                }
+    
 
       } else {
 
-        dispatch(fetchFoodListDataStatus('good'));
+        //dispatch(fetchFoodListDataStatus('good'));
+        dispatch(fetchFoodListSuccess(newfoodList, 'good'));
+
 
       }
                 
 
-        dispatch(fetchFoodListSuccess(newfoodList));
+      //  dispatch(fetchFoodListSuccess(newfoodList));
 
       
     })
@@ -195,9 +196,9 @@ console.log('adding', foodItem);
       body: JSON.stringify(foodItem)
     }) 
     .then(res => {
-        console.log('in res', res.body);
+       
         console.log('data sent');
-        dispatch( trackFood(res));
+
       return res.json(); 
     })
 	.catch(error => {
@@ -220,7 +221,6 @@ export const postSymptoms = (symptom) => (dispatch, getState) => {
     }) 
 	.then(responseData => { 
 		console.log('data sent');
-		dispatch( trackSymptom(responseData));
 	})
 	.catch(error => {
 		console.log('error: ', error);

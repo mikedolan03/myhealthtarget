@@ -17,7 +17,7 @@
   clear: both;
 }
 
-.col-3, .col-4, .col-6, .col-8, .col-12 {
+.col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-12 {
   float: left;
   padding-left: 1.04166666%;
   padding-right: 1.04166666%;
@@ -25,7 +25,7 @@
 }
 
 /* Mobile defaults */
-.col-3, .col-4, .col-6, .col-8, .col-12 {
+.col-3, .col-4, .col-6, .col-7, .col-8, .col-12 {
   width: 100%;
 }
 
@@ -40,9 +40,17 @@
   /* 4 columns, 4/12 in % */
   .col-4 {
     width: 33.333333%;
+  }  
+
+  .col-5 {
+    width: 41.66%;
   }
 
   /* 6 columns, 6/12 in % */
+  .col-7 {
+    width: 58.33%;
+  }
+
   .col-6 {
     width: 50%;
   }

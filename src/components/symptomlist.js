@@ -26,7 +26,7 @@ export class SymptomList extends React.Component {
 	sortList() {
 
 	//	let array = this.props.foodList.todayList.symptomList.slice(0, parseInt(this.props.show));
-		let array = this.buildList().slice(0, parseInt(this.props.show));
+		let array = this.buildList().slice();
 
 		array.sort(function(a, b) {
     			a = new Date(a.date);
@@ -35,7 +35,7 @@ export class SymptomList extends React.Component {
 		}
 		);
 
-		return array; 
+		return array.slice(0, parseInt(this.props.show));; 
 	}
 
 	buildList() {
@@ -64,7 +64,7 @@ export class SymptomList extends React.Component {
 
 render() {
 
-	if(!this.props.foodList.daylists) {
+	if(!this.props.foodList.daylists || this.props.dataStatus=='none') {
 
 		return (
 		<div className="symptom-list dark-box">
@@ -82,7 +82,6 @@ render() {
 
 			console.log('my prop based data in symp list', this.props.foodList); 
 
-  			//let currentStore = store.getState(); 
 
   			if(this.props.foodList.daylists.length > 0) {
   				console.log('we have symptoms');
@@ -110,7 +109,9 @@ render() {
 
 const mapStateToProps = state => ({
     foodList: state.reducer.foodList,
-    symptomList: state.reducer.symptomList
+    symptomList: state.reducer.symptomList,
+        dataStatus: state.reducer.dataStatus
+
 });
 
 export default connect(mapStateToProps)(SymptomList);

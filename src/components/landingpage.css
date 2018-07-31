@@ -63,7 +63,21 @@ section:nth-child(even) {
     padding-left: 10px;
 }
 
+.screen-shot {
+width: 250px;
+height: auto;
+}
 
+.screen-shot-long {
+  width: 250px;
+  height: auto;
+}
+
+.img-container {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
 
 
 @media only screen and (min-width: 640px) {
@@ -75,6 +89,20 @@ section:nth-child(even) {
     padding: 0px;
     margin: 0px;
   }
+
+.screen-shot {
+width: 500px;
+height: auto;
+padding: 20px;
+}
+
+.screen-shot-long {
+  width: 400px; 
+  height: auto;
+  padding: 20px;
+}
+
+
 
   .top-banner {
 

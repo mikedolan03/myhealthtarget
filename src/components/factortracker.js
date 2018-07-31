@@ -2,6 +2,8 @@ import React from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import { withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
+import requiresLogin from './requires-login';
+
 
 import FactorForm from './factorForm';
 import showResults from "./showResults";
@@ -53,4 +55,4 @@ const mapStateToProps = state => ({
 
 const myFactorTracker = withRouter(FactorTracker);
 
-export default connect(mapStateToProps)(myFactorTracker);
+export default requiresLogin()(connect(mapStateToProps)(myFactorTracker));
