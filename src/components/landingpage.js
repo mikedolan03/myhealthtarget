@@ -29,7 +29,7 @@ render() {
 					<h3>Use the app to record what foods you have been eating and when you have symptoms.</h3>
 					<h2><span className="orange-text">Try a test run using our sample account:</span> 
 						<ul className="red-text">
-							<li>Username: test</li>
+							<li>Username: user999</li>
 							<li>Password: password123</li>
 						</ul>
 					</h2>
