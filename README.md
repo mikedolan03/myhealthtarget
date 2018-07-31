@@ -8,7 +8,7 @@ Summary
 
 Symptom Hacker helps you figure out what foods are causing you health problems. Users log food and symptoms into the app and then the app generates an interactive dashboard displaying food and symptom correlations. 
 
-![alt text](https://github.com/mikedolan03/myhealthtarget/tree/master/src/components/shgraph.png "Symptom Hacker Dashboard Graph")
+![alt text][screen1]
 
 The dashboard of Symptom Hacker displays the top food culprits that might be causing a user symptoms. Other widgets on the page show different statistics based on user input. 
 
@@ -28,3 +28,7 @@ Technology Used
 * Express.js
 * Mongodb
 * Chart.js
+
+
+
+[screen1]: https://github.com/mikedolan03/myhealthtarget/tree/master/src/components/shgraph.png "Symptom Hacker Dashboard Graph"
