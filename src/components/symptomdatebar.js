@@ -26,6 +26,16 @@ export class SymptomDateBar extends React.Component {
 
   }
 
+  componentDidMount() 
+  {
+    console.log('datebar mounted gf: ' + this.state.gotoFoods + ' gs: '+this.state.gotoSymptoms);
+  }
+
+  componentWillUnmount() {
+    console.log('datebar is unmounting...');
+    console.log('datebar unmounted gf: ' + this.state.gotoFoods + ' gs: '+this.state.gotoSymptoms);
+
+  }
 
   changeSymptom(event) {
 
@@ -91,17 +101,21 @@ export class SymptomDateBar extends React.Component {
 	render() {
    
    if(this.state.gotoFoods) {
-    this.setState({
+    //Note: Why this set state is commented out -- 
+    //- Should not set state in render -bad pattern and throws warning
+    //- Plus these redirects unmount this component which will reset state
+    /*this.setState({
           gotoFoods: false
-        });
+        }); */
       return <Redirect to="/loggedin/factortracker" />;
 
    }
 
    if(this.state.gotoSymptoms) {
-    this.setState({
+    /* this.setState({
           gotoSymptoms: false 
-        });
+        }); */ 
+
       return <Redirect to="/loggedin/symptomtracker" />;
 
    }
@@ -151,7 +165,6 @@ export class SymptomDateBar extends React.Component {
 
 const mapStateToProps = state => ({
     foodList: state.reducer.foodList,
-    symptomList: state.reducer.symptomList,
     loading: state.reducer.loading,
     loaded: state.reducer.loaded,
     symptom: state.reducer.symptom,

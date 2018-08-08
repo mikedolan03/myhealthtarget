@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import './foodlist.css';
 import FoodListItem from './foodlistitem';
 import {fetchFoodList} from '../actions';
+import './foodlist.css';
 
 var moment = require('moment');
 moment().format();
@@ -58,7 +58,6 @@ render() {
 
 const mapStateToProps = state => ({
     foodList: state.reducer.foodList,
-    symptomList: state.reducer.symptomList,
     loaded: state.reducer.loaded,
     symptom: state.reducer.symptom,
     sentSuccess: state.reducer.sentSuccess

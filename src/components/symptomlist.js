@@ -104,7 +104,6 @@ export class SymptomList extends React.Component {
 
 const mapStateToProps = state => ({
     foodList: state.reducer.foodList,
-    symptomList: state.reducer.symptomList,
     loaded: state.reducer.loaded,
     symptom: state.reducer.symptom,
     sentSuccess: state.reducer.sentSuccess

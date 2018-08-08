@@ -2,20 +2,19 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Chart from 'chart.js';
 import './chart.css';
+
 var moment = require('moment');
  
 export class MyChart extends React.Component {
 
- componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps) {
     
-     console.log('component did update');    
-
-
-      this.buildChart();
+        console.log('component did update');    
+        this.buildChart();
 
     }
 
- componentDidMount() {
+    componentDidMount() {
 
         console.log('in compnent did mount', this.props.foodList);
 
@@ -107,7 +106,7 @@ export class MyChart extends React.Component {
 
 
         } else {
-                    chartTitle = `Likely Causes of ${this.props.symptom}`;
+               chartTitle = `Likely Causes of ${this.props.symptom}`;
 
         }
 
@@ -126,7 +125,6 @@ export class MyChart extends React.Component {
 
         for(let i = 0; i < numberOfFoods; i++)
         {
-            console.log('loop i = ', i);
             myFoodData.push(this.props.foodList.foodCounts[i].count)
             myFoodNames.push(this.props.foodList.foodCounts[i].name)
         }
@@ -331,7 +329,6 @@ MyChart.defaultProps = {
 
 const mapStateToProps = state => ({
     foodList: state.reducer.foodList,
-    symptomList: state.reducer.symptomList,
     loaded: state.reducer.loaded,
     symptom: state.reducer.symptom,
     startDate: state.reducer.startDate,

@@ -1,7 +1,5 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
-//import {fetchFoodList} from '../actions';
-//import {fetchSymptomList} from '../actions';
 import SignUpForm from './signup-form';
 import LoginForm from './loginform';
 import {connect} from 'react-redux';

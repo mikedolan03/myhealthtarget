@@ -4,23 +4,29 @@ import store from '../store';
 import {connect} from 'react-redux';
 import requiresLogin from './requires-login';
 
-import './dashboard.css';
+//components
 import SymptomList from './symptomlist';
 import FoodList from './foodlist';
 import MyChart from './chart';
 import DataBar from './databar';
 import SymptomDateBar from './symptomdatebar';
 import TopFoodsList from './topfoodslist';
+import SymptomPickerModal from './symptompickermodal';
+import NavBar from './navbar';
+
+//actions
 import {fetchFoodList} from '../actions';
 import {changeSymptom} from '../actions';
 import {changeDates} from '../actions';
 import {showModal} from '../actions';
 import {sendItemSuccess} from '../actions';
-import SymptomPickerModal from './symptompickermodal';
-import NavBar from './navbar';
 
+import './dashboard.css';
+
+//moment.js import -- 
 let moment = require('moment');
 moment().format();
+
 
 export class DashBoard extends React.Component {
 
@@ -43,48 +49,11 @@ export class DashBoard extends React.Component {
     
       console.log('component did update');
 
-      console.log('props before modal stuff? ', this.props ); 
-
-
-   
-
-      // if(this.props.dataStatus == 'good' && this.props.showNoDataModal=='show')
-    //  {
-    //  	      	this.openModal(false, false, 'noshow');
-//
-    //  }
-
-
-/*
-      if(!this.props.foodList.foodCounts && 
-      	this.props.showNoDataModal=="noshow" &&
-      	!this.props.showSymptomModal &&
-      	!this.props.showDateModal) {
-
-      	console.log('show no data pop up');
-
-      	this.openModal(false, false, 'show');
-      }
-
-      if(this.props.foodList.foodCounts  &&
-      	this.props.showNoDataModal=="show") {
-
-      	console.log('oops hide data pop up');
-
-      	this.openModal(false, false, 'noshow');
-      }
-
-      if(this.props.dataStatus == 'general' && this.props.showNoDataModal=='noshow')
-      {
-      	      	this.openModal(false, false, 'show');
-
-      }
-      */
 
       if(this.props.sentSuccess==true)
       {
 
-      	console.log('new data posted so updating with new query');
+      	console.log('new data posted - so updating with new query');
 
       	this.setUpQuery();
 
@@ -114,7 +83,7 @@ export class DashBoard extends React.Component {
 
       				   if(this.props.dataStatus == 'general' && this.props.showNoDataModal=='noshow' && !this.props.loading)
       						{
-      							 console.log('do no data modal');
+      							 //console.log('do no data modal');
 
       	      			this.openModal(false, false, 'show');
 
@@ -133,7 +102,7 @@ export class DashBoard extends React.Component {
       									}
 
 
-      								      console.log('data modal wasnt needed');
+      								    //  console.log('data modal wasnt needed');
 
       							}
 
@@ -144,24 +113,19 @@ export class DashBoard extends React.Component {
 
     }
 
-  setUpQuery( ) {
+//used to get the data for the dashboard
+//probably should be renamed 'GetData' as it sets up query and dispatches the fetch action
+	setUpQuery( ) {
 
-  	//reset modal -just in case there is no data
-    // this.openModal(false, false, 'noshow'); 
-
-  	//let today = moment()._d; 
-		//today = moment(today).format("MM-DD-YYYY");
-		//let startDay = moment(today).subtract(7, 'days').format("MM-DD-YYYY");
         
     let myQueryObj = {sdate: this.props.startDate, edate: this.props.endDate	, symptom: this.props.symptom};
-		console.log('my search: ', myQueryObj); 
+		//console.log('my search: ', myQueryObj); 
 
-        //let myQueryObj = {sdate: '7-4-2018', edate: '7-11-2018', symptom:'Gas'};
 
      this.props.dispatch(fetchFoodList('daylists/getcauses', myQueryObj) );
-        //this.props.dispatch(fetchFoodList('daylists', {}) );
   }  
 
+//used to create tag cloud 
   buildTags() {
 
 		let tags = '';
@@ -173,7 +137,7 @@ export class DashBoard extends React.Component {
 		 		}
 		 	
 
-			   });
+			});
 
 		 	console.log('combined tags', tags);
 
@@ -184,92 +148,85 @@ export class DashBoard extends React.Component {
 
 	clickedTrackFood() {
 
-
 		this.props.history.push('/loggedin/factortracker/');
 
 	}
 
 	changedSymptom(event) {
 
-        //event.preventDefault();
-        //console.log('in change symp 1', this.props);
-        console.log('in change symp 2', this.input.current.value);
+    //console.log('in change symp 2', this.input.current.value);
         
-     this.props.dispatch(changeSymptom(this.input.current.value));
-    // this.setUpQuery(); 
+    this.props.dispatch(changeSymptom(this.input.current.value));
        
     }
 
-    openModal(symptomM, dateM, nodataM) {
-      //this.setState({ isModalOpen: true })
-           this.props.dispatch(showModal(symptomM, dateM, nodataM));
-           			console.log('any props? ', this.props ); 
+  openModal(symptomM, dateM, nodataM) {
+    
+    this.props.dispatch(showModal(symptomM, dateM, nodataM));
 
-    }
+  }
 
-    closeModal() {
-           this.props.dispatch(showModal(false, false, false));
-    }
+  closeModal() {
+         this.props.dispatch(showModal(false, false, false));
+  }
 
-    renderBigPercent() {
+//a  function that sets up rendering and passing data to dashboard components
+  renderBigPercent() {
 
-    		let nodata = 'false';
+    let nodata = 'false';
 
     		
 
-								if(!this.props.foodList.foodCounts){ 
-									nodata = 'true';
-									console.log('foodcounts missing nodata = ', nodata);
-								}
+		if(!this.props.foodList.foodCounts){ 
+			nodata = 'true';
+			//console.log('foodcounts missing nodata = ', nodata);
+		}
 
-								if(this.props.dataStatus =="none") {
-									nodata = 'true';
-									console.log('status none nodata = ', nodata);
-								}
+		if(this.props.dataStatus =="none") {
+			nodata = 'true';
+			//console.log('status none nodata = ', nodata);
+		}
 
-								if(this.props.foodList.foodCounts) {
+		if(this.props.foodList.foodCounts) {
 
-									if(this.props.foodList.foodCounts.length <= 0) {
-										nodata='true';
-										console.log('foodcounts empty nodata = ', nodata);
+			if(this.props.foodList.foodCounts.length <= 0) {
+				nodata='true';
+				console.log('foodcounts empty nodata = ', nodata);
 
-									}
-								}
+			}
+		}
 
-								console.log('nodata = ', nodata);
-
-
-
-    	if(nodata=='false') {
+  	if(nodata=='false') {
 
 
-    		return (
-    						<div className="dark-box">
-								<DataBar dataStatus={this.props.dataStatus} symptom={this.props.symptom} description= {this.props.foodList.foodCounts[0].name } 
-								number={`${this.generatePercent(this.props.foodList.foodCounts[0].count, this.props.foodList.daylists.length)}%`} nodata={nodata} />
-								</div>
-								)
+  		return (
+  						<div className="dark-box">
+							<DataBar dataStatus={this.props.dataStatus} symptom={this.props.symptom} description= {this.props.foodList.foodCounts[0].name } 
+							number={`${this.generatePercent(this.props.foodList.foodCounts[0].count, this.props.foodList.daylists.length)}%`} nodata={nodata} />
+							</div>
+							)
 
-    	} else {
+  	} else {
 
-    		return(
+  		return(
 
-    		<div className="dark-box">
-				<DataBar symptom={this.props.symptom} description= ''
-				number="0" nodata='true' dataStatus={this.props.dataStatus}/>
-				</div>
+  		<div className="dark-box">
+			<DataBar symptom={this.props.symptom} description= ''
+			number="0" nodata='true' dataStatus={this.props.dataStatus}/>
+			</div>
 
-				)
+			)
 
 
-    	}
+  	}
     
 
 
-    }
+  }
 
+//a function that sets up rendering and passing data to dashboard components
 
-    renderPercentBoxes( ) {
+  renderPercentBoxes( ) {
 
     	let percentboxes = [];
     	let count = 0; 
@@ -353,7 +310,7 @@ export class DashBoard extends React.Component {
 
 			if (this.props.loading) {
 
-				console.log('loading');
+				//console.log('loading');
 
 				return(
 					<div>
@@ -368,94 +325,90 @@ export class DashBoard extends React.Component {
 
 			} else if (this.props.loaded) {
 
-					
 
-								console.log('loaded', this.props.foodList.length);
+				//console.log('loaded', this.props.foodList.length);
+
+				let nodata = 'false';
+
+				if(!this.props.foodList.foodCounts){ 
+
+					nodata = 'true';
+					//console.log('foodcounts missing nodata = ', nodata);
+
+
+				}
+
+				if(this.props.dataStatus =="none") {
+					nodata = 'true';
+					//console.log('status none nodata = ', nodata);
+
+				}
+
+				//console.log('nodata = ', nodata);
+
+				return (
+				<div>
+				<SymptomPickerModal isOpen={this.props.showSymptomModal} isOpenD={this.props.showDateModal} onClose={()=> this.closeModal()} />
 			
-								let nodata = 'false';
-
-								if(!this.props.foodList.foodCounts){ 
-
-									nodata = 'true';
-																	console.log('foodcounts missing nodata = ', nodata);
-
-
-								}
-
-								if(this.props.dataStatus =="none") {
-									nodata = 'true';
-																	console.log('status none nodata = ', nodata);
-
-								}
-
-								console.log('nodata = ', nodata);
-
-								return (
-								<div>
-								<SymptomPickerModal isOpen={this.props.showSymptomModal} isOpenD={this.props.showDateModal} onClose={()=> this.closeModal()} />
-							
-								<section className="dashboard">  
-								
-									<div className="dashboard-container">
- 											<div className="row">
- 												<div className="col-12">
-													<div className="chart-area-container">
-													 <MyChart nodata={nodata}/>
-													 <SymptomDateBar onOpen={()=> this.openModal(true, false)} onOpenD={()=> this.openModal(false, true)} symptom={this.props.symptom} startDate={this.props.startDate} endDate={this.props.endDate}/>
-													 <SymptomDateBar addbuttons="true" onOpen={()=> this.openModal(true, false)} onOpenD={()=> this.openModal(false, true)} symptom={this.props.symptom} startDate={this.props.startDate} endDate={this.props.endDate}/>
-													 <SymptomDateBar top="true" onOpen={()=> this.openModal(true, false)} onOpenD={()=> this.openModal(false, true)} symptom={this.props.symptom} startDate={this.props.startDate} endDate={this.props.endDate}/>
-													</div>
-												</div>
-
-											</div>
-									
-											<div className="row aligner">
-												<div className="col-6">
-									
-													<TopFoodsList />
-												
-												</div>
-												<div className="col-6 aligner-item">
-												{this.renderBigPercent()}
-												</div>
-											</div>
-											<div className="row">
-											
-												{this.renderPercentBoxes()} 
-												
-											</div>
-									
-											<div className="row">
-												<div className="col-12 add-vert-space">
-													<FoodList />
-												</div>
-											</div>
-											<div className="row">
-												<div className="col-12 add-vert-space">
-													<SymptomList show="10"/>
-
-													<button className="big-button" onClick={()=> this.props.history.push('/loggedin/symptomtracker/')}	>
-													Add symptom	to track
-													</button>
-
-													
-													<button className="big-button" onClick={()=> this.props.history.push('/loggedin/factortracker/')}>
-													Add food to track
-													</button>
-
-												
-												</div>
-											</div>
-									</div>
-								</section>
-							</div>
-
-					);
-
-								
-
-
+				<section className="dashboard">  
 				
+					<div className="dashboard-container">
+								<div className="row">
+									<div className="col-12">
+									<div className="chart-area-container">
+									 <MyChart nodata={nodata}/>
+									 <SymptomDateBar onOpen={()=> this.openModal(true, false)} onOpenD={()=> this.openModal(false, true)} symptom={this.props.symptom} startDate={this.props.startDate} endDate={this.props.endDate}/>
+									 <SymptomDateBar addbuttons="true" onOpen={()=> this.openModal(true, false)} onOpenD={()=> this.openModal(false, true)} symptom={this.props.symptom} startDate={this.props.startDate} endDate={this.props.endDate}/>
+									 <SymptomDateBar top="true" onOpen={()=> this.openModal(true, false)} onOpenD={()=> this.openModal(false, true)} symptom={this.props.symptom} startDate={this.props.startDate} endDate={this.props.endDate}/>
+									</div>
+								</div>
+
+							</div>
+					
+							<div className="row aligner">
+								<div className="col-6">
+					
+									<TopFoodsList />
+								
+								</div>
+								<div className="col-6 aligner-item">
+								{this.renderBigPercent()}
+								</div>
+							</div>
+							<div className="row">
+							
+								{this.renderPercentBoxes()} 
+								
+							</div>
+					
+							<div className="row">
+								<div className="col-12 add-vert-space">
+									<FoodList />
+								</div>
+							</div>
+							<div className="row">
+								<div className="col-12 add-vert-space">
+									<SymptomList show="10"/>
+
+									<button className="big-button" onClick={()=> this.props.history.push('/loggedin/symptomtracker/')}	>
+									Add symptom	to track
+									</button>
+
+									
+									<button className="big-button" onClick={()=> this.props.history.push('/loggedin/factortracker/')}>
+									Add food to track
+									</button>
+
+								
+								</div>
+							</div>
+					</div>
+				</section>
+				</div>
+
+				);
+
+												
 				} else {
 
 				console.log('Getting data');
@@ -472,13 +425,12 @@ export class DashBoard extends React.Component {
 					</div>
 					 );
 				}
-			}
 		}
+	}
 
 
 const mapStateToProps = state => ({
     foodList: state.reducer.foodList,
-    symptomList: state.reducer.symptomList,
     loading: state.reducer.loading,
     loaded: state.reducer.loaded,
     symptom: state.reducer.symptom,

@@ -190,7 +190,6 @@ export class SymptomPickerModal extends React.Component {
 
 const mapStateToProps = state => ({
     foodList: state.reducer.foodList,
-    symptomList: state.reducer.symptomList,
     loading: state.reducer.loading,
     loaded: state.reducer.loaded,
     symptom: state.reducer.symptom,
