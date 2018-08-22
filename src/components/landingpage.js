@@ -21,18 +21,13 @@ render() {
 					</div>
 					<div className="sign-up-section">
 							<SignUp />
+							
 					</div>
 			<div className="row">
 				<div className="col-5">
 					<h2>Why use Symptom Hacker?</h2>
 					<h3>Symptom Hacker helps you figure out what foods are causing you health problems.</h3>
 					<h3>Use the app to record what foods you have been eating and when you have symptoms.</h3>
-					<h2><span className="orange-text">Try a test run using our sample account:</span> 
-						<ul className="red-text">
-							<li>Username: user999</li>
-							<li>Password: password123</li>
-						</ul>
-					</h2>
 				</div>
 				<div className="col-7">
 					<div className="img-container">

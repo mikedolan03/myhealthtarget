@@ -59,6 +59,10 @@ export class SignUpForm extends React.Component {
                     Sign Up
                 </button>
             </form>
+            <div className="demo-info-signup"><div className="orange-text small-text">Or click Log In and try the demo: </div> 
+            <div className="red-text small-text inline-element-right-marg"> User: user999</div>
+            <div className="blue-text small-text inline-element-left-marg"> Password: password123</div>
+        </div>
         </div>
         );
     }

@@ -19,6 +19,7 @@ export class LoginForm extends React.Component {
             );
         }
         return (
+        <div>
         <div className="sign-up-form-container">
             <em>Welcome back!</em>
             <form
@@ -51,7 +52,13 @@ export class LoginForm extends React.Component {
                     Log in
                 </button>
             </form>
+
         </div>
+        <div className="demo-info"><div className="orange-text small-text">Try the demo: </div> 
+            <div className="red-text small-text inline-element-right-marg"> User: user999</div>
+            <div className="blue-text small-text inline-element-left-marg"> Password: password123</div>
+        </div>
+        </div>  
         );
     }
 }

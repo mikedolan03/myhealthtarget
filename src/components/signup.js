@@ -19,7 +19,7 @@ if (props.loggingIn) {
 
      <div className="sign-up-container">
             <LoginForm />
-            <div className="login-link">
+            <div className="login-link">  
                 <button onClick={() => props.dispatch(loggingIn(false)) }>No account, yet? Join!</button>
             </div>
         </div>
