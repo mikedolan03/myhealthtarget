@@ -9,7 +9,7 @@ const initialState = {
       loading: false,
       loaded: false,
       symptom: 'Gas',
-      startDate: moment(moment().format()).subtract(30, 'days').format('YYYY[-]MM[-]DD'),
+      startDate: moment(moment().format()).subtract(120, 'days').format('YYYY[-]MM[-]DD'),
       endDate: moment().format('YYYY[-]MM[-]DD'),
       showSymptomModal: false,
       showDateModal: false,
